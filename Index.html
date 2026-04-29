@@ -1,1 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Compound Interest Calculator</title>
+<meta name="description" content="Free compound interest calculator to estimate investment growth, monthly contributions, future value, and total interest earned.">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#f3f3f3;
+  color:#222;
+}
+
+header{
+  background:#2f3b46;
+  color:white;
+  padding:14px 20px;
+}
+
+.header-wrap{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:bold;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:16px;
+  font-size:14px;
+}
+
+.page{
+  max-width:1100px;
+  margin:18px auto;
+  display:grid;
+  grid-template-columns:1fr 300px;
+  gap:20px;
+  padding:0 14px;
+}
+
+.main{
+  background:white;
+  border:1px solid #ccc;
+  padding:18px;
+}
+
+h1{
+  font-size:28px;
+  margin-top:0;
+}
+
+.calculator-box{
+  max-width:520px;
+  background:#eaf3ff;
+  border:1px solid #9dbde2;
+  padding:14px;
+  border-radius:4px;
+}
+
+.calc-title{
+  background:#336699;
+  color:white;
+  padding:9px 12px;
+  margin:-14px -14px 14px -14px;
+  font-weight:bold;
+  font-size:18px;
+}
+
+.calc-row{
+  display:grid;
+  grid-template-columns:190px 1fr;
+  gap:10px;
+  align-items:center;
+  margin-bottom:9px;
+}
+
+label{
+  font-size:14px;
+  font-weight:bold;
+}
+
+input, select{
+  padding:7px;
+  border:1px solid #999;
+  border-radius:3px;
+  font-size:14px;
+}
+
+.buttons{
+  margin-top:12px;
+  text-align:center;
+}
+
+button{
+  padding:8px 18px;
+  border:1px solid #1f4e79;
+  background:#2f75b5;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  border-radius:3px;
+}
+
+button:hover{
+  background:#1f5f94;
+}
+
+.clear-btn{
+  background:#777;
+  border-color:#555;
+}
+
+.result-box{
+  margin-top:14px;
+  background:white;
+  border:1px solid #b7cde8;
+  padding:12px;
+  display:none;
+}
+
+.result-line{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid #eee;
+  padding:6px 0;
+}
+
+.result-line:last-child{
+  border-bottom:none;
+}
+
+.result-value{
+  font-weight:bold;
+  color:#1f5f94;
+}
+
+.ad-box{
+  background:#eee;
+  border:1px dashed #999;
+  color:#777;
+  text-align:center;
+  padding:22px;
+  margin-bottom:18px;
+}
+
+.sidebar-box{
+  background:white;
+  border:1px solid #ccc;
+  padding:14px;
+  margin-bottom:18px;
+}
+
+.sidebar-box h3{
+  margin-top:0;
+}
+
+.sidebar-box a{
+  display:block;
+  color:#1f5f94;
+  text-decoration:none;
+  padding:6px 0;
+  border-bottom:1px solid #eee;
+  font-size:14px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+  font-size:14px;
+}
+
+th,td{
+  border:1px solid #ccc;
+  padding:8px;
+  text-align:right;
+}
+
+th:first-child,td:first-child{
+  text-align:center;
+}
+
+th{
+  background:#e5e5e5;
+}
+
+.content{
+  margin-top:28px;
+}
+
+.content h2{
+  font-size:22px;
+  margin-top:26px;
+}
+
+footer{
+  text-align:center;
+  padding:25px;
+  color:#666;
+  font-size:14px;
+}
+
+@media(max-width:850px){
+  .page{
+    grid-template-columns:1fr;
+  }
+
+  .calc-row{
+    grid-template-columns:1fr;
+  }
+
+  .header-wrap{
+    display:block;
+  }
+
+  nav{
+    margin-top:10px;
+  }
+
+  nav a{
+    margin-left:0;
+    margin-right:12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-wrap">
+    <div class="logo">Finance Calculators</div>
+    <nav>
+      <a href="#">Investment</a>
+      <a href="#">Loan</a>
+      <a href="#">Mortgage</a>
+      <a href="#">Retirement</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page">
+
+<main class="main">
+
+<h1>Compound Interest Calculator</h1>
+
+<p>
+Use this compound interest calculator to estimate how much your money may grow over time with interest and monthly contributions.
+</p>
+
+<div class="calculator-box">
+  <div class="calc-title">Compound Interest Calculator</div>
+
+  <div class="calc-row">
+    <label>Initial Investment</label>
+    <input type="number" id="principal" value="1000">
+  </div>
+
+  <div class="calc-row">
+    <label>Monthly Contribution</label>
+    <input type="number" id="monthly" value="100">
+  </div>
+
+  <div class="calc-row">
+    <label>Annual Interest Rate</label>
+    <input type="number" id="rate" value="7" step="0.01">
+  </div>
+
+  <div class="calc-row">
+    <label>Number of Years</label>
+    <input type="number" id="years" value="10">
+  </div>
+
+  <div class="calc-row">
+    <label>Compound Frequency</label>
+    <select id="frequency">
+      <option value="1">Annually</option>
+      <option value="4">Quarterly</option>
+      <option value="12" selected>Monthly</option>
+      <option value="365">Daily</option>
+    </select>
+  </div>
+
+  <div class="buttons">
+    <button onclick="calculate()">Calculate</button>
+    <button class="clear-btn" onclick="clearForm()">Clear</button>
+  </div>
+
+  <div class="result-box" id="resultBox">
+    <div class="result-line">
+      <span>Future Value</span>
+      <span class="result-value" id="futureValue">$0.00</span>
+    </div>
+
+    <div class="result-line">
+      <span>Total Contributions</span>
+      <span class="result-value" id="totalContributions">$0.00</span>
+    </div>
+
+    <div class="result-line">
+      <span>Total Interest Earned</span>
+      <span class="result-value" id="interestEarned">$0.00</span>
+    </div>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Balance</th>
+      <th>Contributions</th>
+      <th>Interest</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody"></tbody>
+</table>
+
+<div class="ad-box" style="margin-top:22px;">
+  Google AdSense Ad Space - In Content
+</div>
+
+<section class="content">
+  <h2>What Is Compound Interest?</h2>
+  <p>
+    Compound interest is interest earned on both your original investment and the interest that has already been added to your balance.
+    This allows your money to grow faster over time.
+  </p>
+
+  <h2>How This Calculator Works</h2>
+  <p>
+    Enter your starting investment, monthly contribution, interest rate, number of years, and compounding frequency.
+    The calculator estimates your future balance, total contributions, and total interest earned.
+  </p>
+
+  <h2>Compound Interest Formula</h2>
+  <p>
+    The basic compound interest formula is <strong>A = P(1 + r/n)<sup>nt</sup></strong>.
+    In this formula, A is the future value, P is the principal, r is the annual interest rate, n is the number of compounding periods per year, and t is the number of years.
+  </p>
+
+  <h2>Example</h2>
+  <p>
+    If you invest $1,000, add $100 per month, earn 7% annually, and invest for 10 years, this calculator estimates how much your money may grow.
+  </p>
+
+  <h2>Frequently Asked Questions</h2>
+
+  <h3>Is this calculator free?</h3>
+  <p>Yes. This calculator is free to use.</p>
+
+  <h3>Does this guarantee investment returns?</h3>
+  <p>No. The results are estimates only and should not be considered financial advice.</p>
+
+  <h3>Why does compounding matter?</h3>
+  <p>Compounding matters because your interest can begin earning interest, which may increase growth over long periods of time.</p>
+</section>
+
+</main>
+
+<aside>
+  <div class="ad-box">
+    Google AdSense Ad Space<br>300x250
+  </div>
+
+  <div class="sidebar-box">
+    <h3>Related Calculators</h3>
+    <a href="#">Simple Interest Calculator</a>
+    <a href="#">Savings Calculator</a>
+    <a href="#">Investment Calculator</a>
+    <a href="#">Loan Calculator</a>
+    <a href="#">Mortgage Calculator</a>
+    <a href="#">Retirement Calculator</a>
+    <a href="#">Credit Card Payoff Calculator</a>
+  </div>
+
+  <div class="ad-box">
+    Google AdSense Ad Space<br>300x600
+  </div>
+</aside>
+
+</div>
+
+<footer>
+  This tool is for educational purposes only. Results are estimates and not financial advice.
+</footer>
+
+<script>
+const money = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD"
+});
+
+function calculate(){
+  const principal = Number(document.getElementById("principal").value);
+  const monthly = Number(document.getElementById("monthly").value);
+  const annualRate = Number(document.getElementById("rate").value) / 100;
+  const years = Number(document.getElementById("years").value);
+  const frequency = Number(document.getElementById("frequency").value);
+
+  if(principal < 0 || monthly < 0 || annualRate < 0 || years <= 0){
+    alert("Please enter valid numbers.");
+    return;
+  }
+
+  let balance = principal;
+  let totalContributions = principal;
+  const totalMonths = years * 12;
+  const monthlyRate = Math.pow(1 + annualRate / frequency, frequency / 12) - 1;
+
+  const yearlyData = [];
+
+  for(let month = 1; month <= totalMonths; month++){
+    balance = balance * (1 + monthlyRate);
+    balance += monthly;
+    totalContributions += monthly;
+
+    if(month % 12 === 0){
+      yearlyData.push({
+        year: month / 12,
+        balance: balance,
+        contributions: totalContributions,
+        interest: balance - totalContributions
+      });
+    }
+  }
+
+  document.getElementById("futureValue").textContent = money.format(balance);
+  document.getElementById("totalContributions").textContent = money.format(totalContributions);
+  document.getElementById("interestEarned").textContent = money.format(balance - totalContributions);
+  document.getElementById("resultBox").style.display = "block";
+
+  fillTable(yearlyData);
+}
+
+function fillTable(data){
+  const tableBody = document.getElementById("tableBody");
+  tableBody.innerHTML = "";
+
+  data.forEach(row => {
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td>${row.year}</td>
+      <td>${money.format(row.balance)}</td>
+      <td>${money.format(row.contributions)}</td>
+      <td>${money.format(row.interest)}</td>
+    `;
+
+    tableBody.appendChild(tr);
+  });
+}
+
+function clearForm(){
+  document.getElementById("principal").value = "";
+  document.getElementById("monthly").value = "";
+  document.getElementById("rate").value = "";
+  document.getElementById("years").value = "";
+  document.getElementById("frequency").value = "12";
+  document.getElementById("resultBox").style.display = "none";
+  document.getElementById("tableBody").innerHTML = "";
+}
+
+calculate();
+</script>
+
+</body>
+</html>
