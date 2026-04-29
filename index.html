@@ -1,12 +1,52 @@
 <!-- Salve como index.html -->
+Sim, André. Aqui está o index.html completo, com:
+
+* gráfico de crescimento bonito;
+* SEO mais forte;
+* FAQ Schema para Google;
+* áreas de AdSense melhor posicionadas;
+* mantendo a centralização mobile que ficou boa;
+* sem criar novas páginas de calculadoras.
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Compound Interest Calculator | Free Investment Calculator</title>
-<meta name="description" content="Free compound interest calculator to estimate future investment value, monthly contributions, total interest earned, and long-term growth.">
+<title>Compound Interest Calculator | Free Investment Growth Calculator</title>
+<meta name="description" content="Free compound interest calculator to estimate future investment value, monthly contributions, total interest earned, and long-term investment growth.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is compound interest?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Compound interest is interest earned on both the original investment and the interest that has already been added to the balance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this compound interest calculator free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, this compound interest calculator is free to use for educational purposes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this calculator guarantee investment returns?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. This calculator provides estimates only. Real investment returns may vary due to market performance, fees, taxes, and risk."
+      }
+    }
+  ]
+}
+</script>
 <style>
 *{box-sizing:border-box}
 html, body{overflow-x:hidden}
@@ -94,6 +134,11 @@ nav a:hover{color:var(--blue)}
   font-size:18px;
   margin:0;
   color:#c9d1d9;
+}
+.top-ad{
+  max-width:1120px;
+  margin:18px auto 0;
+  padding:0 16px;
 }
 .page{
   max-width:1120px;
@@ -214,6 +259,25 @@ button{
 .result-line:last-child{border-bottom:none}
 .result-value{font-weight:800;color:var(--blue)}
 .big-result{font-size:20px;color:var(--green)}
+.chart-wrap{
+  width:100%;
+  max-width:560px;
+  margin:24px auto 0;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px;
+}
+.chart-title{
+  margin:0 0 10px;
+  font-size:18px;
+  color:var(--text);
+}
+canvas{
+  width:100%;
+  height:260px;
+  display:block;
+}
 .table-wrap{
   width:100%;
   max-width:560px;
@@ -322,6 +386,7 @@ footer{
   }
   .main-card > p,
   .calculator,
+  .chart-wrap,
   .table-wrap,
   .main-card > .ad-box,
   .content{
@@ -375,10 +440,15 @@ footer{
     <p>Estimate how your investment may grow over time with monthly contributions, compound interest, and long-term growth projections.</p>
   </div>
 </section>
+<div class="top-ad">
+  <div class="ad-box">
+    Google AdSense Ad Space - Responsive Top Banner
+  </div>
+</div>
 <div class="page">
 <main class="main-card">
 <p>
-Use this free compound interest calculator to estimate your future investment value, total contributions, and total interest earned.
+Use this free compound interest calculator to estimate your future investment value, total contributions, total interest earned, and long-term growth.
 </p>
 <div class="calculator">
   <div class="calc-header">Investment Growth Calculator</div>
@@ -442,6 +512,10 @@ Use this free compound interest calculator to estimate your future investment va
     </div>
   </div>
 </div>
+<div class="chart-wrap">
+  <h2 class="chart-title">Investment Growth Chart</h2>
+  <canvas id="growthChart" width="560" height="260"></canvas>
+</div>
 <div class="table-wrap">
 <table>
   <thead>
@@ -464,25 +538,34 @@ Use this free compound interest calculator to estimate your future investment va
     Compound interest is interest earned on both your original money and the interest that has already been added to your balance.
     Over time, this can help your investment grow faster because your earnings can also generate earnings.
   </p>
-  <h2>How to Use This Calculator</h2>
+  <h2>How to Use This Compound Interest Calculator</h2>
   <p>
     Enter your initial investment, monthly contribution, expected annual interest rate, number of years, and compounding frequency.
     The calculator will estimate your future value, total amount contributed, and total interest earned.
   </p>
+  <h2>Why Monthly Contributions Matter</h2>
+  <p>
+    Monthly contributions can make a major difference over time. Even small deposits may grow significantly when combined with time and compound interest.
+  </p>
   <h2>Compound Interest Formula</h2>
   <p>
-    The basic compound interest formula is <strong>A = P(1 + r/n)<sup>nt</sup></strong>.
+    The basic compound interest formula is <strong>A = P(1 + r/n)<sup>nt</sup></strong>, where A is the future value, P is the principal, r is the annual rate, n is the compounding frequency, and t is time in years.
   </p>
   <h2>Example Calculation</h2>
   <p>
     If you start with $1,000, add $100 every month, earn an estimated 7% annual return, and invest for 10 years,
     this calculator can estimate how much your money may grow.
   </p>
+  <div class="ad-box">
+    Google AdSense Ad Space - Mid Article
+  </div>
   <h2>Frequently Asked Questions</h2>
   <h3>Is this calculator free?</h3>
   <p>Yes. This compound interest calculator is free to use.</p>
   <h3>Does this calculator guarantee returns?</h3>
   <p>No. The results are estimates only. Real investment returns may change based on market performance, fees, taxes, and risk.</p>
+  <h3>What interest rate should I use?</h3>
+  <p>Many people test examples like 5%, 7%, or 10%, but the right number depends on your investment type and risk level.</p>
   <div class="notice">
     This calculator is for educational purposes only and should not be considered financial advice.
   </div>
@@ -531,6 +614,7 @@ themeToggle.addEventListener("click", () => {
     localStorage.setItem("theme", "light");
     themeToggle.textContent = "🌙 Dark";
   }
+  calculate();
 });
 menuToggle.addEventListener("click", () => {
   mainNav.classList.toggle("open");
@@ -576,6 +660,7 @@ function calculate(){
   document.getElementById("interestEarned").textContent = money.format(balance - totalContributions);
   document.getElementById("resultBox").style.display = "block";
   fillTable(yearlyData);
+  drawChart(yearlyData);
 }
 function fillTable(data){
   const tableBody = document.getElementById("tableBody");
@@ -591,6 +676,67 @@ function fillTable(data){
     tableBody.appendChild(tr);
   });
 }
+function drawChart(data){
+  const canvas = document.getElementById("growthChart");
+  const ctx = canvas.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 260 * dpr;
+  ctx.scale(dpr, dpr);
+  const width = rect.width;
+  const height = 260;
+  ctx.clearRect(0, 0, width, height);
+  if(!data.length) return;
+  const padding = 34;
+  const chartWidth = width - padding * 2;
+  const chartHeight = height - padding * 2;
+  const maxValue = Math.max(...data.map(item => item.balance));
+  const isDark = document.body.classList.contains("dark");
+  ctx.strokeStyle = isDark ? "#30363d" : "#d0d7de";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(padding, padding);
+  ctx.lineTo(padding, height - padding);
+  ctx.lineTo(width - padding, height - padding);
+  ctx.stroke();
+  const gradient = ctx.createLinearGradient(0, padding, 0, height - padding);
+  gradient.addColorStop(0, isDark ? "rgba(63,185,80,0.35)" : "rgba(45,164,78,0.25)");
+  gradient.addColorStop(1, "rgba(45,164,78,0)");
+  ctx.beginPath();
+  data.forEach((item, index) => {
+    const x = padding + (index / (data.length - 1 || 1)) * chartWidth;
+    const y = height - padding - (item.balance / maxValue) * chartHeight;
+    if(index === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.lineTo(width - padding, height - padding);
+  ctx.lineTo(padding, height - padding);
+  ctx.closePath();
+  ctx.fillStyle = gradient;
+  ctx.fill();
+  ctx.beginPath();
+  data.forEach((item, index) => {
+    const x = padding + (index / (data.length - 1 || 1)) * chartWidth;
+    const y = height - padding - (item.balance / maxValue) * chartHeight;
+    if(index === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.strokeStyle = isDark ? "#3fb950" : "#2da44e";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  const last = data[data.length - 1];
+  const lastX = padding + chartWidth;
+  const lastY = height - padding - (last.balance / maxValue) * chartHeight;
+  ctx.beginPath();
+  ctx.arc(lastX, lastY, 5, 0, Math.PI * 2);
+  ctx.fillStyle = isDark ? "#3fb950" : "#2da44e";
+  ctx.fill();
+  ctx.font = "12px Arial";
+  ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
+  ctx.fillText("Year 1", padding, height - 10);
+  ctx.fillText("Year " + last.year, width - padding - 46, height - 10);
+}
 function clearForm(){
   document.getElementById("principal").value = "";
   document.getElementById("monthly").value = "";
@@ -599,7 +745,11 @@ function clearForm(){
   document.getElementById("frequency").value = "12";
   document.getElementById("resultBox").style.display = "none";
   document.getElementById("tableBody").innerHTML = "";
+  const canvas = document.getElementById("growthChart");
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
+window.addEventListener("resize", calculate);
 calculate();
 </script>
 </body>
