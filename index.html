@@ -18,6 +18,8 @@
   --muted:#57606a;
   --border:#d0d7de;
   --header:#ffffff;
+  --hero-bg:#f6f8fa;
+  --hero-text:#24292f;
   --blue:#0969da;
   --green:#2da44e;
   --table-bg:#ffffff;
@@ -31,6 +33,8 @@ body.dark{
   --muted:#8b949e;
   --border:#30363d;
   --header:#010409;
+  --hero-bg:#0d1117;
+  --hero-text:#f0f6fc;
   --blue:#2f81f7;
   --green:#3fb950;
   --table-bg:#0d1117;
@@ -40,17 +44,14 @@ body.dark{
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  background:
-    radial-gradient(circle at 50% 160px, rgba(47,129,247,0.95) 0%, rgba(88,166,255,0.45) 22%, rgba(13,17,23,0.95) 55%, #010409 100%);
+  background:var(--bg);
   color:var(--text);
   line-height:1.6;
   transition:.25s;
-  min-height:100vh;
 }
 
 header{
-  background:rgba(1,4,9,0.85);
-  backdrop-filter:blur(12px);
+  background:var(--header);
   border-bottom:1px solid var(--border);
 }
 
@@ -66,7 +67,7 @@ header{
 .logo{
   font-size:22px;
   font-weight:800;
-  color:#f0f6fc;
+  color:var(--text);
 }
 
 .logo span{
@@ -80,7 +81,7 @@ header{
 }
 
 nav a{
-  color:#c9d1d9;
+  color:var(--text);
   text-decoration:none;
   margin-left:18px;
   font-size:14px;
@@ -88,32 +89,83 @@ nav a{
 }
 
 nav a:hover{
-  color:#58a6ff;
+  color:var(--blue);
 }
 
 .theme-toggle{
   padding:7px 12px;
   border-radius:8px;
-  border:1px solid #30363d;
-  background:#161b22;
-  color:#f0f6fc;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
   cursor:pointer;
   font-weight:700;
 }
 
 .hero{
-  position:relative;
-  background:transparent;
-  padding:80px 16px 60px;
-  overflow:hidden;
-  border-bottom:1px solid rgba(48,54,61,0.7);
+  position: relative;
+  background: radial-gradient(circle at center, #1f3cff 0%, #0d1117 60%);
+  padding: 80px 16px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero::before{
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(88,166,255,0.35), transparent 70%);
+  filter: blur(100px);
+  z-index: 0;
+  animation: floatGlow 12s ease-in-out infinite;
+}
+
+.hero::after{
+  content: "";
+  position: absolute;
+  top: 60%;
+  left: 40%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(168,85,247,0.25), transparent 70%);
+  filter: blur(120px);
+  z-index: 0;
+  animation: floatGlowReverse 16s ease-in-out infinite;
 }
 
 .hero-content{
   max-width:1120px;
   margin:auto;
-  position:relative;
-  z-index:1;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes floatGlow{
+  0%{
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50%{
+    transform: translate(-45%, -55%) scale(1.1);
+  }
+  100%{
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes floatGlowReverse{
+  0%{
+    transform: translate(0, 0) scale(1);
+  }
+  50%{
+    transform: translate(-20px, 20px) scale(1.08);
+  }
+  100%{
+    transform: translate(0, 0) scale(1);
+  }
 }
 
 .hero h1{
@@ -339,7 +391,7 @@ footer{
   max-width:1120px;
   margin:auto;
   padding:28px 16px;
-  color:#c9d1d9;
+  color:var(--muted);
   font-size:14px;
   text-align:center;
 }
