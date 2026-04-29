@@ -1,4 +1,6 @@
 <!-- Salve como index.html -->
+Claro. Aqui está o index.html completo, já com menu mobile profissional, botão Dark/Light, botões rápidos e o design atual preservado:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +10,9 @@
 <meta name="description" content="Free compound interest calculator to estimate future investment value, monthly contributions, total interest earned, and long-term growth.">
 <style>
 *{box-sizing:border-box}
+html, body{
+  overflow-x:hidden;
+}
 :root{
   --bg:#f6f8fa;
   --card:#ffffff;
@@ -47,6 +52,8 @@ body{
 header{
   background:var(--header);
   border-bottom:1px solid var(--border);
+  position:relative;
+  z-index:50;
 }
 .header-wrap{
   max-width:1120px;
@@ -67,7 +74,7 @@ header{
 .header-right{
   display:flex;
   align-items:center;
-  gap:18px;
+  gap:14px;
 }
 nav a{
   color:var(--text);
@@ -79,7 +86,8 @@ nav a{
 nav a:hover{
   color:var(--blue);
 }
-.theme-toggle{
+.theme-toggle,
+.menu-toggle{
   padding:7px 12px;
   border-radius:8px;
   border:1px solid var(--border);
@@ -87,6 +95,9 @@ nav a:hover{
   color:var(--text);
   cursor:pointer;
   font-weight:700;
+}
+.menu-toggle{
+  display:none;
 }
 .hero{
   position:relative;
@@ -106,6 +117,7 @@ nav a:hover{
   margin:auto;
   position:relative;
   z-index:1;
+  padding:0 4px;
 }
 .hero h1{
   max-width:760px;
@@ -325,25 +337,53 @@ footer{
   text-align:center;
 }
 @media(max-width:860px){
-  .page{
-    grid-template-columns:1fr;
-  }
-  .hero h1{
-    font-size:32px;
-  }
   .header-wrap{
-    display:block;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
   }
   .header-right{
-    margin-top:12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .menu-toggle{
     display:block;
   }
   nav{
-    margin-bottom:12px;
+    display:none;
+    position:absolute;
+    top:72px;
+    left:16px;
+    right:16px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:10px;
+    z-index:100;
+    box-shadow:0 14px 35px rgba(0,0,0,.25);
+  }
+  nav.open{
+    display:block;
   }
   nav a{
-    margin-left:0;
-    margin-right:14px;
+    display:block;
+    margin:0;
+    padding:12px;
+    border-bottom:1px solid var(--border);
+    font-size:15px;
+  }
+  nav a:last-child{
+    border-bottom:none;
+  }
+  .page{
+    grid-template-columns:1fr;
+  }
+  .hero{
+    padding:80px 16px 110px;
+  }
+  .hero h1{
+    font-size:32px;
   }
   .calc-row{
     grid-template-columns:1fr;
@@ -359,7 +399,8 @@ footer{
   <div class="header-wrap">
     <div class="logo">Finance<span>Tools</span></div>
     <div class="header-right">
-      <nav>
+      <button class="menu-toggle" id="menuToggle">☰ Menu</button>
+      <nav id="mainNav">
         <a href="index.html">Compound Interest</a>
         <a href="loan-calculator.html">Loan Calculator</a>
         <a href="mortgage-calculator.html">Mortgage Calculator</a>
@@ -514,6 +555,8 @@ const money = new Intl.NumberFormat("en-US", {
   currency: "USD"
 });
 const themeToggle = document.getElementById("themeToggle");
+const menuToggle = document.getElementById("menuToggle");
+const mainNav = document.getElementById("mainNav");
 if(localStorage.getItem("theme") === "dark"){
   document.body.classList.add("dark");
   themeToggle.textContent = "☀️ Light";
@@ -527,6 +570,9 @@ themeToggle.addEventListener("click", () => {
     localStorage.setItem("theme", "light");
     themeToggle.textContent = "🌙 Dark";
   }
+});
+menuToggle.addEventListener("click", () => {
+  mainNav.classList.toggle("open");
 });
 function setRate(value){
   document.getElementById("rate").value = value;
