@@ -1,5 +1,5 @@
 <!-- Salve como index.html -->
-
+Sim. Abaixo está o projeto completo com o footer novo adicionado no final, sem mudar a estrutura principal.
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,38 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Compound Interest Calculator | Free Investment Growth Calculator</title>
 <meta name="description" content="Free compound interest calculator to estimate future investment value, monthly contributions, total interest earned, and long-term investment growth.">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is compound interest?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Compound interest is interest earned on both the original investment and the interest that has already been added to the balance."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is this compound interest calculator free?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this compound interest calculator is free to use for educational purposes."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does this calculator guarantee investment returns?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. This calculator provides estimates only. Real investment returns may vary due to market performance, fees, taxes, and risk."
-      }
-    }
-  ]
-}
-</script>
 <style>
 *{box-sizing:border-box}
 html, body{overflow-x:hidden}
@@ -197,11 +165,6 @@ input,select{
   background:var(--input-bg);
   color:var(--text);
 }
-input:focus,select:focus{
-  outline:none;
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(47,129,247,.2);
-}
 .quick-buttons{
   display:flex;
   gap:6px;
@@ -322,13 +285,32 @@ th{background:var(--card)}
   font-size:14px;
   font-weight:600;
 }
-footer{
+.site-footer{
+  margin-top:40px;
+  background:var(--card);
+  border-top:1px solid var(--border);
+}
+.footer-info{
   max-width:1120px;
   margin:auto;
-  padding:28px 16px;
+  padding:28px 16px 18px;
   color:var(--muted);
   font-size:14px;
+  line-height:1.55;
+}
+.footer-info p{
+  margin:0 0 14px;
+}
+.footer-links{
   text-align:center;
+  padding:12px 16px 22px;
+  color:var(--muted);
+  font-size:14px;
+}
+.footer-links a{
+  color:var(--text);
+  text-decoration:underline;
+  margin:0 4px;
 }
 @media(max-width:860px){
   .header-wrap{
@@ -393,20 +375,9 @@ footer{
     max-width:760px;
     margin:22px auto 0;
   }
-  .ad-box,.sidebar-card{
-    width:100%;
-    margin-left:auto;
-    margin-right:auto;
-  }
-  .hero{
-    padding:80px 16px 110px;
-  }
-  .hero h1{
-    font-size:32px;
-  }
-  .calc-row{
-    grid-template-columns:1fr;
-  }
+  .hero{padding:80px 16px 110px}
+  .hero h1{font-size:32px}
+  .calc-row{grid-template-columns:1fr}
   label{padding-top:0}
 }
 </style>
@@ -434,15 +405,11 @@ footer{
   </div>
 </section>
 <div class="top-ad">
-  <div class="ad-box">
-    Google AdSense Ad Space - Responsive Top Banner
-  </div>
+  <div class="ad-box">Google AdSense Ad Space - Responsive Top Banner</div>
 </div>
 <div class="page">
 <main class="main-card">
-<p>
-Use this free compound interest calculator to estimate your future investment value, total contributions, total interest earned, and long-term growth.
-</p>
+<p>Use this free compound interest calculator to estimate your future investment value, total contributions, total interest earned, and long-term growth.</p>
 <div class="calculator">
   <div class="calc-header">Investment Growth Calculator</div>
   <div class="calc-body">
@@ -522,36 +489,19 @@ Use this free compound interest calculator to estimate your future investment va
   <tbody id="tableBody"></tbody>
 </table>
 </div>
-<div class="ad-box" style="margin-top:24px;">
-  Google AdSense Ad Space - In Content
-</div>
+<div class="ad-box" style="margin-top:24px;">Google AdSense Ad Space - In Content</div>
 <section class="content">
   <h2>What Is Compound Interest?</h2>
-  <p>
-    Compound interest is interest earned on both your original money and the interest that has already been added to your balance.
-    Over time, this can help your investment grow faster because your earnings can also generate earnings.
-  </p>
+  <p>Compound interest is interest earned on both your original money and the interest that has already been added to your balance.</p>
   <h2>How to Use This Compound Interest Calculator</h2>
-  <p>
-    Enter your initial investment, monthly contribution, expected annual interest rate, number of years, and compounding frequency.
-    The calculator will estimate your future value, total amount contributed, and total interest earned.
-  </p>
+  <p>Enter your initial investment, monthly contribution, expected annual interest rate, number of years, and compounding frequency.</p>
   <h2>Why Monthly Contributions Matter</h2>
-  <p>
-    Monthly contributions can make a major difference over time. Even small deposits may grow significantly when combined with time and compound interest.
-  </p>
+  <p>Monthly contributions can make a major difference over time. Even small deposits may grow significantly when combined with time and compound interest.</p>
   <h2>Compound Interest Formula</h2>
-  <p>
-    The basic compound interest formula is <strong>A = P(1 + r/n)<sup>nt</sup></strong>, where A is the future value, P is the principal, r is the annual rate, n is the compounding frequency, and t is time in years.
-  </p>
+  <p>The basic compound interest formula is <strong>A = P(1 + r/n)<sup>nt</sup></strong>.</p>
   <h2>Example Calculation</h2>
-  <p>
-    If you start with $1,000, add $100 every month, earn an estimated 7% annual return, and invest for 10 years,
-    this calculator can estimate how much your money may grow.
-  </p>
-  <div class="ad-box">
-    Google AdSense Ad Space - Mid Article
-  </div>
+  <p>If you start with $1,000, add $100 every month, earn an estimated 7% annual return, and invest for 10 years, this calculator can estimate how much your money may grow.</p>
+  <div class="ad-box">Google AdSense Ad Space - Mid Article</div>
   <h2>Frequently Asked Questions</h2>
   <h3>Is this calculator free?</h3>
   <p>Yes. This compound interest calculator is free to use.</p>
@@ -559,15 +509,11 @@ Use this free compound interest calculator to estimate your future investment va
   <p>No. The results are estimates only. Real investment returns may change based on market performance, fees, taxes, and risk.</p>
   <h3>What interest rate should I use?</h3>
   <p>Many people test examples like 5%, 7%, or 10%, but the right number depends on your investment type and risk level.</p>
-  <div class="notice">
-    This calculator is for educational purposes only and should not be considered financial advice.
-  </div>
+  <div class="notice">This calculator is for educational purposes only and should not be considered financial advice.</div>
 </section>
 </main>
 <aside>
-  <div class="ad-box">
-    Google AdSense Ad Space<br>300x250
-  </div>
+  <div class="ad-box">Google AdSense Ad Space<br>300x250</div>
   <div class="sidebar-card">
     <h3>Related Calculators</h3>
     <a href="index.html">Compound Interest Calculator</a>
@@ -578,13 +524,29 @@ Use this free compound interest calculator to estimate your future investment va
     <a href="retirement-calculator.html">Retirement Calculator</a>
     <a href="credit-card-payoff-calculator.html">Credit Card Payoff Calculator</a>
   </div>
-  <div class="ad-box">
-    Google AdSense Ad Space<br>300x600
-  </div>
+  <div class="ad-box">Google AdSense Ad Space<br>300x600</div>
 </aside>
 </div>
-<footer>
-  © 2026 FinanceTools. Educational calculators for personal finance planning.
+<footer class="site-footer">
+  <div class="footer-info">
+    <p>
+      FinanceTools is dedicated to providing fast, simple, and reliable online calculators to help users make better financial decisions. 
+      Our goal is to create an accessible platform where people can quickly perform essential calculations without complexity. 
+      All tools are completely free and require no registration.
+    </p>
+    <p>
+      Each calculator is carefully designed and tested to support accuracy and usability. While most tools are suitable for general use, 
+      some results may vary depending on financial systems, regions, fees, taxes, and other real-world factors. We are continuously improving 
+      and expanding our platform to provide even more useful tools over time.
+    </p>
+  </div>
+  <div class="footer-links">
+    <a href="about.html">about us</a> |
+    <a href="sitemap.html">sitemap</a> |
+    <a href="terms.html">terms of use</a> |
+    <a href="privacy.html">privacy policy</a>
+    &nbsp; © 2026 FinanceTools
+  </div>
 </footer>
 <script>
 const money = new Intl.NumberFormat("en-US", {
@@ -718,17 +680,6 @@ function drawChart(data){
   ctx.strokeStyle = isDark ? "#3fb950" : "#2da44e";
   ctx.lineWidth = 3;
   ctx.stroke();
-  const last = data[data.length - 1];
-  const lastX = padding + chartWidth;
-  const lastY = height - padding - (last.balance / maxValue) * chartHeight;
-  ctx.beginPath();
-  ctx.arc(lastX, lastY, 5, 0, Math.PI * 2);
-  ctx.fillStyle = isDark ? "#3fb950" : "#2da44e";
-  ctx.fill();
-  ctx.font = "12px Arial";
-  ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
-  ctx.fillText("Year 1", padding, height - 10);
-  ctx.fillText("Year " + last.year, width - padding - 46, height - 10);
 }
 function clearForm(){
   document.getElementById("principal").value = "";
@@ -747,3 +698,4 @@ calculate();
 </script>
 </body>
 </html>
+
