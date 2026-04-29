@@ -1,29 +1,64 @@
+<!-- Salve como index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compound Interest Calculator</title>
-<meta name="description" content="Free compound interest calculator to estimate investment growth, monthly contributions, future value, and total interest earned.">
+<title>Compound Interest Calculator | Free Investment Calculator</title>
+<meta name="description" content="Free compound interest calculator to estimate future investment value, monthly contributions, total interest earned, and long-term growth.">
 
 <style>
+*{box-sizing:border-box}
+
+:root{
+  --bg:#f6f8fa;
+  --card:#ffffff;
+  --text:#24292f;
+  --muted:#57606a;
+  --border:#d0d7de;
+  --header:#ffffff;
+  --hero-bg:#f6f8fa;
+  --hero-text:#24292f;
+  --blue:#0969da;
+  --green:#2da44e;
+  --table-bg:#ffffff;
+  --input-bg:#ffffff;
+}
+
+body.dark{
+  --bg:#0d1117;
+  --card:#161b22;
+  --text:#f0f6fc;
+  --muted:#8b949e;
+  --border:#30363d;
+  --header:#010409;
+  --hero-bg:#0d1117;
+  --hero-text:#f0f6fc;
+  --blue:#2f81f7;
+  --green:#3fb950;
+  --table-bg:#0d1117;
+  --input-bg:#0d1117;
+}
+
 body{
   margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:#f3f3f3;
-  color:#222;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  transition:.25s;
 }
 
 header{
-  background:#2f3b46;
-  color:white;
-  padding:14px 20px;
+  background:var(--header);
+  border-bottom:1px solid var(--border);
 }
 
 .header-wrap{
-  max-width:1100px;
+  max-width:1120px;
   margin:auto;
+  padding:16px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -31,110 +66,193 @@ header{
 
 .logo{
   font-size:22px;
-  font-weight:bold;
+  font-weight:800;
+  color:var(--text);
+}
+
+.logo span{
+  color:var(--green);
+}
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:18px;
 }
 
 nav a{
-  color:white;
+  color:var(--text);
   text-decoration:none;
-  margin-left:16px;
+  margin-left:18px;
   font-size:14px;
+  font-weight:600;
+}
+
+nav a:hover{
+  color:var(--blue);
+}
+
+.theme-toggle{
+  padding:7px 12px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  cursor:pointer;
+  font-weight:700;
+}
+
+.hero{
+  background:linear-gradient(135deg,var(--hero-bg),var(--card));
+  padding:52px 16px;
+  border-bottom:1px solid var(--border);
+}
+
+.hero-content{
+  max-width:1120px;
+  margin:auto;
+}
+
+.hero h1{
+  max-width:760px;
+  font-size:42px;
+  line-height:1.15;
+  margin:0 0 14px;
+  color:var(--hero-text);
+}
+
+.hero p{
+  max-width:720px;
+  font-size:18px;
+  margin:0;
+  color:var(--muted);
 }
 
 .page{
-  max-width:1100px;
-  margin:18px auto;
+  max-width:1120px;
+  margin:24px auto;
   display:grid;
   grid-template-columns:1fr 300px;
-  gap:20px;
-  padding:0 14px;
+  gap:22px;
+  padding:0 16px;
 }
 
-.main{
-  background:white;
-  border:1px solid #ccc;
-  padding:18px;
+.main-card,
+.sidebar-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:22px;
 }
 
-h1{
-  font-size:28px;
-  margin-top:0;
+.main-card p,
+.content p{
+  color:var(--muted);
 }
 
-.calculator-box{
-  max-width:520px;
-  background:#eaf3ff;
-  border:1px solid #9dbde2;
-  padding:14px;
-  border-radius:4px;
+.ad-box{
+  background:var(--card);
+  border:1px dashed var(--border);
+  color:var(--muted);
+  text-align:center;
+  padding:24px;
+  border-radius:10px;
+  margin-bottom:20px;
+  font-size:14px;
 }
 
-.calc-title{
-  background:#336699;
+.calculator{
+  max-width:560px;
+  background:var(--card);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:18px;
+}
+
+.calc-header{
+  background:var(--blue);
   color:white;
-  padding:9px 12px;
-  margin:-14px -14px 14px -14px;
-  font-weight:bold;
+  padding:12px 16px;
   font-size:18px;
+  font-weight:bold;
+}
+
+.calc-body{
+  padding:16px;
 }
 
 .calc-row{
   display:grid;
   grid-template-columns:190px 1fr;
-  gap:10px;
+  gap:12px;
   align-items:center;
-  margin-bottom:9px;
+  margin-bottom:12px;
 }
 
 label{
   font-size:14px;
-  font-weight:bold;
+  font-weight:700;
 }
 
-input, select{
-  padding:7px;
-  border:1px solid #999;
-  border-radius:3px;
-  font-size:14px;
+input,select{
+  width:100%;
+  padding:9px 10px;
+  border:1px solid var(--border);
+  border-radius:6px;
+  font-size:15px;
+  background:var(--input-bg);
+  color:var(--text);
+}
+
+input:focus,select:focus{
+  outline:none;
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(47,129,247,.2);
 }
 
 .buttons{
-  margin-top:12px;
   text-align:center;
+  margin-top:14px;
 }
 
 button{
-  padding:8px 18px;
-  border:1px solid #1f4e79;
-  background:#2f75b5;
-  color:white;
-  font-weight:bold;
+  padding:9px 20px;
+  border:none;
+  border-radius:6px;
   cursor:pointer;
-  border-radius:3px;
+  font-weight:700;
+  font-size:14px;
 }
 
-button:hover{
-  background:#1f5f94;
+.calculate-btn{
+  background:var(--green);
+  color:white;
 }
 
 .clear-btn{
-  background:#777;
-  border-color:#555;
+  background:transparent;
+  color:var(--text);
+  border:1px solid var(--border);
+  margin-left:8px;
 }
 
 .result-box{
-  margin-top:14px;
-  background:white;
-  border:1px solid #b7cde8;
-  padding:12px;
+  margin-top:16px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:14px;
   display:none;
 }
 
 .result-line{
   display:flex;
   justify-content:space-between;
-  border-bottom:1px solid #eee;
-  padding:6px 0;
+  gap:10px;
+  padding:8px 0;
+  border-bottom:1px solid var(--border);
 }
 
 .result-line:last-child{
@@ -142,49 +260,27 @@ button:hover{
 }
 
 .result-value{
-  font-weight:bold;
-  color:#1f5f94;
+  font-weight:800;
+  color:var(--blue);
 }
 
-.ad-box{
-  background:#eee;
-  border:1px dashed #999;
-  color:#777;
-  text-align:center;
-  padding:22px;
-  margin-bottom:18px;
-}
-
-.sidebar-box{
-  background:white;
-  border:1px solid #ccc;
-  padding:14px;
-  margin-bottom:18px;
-}
-
-.sidebar-box h3{
-  margin-top:0;
-}
-
-.sidebar-box a{
-  display:block;
-  color:#1f5f94;
-  text-decoration:none;
-  padding:6px 0;
-  border-bottom:1px solid #eee;
-  font-size:14px;
+.big-result{
+  font-size:20px;
+  color:var(--green);
 }
 
 table{
   width:100%;
   border-collapse:collapse;
-  margin-top:20px;
+  margin-top:22px;
   font-size:14px;
+  background:var(--table-bg);
+  color:var(--text);
 }
 
 th,td{
-  border:1px solid #ccc;
-  padding:8px;
+  border:1px solid var(--border);
+  padding:9px;
   text-align:right;
 }
 
@@ -193,45 +289,87 @@ th:first-child,td:first-child{
 }
 
 th{
-  background:#e5e5e5;
-}
-
-.content{
-  margin-top:28px;
+  background:var(--card);
 }
 
 .content h2{
-  font-size:22px;
-  margin-top:26px;
+  margin-top:32px;
+  font-size:24px;
+  color:var(--text);
 }
 
-footer{
-  text-align:center;
-  padding:25px;
-  color:#666;
+.content h3{
+  margin-top:22px;
+  color:var(--text);
+}
+
+.notice{
+  background:rgba(187,128,9,.15);
+  border:1px solid rgba(187,128,9,.45);
+  padding:14px;
+  border-radius:8px;
+  margin-top:20px;
+  color:#b7791f;
   font-size:14px;
 }
 
-@media(max-width:850px){
+.sidebar-card{
+  margin-bottom:20px;
+}
+
+.sidebar-card h3{
+  margin-top:0;
+  color:var(--text);
+}
+
+.sidebar-card a{
+  display:block;
+  color:var(--blue);
+  text-decoration:none;
+  padding:8px 0;
+  border-bottom:1px solid var(--border);
+  font-size:14px;
+  font-weight:600;
+}
+
+footer{
+  max-width:1120px;
+  margin:auto;
+  padding:28px 16px;
+  color:var(--muted);
+  font-size:14px;
+  text-align:center;
+}
+
+@media(max-width:860px){
   .page{
     grid-template-columns:1fr;
   }
 
-  .calc-row{
-    grid-template-columns:1fr;
+  .hero h1{
+    font-size:32px;
   }
 
   .header-wrap{
     display:block;
   }
 
+  .header-right{
+    margin-top:12px;
+    display:block;
+  }
+
   nav{
-    margin-top:10px;
+    margin-bottom:12px;
   }
 
   nav a{
     margin-left:0;
-    margin-right:12px;
+    margin-right:14px;
+  }
+
+  .calc-row{
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -241,78 +379,88 @@ footer{
 
 <header>
   <div class="header-wrap">
-    <div class="logo">Finance Calculators</div>
-    <nav>
-      <a href="#">Investment</a>
-      <a href="#">Loan</a>
-      <a href="#">Mortgage</a>
-      <a href="#">Retirement</a>
-    </nav>
+    <div class="logo">Finance<span>Tools</span></div>
+
+    <div class="header-right">
+      <nav>
+        <a href="index.html">Compound Interest</a>
+        <a href="loan-calculator.html">Loan Calculator</a>
+        <a href="mortgage-calculator.html">Mortgage Calculator</a>
+        <a href="retirement-calculator.html">Retirement Calculator</a>
+      </nav>
+
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </div>
   </div>
 </header>
 
+<section class="hero">
+  <div class="hero-content">
+    <h1>Compound Interest Calculator</h1>
+    <p>Estimate how your investment may grow over time with monthly contributions, compound interest, and long-term growth projections.</p>
+  </div>
+</section>
+
 <div class="page">
 
-<main class="main">
-
-<h1>Compound Interest Calculator</h1>
+<main class="main-card">
 
 <p>
-Use this compound interest calculator to estimate how much your money may grow over time with interest and monthly contributions.
+Use this free compound interest calculator to estimate your future investment value, total contributions, and total interest earned.
 </p>
 
-<div class="calculator-box">
-  <div class="calc-title">Compound Interest Calculator</div>
+<div class="calculator">
+  <div class="calc-header">Investment Growth Calculator</div>
 
-  <div class="calc-row">
-    <label>Initial Investment</label>
-    <input type="number" id="principal" value="1000">
-  </div>
-
-  <div class="calc-row">
-    <label>Monthly Contribution</label>
-    <input type="number" id="monthly" value="100">
-  </div>
-
-  <div class="calc-row">
-    <label>Annual Interest Rate</label>
-    <input type="number" id="rate" value="7" step="0.01">
-  </div>
-
-  <div class="calc-row">
-    <label>Number of Years</label>
-    <input type="number" id="years" value="10">
-  </div>
-
-  <div class="calc-row">
-    <label>Compound Frequency</label>
-    <select id="frequency">
-      <option value="1">Annually</option>
-      <option value="4">Quarterly</option>
-      <option value="12" selected>Monthly</option>
-      <option value="365">Daily</option>
-    </select>
-  </div>
-
-  <div class="buttons">
-    <button onclick="calculate()">Calculate</button>
-    <button class="clear-btn" onclick="clearForm()">Clear</button>
-  </div>
-
-  <div class="result-box" id="resultBox">
-    <div class="result-line">
-      <span>Future Value</span>
-      <span class="result-value" id="futureValue">$0.00</span>
+  <div class="calc-body">
+    <div class="calc-row">
+      <label>Initial Investment</label>
+      <input type="number" id="principal" value="1000">
     </div>
 
-    <div class="result-line">
-      <span>Total Contributions</span>
-      <span class="result-value" id="totalContributions">$0.00</span>
+    <div class="calc-row">
+      <label>Monthly Contribution</label>
+      <input type="number" id="monthly" value="100">
     </div>
 
-    <div class="result-line">
-      <span>Total Interest Earned</span>
-      <span class="result-value" id="interestEarned">$0.00</span>
+    <div class="calc-row">
+      <label>Annual Interest Rate</label>
+      <input type="number" id="rate" value="7" step="0.01">
+    </div>
+
+    <div class="calc-row">
+      <label>Number of Years</label>
+      <input type="number" id="years" value="10">
+    </div>
+
+    <div class="calc-row">
+      <label>Compound Frequency</label>
+      <select id="frequency">
+        <option value="1">Annually</option>
+        <option value="4">Quarterly</option>
+        <option value="12" selected>Monthly</option>
+        <option value="365">Daily</option>
+      </select>
+    </div>
+
+    <div class="buttons">
+      <button class="calculate-btn" onclick="calculate()">Calculate</button>
+      <button class="clear-btn" onclick="clearForm()">Clear</button>
+    </div>
+
+    <div class="result-box" id="resultBox">
+      <div class="result-line">
+        <span>Future Value</span>
+        <span class="result-value big-result" id="futureValue">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Total Contributions</span>
+        <span class="result-value" id="totalContributions">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Total Interest Earned</span>
+        <span class="result-value" id="interestEarned">$0.00</span>
+      </div>
     </div>
   </div>
 </div>
@@ -329,44 +477,45 @@ Use this compound interest calculator to estimate how much your money may grow o
   <tbody id="tableBody"></tbody>
 </table>
 
-<div class="ad-box" style="margin-top:22px;">
+<div class="ad-box" style="margin-top:24px;">
   Google AdSense Ad Space - In Content
 </div>
 
 <section class="content">
   <h2>What Is Compound Interest?</h2>
   <p>
-    Compound interest is interest earned on both your original investment and the interest that has already been added to your balance.
-    This allows your money to grow faster over time.
+    Compound interest is interest earned on both your original money and the interest that has already been added to your balance.
+    Over time, this can help your investment grow faster because your earnings can also generate earnings.
   </p>
 
-  <h2>How This Calculator Works</h2>
+  <h2>How to Use This Calculator</h2>
   <p>
-    Enter your starting investment, monthly contribution, interest rate, number of years, and compounding frequency.
-    The calculator estimates your future balance, total contributions, and total interest earned.
+    Enter your initial investment, monthly contribution, expected annual interest rate, number of years, and compounding frequency.
+    The calculator will estimate your future value, total amount contributed, and total interest earned.
   </p>
 
   <h2>Compound Interest Formula</h2>
   <p>
     The basic compound interest formula is <strong>A = P(1 + r/n)<sup>nt</sup></strong>.
-    In this formula, A is the future value, P is the principal, r is the annual interest rate, n is the number of compounding periods per year, and t is the number of years.
   </p>
 
-  <h2>Example</h2>
+  <h2>Example Calculation</h2>
   <p>
-    If you invest $1,000, add $100 per month, earn 7% annually, and invest for 10 years, this calculator estimates how much your money may grow.
+    If you start with $1,000, add $100 every month, earn an estimated 7% annual return, and invest for 10 years,
+    this calculator can estimate how much your money may grow.
   </p>
 
   <h2>Frequently Asked Questions</h2>
 
   <h3>Is this calculator free?</h3>
-  <p>Yes. This calculator is free to use.</p>
+  <p>Yes. This compound interest calculator is free to use.</p>
 
-  <h3>Does this guarantee investment returns?</h3>
-  <p>No. The results are estimates only and should not be considered financial advice.</p>
+  <h3>Does this calculator guarantee returns?</h3>
+  <p>No. The results are estimates only. Real investment returns may change based on market performance, fees, taxes, and risk.</p>
 
-  <h3>Why does compounding matter?</h3>
-  <p>Compounding matters because your interest can begin earning interest, which may increase growth over long periods of time.</p>
+  <div class="notice">
+    This calculator is for educational purposes only and should not be considered financial advice.
+  </div>
 </section>
 
 </main>
@@ -376,15 +525,15 @@ Use this compound interest calculator to estimate how much your money may grow o
     Google AdSense Ad Space<br>300x250
   </div>
 
-  <div class="sidebar-box">
+  <div class="sidebar-card">
     <h3>Related Calculators</h3>
-    <a href="#">Simple Interest Calculator</a>
-    <a href="#">Savings Calculator</a>
-    <a href="#">Investment Calculator</a>
-    <a href="#">Loan Calculator</a>
-    <a href="#">Mortgage Calculator</a>
-    <a href="#">Retirement Calculator</a>
-    <a href="#">Credit Card Payoff Calculator</a>
+    <a href="index.html">Compound Interest Calculator</a>
+    <a href="simple-interest-calculator.html">Simple Interest Calculator</a>
+    <a href="savings-calculator.html">Savings Calculator</a>
+    <a href="loan-calculator.html">Loan Calculator</a>
+    <a href="mortgage-calculator.html">Mortgage Calculator</a>
+    <a href="retirement-calculator.html">Retirement Calculator</a>
+    <a href="credit-card-payoff-calculator.html">Credit Card Payoff Calculator</a>
   </div>
 
   <div class="ad-box">
@@ -395,13 +544,32 @@ Use this compound interest calculator to estimate how much your money may grow o
 </div>
 
 <footer>
-  This tool is for educational purposes only. Results are estimates and not financial advice.
+  © 2026 FinanceTools. Educational calculators for personal finance planning.
 </footer>
 
 <script>
 const money = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD"
+});
+
+const themeToggle = document.getElementById("themeToggle");
+
+if(localStorage.getItem("theme") === "dark"){
+  document.body.classList.add("dark");
+  themeToggle.textContent = "☀️ Light";
+}
+
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+
+  if(document.body.classList.contains("dark")){
+    localStorage.setItem("theme", "dark");
+    themeToggle.textContent = "☀️ Light";
+  }else{
+    localStorage.setItem("theme", "light");
+    themeToggle.textContent = "🌙 Dark";
+  }
 });
 
 function calculate(){
