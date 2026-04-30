@@ -1,7 +1,5 @@
 <!-- Salve como index.html -->
 
-Sim — apliquei só melhorias visuais no CSS, mantendo a estrutura e a lógica do site.
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +30,34 @@ body{
   background:var(--bg);
   color:var(--text);
   line-height:1.6;
-  transition:.25s;
+  transition:
+    background-color .45s cubic-bezier(0.4,0,0.2,1),
+    color .45s cubic-bezier(0.4,0,0.2,1),
+    opacity .22s ease;
+}
+body.fade-transition{
+  opacity:.72;
+}
+body,
+header,
+.main-card,
+.sidebar-card,
+.calculator,
+.result-box,
+.chart-wrap,
+.ad-box,
+.site-footer,
+input,
+select,
+button,
+nav{
+  transition:
+    background-color .45s cubic-bezier(0.4,0,0.2,1),
+    color .45s cubic-bezier(0.4,0,0.2,1),
+    border-color .35s ease,
+    box-shadow .35s ease,
+    transform .2s ease,
+    opacity .25s ease;
 }
 header{
   background:var(--header);
@@ -67,19 +92,26 @@ nav a:hover{color:var(--blue)}
   color:var(--text);
   cursor:pointer;
   font-weight:700;
-  transition:.2s;
 }
 .theme-toggle:hover,.menu-toggle:hover{
   border-color:var(--blue);
   color:var(--blue);
+  transform:translateY(-1px);
+}
+button:active{
+  transform:scale(.97);
 }
 .menu-toggle{display:none}
+
 .hero{
   position:relative;
   background:#2da44e;
   padding:60px 16px 70px;
   overflow:hidden;
   border-bottom:1px solid var(--soft-border);
+  transition:
+    background .55s cubic-bezier(0.4,0,0.2,1),
+    border-color .35s ease;
 }
 .hero::before{
   content:"";
@@ -119,6 +151,7 @@ body.dark .hero{
   margin:0;
   color:rgba(255,255,255,0.88);
 }
+
 .top-ad{
   max-width:1120px;
   margin:18px auto 0;
@@ -139,6 +172,10 @@ body.dark .hero{
   padding:30px;
   box-shadow:var(--soft-shadow);
 }
+.main-card:hover,
+.sidebar-card:hover{
+  transform:translateY(-1px);
+}
 .main-card p,.content p{color:var(--muted)}
 .ad-box{
   background:var(--card);
@@ -151,6 +188,7 @@ body.dark .hero{
   font-size:14px;
   opacity:.58;
 }
+
 .calculator{
   width:100%;
   max-width:560px;
@@ -190,7 +228,6 @@ input,select{
   font-size:15px;
   background:var(--input-bg);
   color:var(--text);
-  transition:.2s;
 }
 input:focus,select:focus{
   outline:none;
@@ -212,12 +249,12 @@ input:focus,select:focus{
   color:var(--text);
   cursor:pointer;
   font-weight:700;
-  transition:.2s;
 }
 .quick-buttons button:hover{
   border-color:var(--blue);
   color:var(--blue);
   background:rgba(47,129,247,.08);
+  transform:translateY(-1px);
 }
 .buttons{text-align:center;margin-top:16px}
 button{
@@ -227,7 +264,6 @@ button{
   cursor:pointer;
   font-weight:700;
   font-size:14px;
-  transition:.2s;
 }
 .calculate-btn{
   background:var(--green);
@@ -246,6 +282,7 @@ button{
 .clear-btn:hover{
   border-color:var(--blue);
   color:var(--blue);
+  transform:translateY(-1px);
 }
 .result-box{
   margin-top:18px;
@@ -265,6 +302,7 @@ button{
 .result-line:last-child{border-bottom:none}
 .result-value{font-weight:800;color:var(--blue)}
 .big-result{font-size:20px;color:var(--green)}
+
 .chart-wrap{
   width:100%;
   max-width:560px;
@@ -348,6 +386,7 @@ th{
   font-weight:600;
 }
 .sidebar-card a:hover{text-decoration:underline}
+
 .site-footer{
   margin-top:44px;
   background:var(--card);
@@ -375,6 +414,7 @@ th{
   text-decoration:underline;
   margin:0 4px;
 }
+
 @media(max-width:860px){
   .header-wrap{
     display:flex;
@@ -421,6 +461,10 @@ th{
     max-width:760px;
     margin:0 auto;
     padding:22px 16px;
+  }
+  .main-card:hover,
+  .sidebar-card:hover{
+    transform:none;
   }
   .main-card > p,
   .calculator,
@@ -625,13 +669,23 @@ const mainNav = document.getElementById("mainNav");
 document.body.classList.remove("dark");
 themeToggle.textContent = "🌙 Dark";
 themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  if(document.body.classList.contains("dark")){
-    themeToggle.textContent = "☀️ Light";
-  }else{
-    themeToggle.textContent = "🌙 Dark";
-  }
-  calculate();
+  document.body.classList.add("fade-transition");
+
+  setTimeout(() => {
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+      themeToggle.textContent = "☀️ Light";
+    }else{
+      themeToggle.textContent = "🌙 Dark";
+    }
+
+    calculate();
+
+    requestAnimationFrame(() => {
+      document.body.classList.remove("fade-transition");
+    });
+  }, 140);
 });
 menuToggle.addEventListener("click", () => {
   mainNav.classList.toggle("open");
