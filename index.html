@@ -77,7 +77,7 @@ nav a:hover{color:var(--blue)}
       rgba(20,24,84,0.58) 48%,
       rgba(5,8,45,1) 80%
     );
-  padding:86px 16px 112px;
+  padding:60px 16px 70px;
   overflow:hidden;
   border-bottom:1px solid var(--soft-border);
 }
@@ -391,7 +391,7 @@ th{background:var(--card)}
     max-width:760px;
     margin:22px auto 0;
   }
-  .hero{padding:76px 16px 104px}
+  .hero{padding:56px 16px 66px}
   .hero h1{font-size:32px}
   .calc-row{grid-template-columns:1fr}
   label{padding-top:0}
@@ -420,9 +420,11 @@ th{background:var(--card)}
     <p>Estimate how your investment may grow over time with monthly contributions, compound interest, and long-term growth projections.</p>
   </div>
 </section>
-<!--<div class="top-ad">
+<!-- Top Ad temporarily disabled
+<div class="top-ad">
   <div class="ad-box">Google AdSense Ad Space - Responsive Top Banner</div>
-</div>-->
+</div>
+-->
 <div class="page">
 <main class="main-card">
 <p>Use this free compound interest calculator to estimate your future investment value, total contributions, total interest earned, and long-term growth.</p>
@@ -573,17 +575,14 @@ const money = new Intl.NumberFormat("en-US", {
 const themeToggle = document.getElementById("themeToggle");
 const menuToggle = document.getElementById("menuToggle");
 const mainNav = document.getElementById("mainNav");
-if(localStorage.getItem("theme") === "dark"){
-  document.body.classList.add("dark");
-  themeToggle.textContent = "☀️ Light";
-}
+// Always start in light mode
+document.body.classList.remove("dark");
+themeToggle.textContent = "🌙 Dark";
 themeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
   if(document.body.classList.contains("dark")){
-    localStorage.setItem("theme", "dark");
     themeToggle.textContent = "☀️ Light";
   }else{
-    localStorage.setItem("theme", "light");
     themeToggle.textContent = "🌙 Dark";
   }
   calculate();
