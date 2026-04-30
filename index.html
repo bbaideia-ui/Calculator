@@ -1,5 +1,7 @@
 <!-- Salve como index.html -->
 
+Aqui está o HTML completo com o FAQ accordion nível Apple aplicado:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,7 +104,6 @@ button:active{
   transform:scale(.97);
 }
 .menu-toggle{display:none}
-
 .hero{
   position:relative;
   background:#2da44e;
@@ -151,7 +152,6 @@ body.dark .hero{
   margin:0;
   color:rgba(255,255,255,0.88);
 }
-
 .top-ad{
   max-width:1120px;
   margin:18px auto 0;
@@ -188,7 +188,6 @@ body.dark .hero{
   font-size:14px;
   opacity:.58;
 }
-
 .calculator{
   width:100%;
   max-width:560px;
@@ -302,7 +301,6 @@ button{
 .result-line:last-child{border-bottom:none}
 .result-value{font-weight:800;color:var(--blue)}
 .big-result{font-size:20px;color:var(--green)}
-
 .chart-wrap{
   width:100%;
   max-width:560px;
@@ -386,7 +384,6 @@ th{
   font-weight:600;
 }
 .sidebar-card a:hover{text-decoration:underline}
-
 .site-footer{
   margin-top:44px;
   background:var(--card);
@@ -414,7 +411,76 @@ th{
   text-decoration:underline;
   margin:0 4px;
 }
-
+/* FAQ Accordion - Apple Style */
+.faq-list{
+  margin-top:18px;
+  border:1px solid var(--soft-border);
+  border-radius:16px;
+  overflow:hidden;
+  background:var(--card);
+  box-shadow:0 8px 24px rgba(0,0,0,0.035);
+}
+.faq-item{
+  border-bottom:1px solid var(--soft-border);
+}
+.faq-item:last-child{
+  border-bottom:none;
+}
+.faq-question{
+  width:100%;
+  background:transparent;
+  border:none;
+  color:var(--text);
+  padding:18px 20px;
+  font-size:16px;
+  font-weight:800;
+  text-align:left;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.faq-question:hover{
+  background:rgba(47,129,247,.06);
+}
+.faq-icon{
+  width:24px;
+  height:24px;
+  min-width:24px;
+  border-radius:50%;
+  border:1px solid var(--soft-border);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  line-height:1;
+  transition:transform .28s cubic-bezier(.4,0,.2,1);
+}
+.faq-item.active .faq-icon{
+  transform:rotate(45deg);
+}
+.faq-answer{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(-4px);
+  transition:
+    max-height .38s cubic-bezier(.4,0,.2,1),
+    opacity .25s ease,
+    transform .25s ease;
+}
+.faq-answer p{
+  margin:0;
+  padding:0 20px 18px;
+  color:var(--muted);
+  font-size:15px;
+}
+.faq-item.active .faq-answer{
+  max-height:220px;
+  opacity:1;
+  transform:translateY(0);
+}
 @media(max-width:860px){
   .header-wrap{
     display:flex;
@@ -611,12 +677,44 @@ th{
   <h2>Example Calculation</h2>
   <p>If you start with $1,000, add $100 every month, earn an estimated 7% annual return, and invest for 10 years, this calculator can estimate how much your money may grow.</p>
   <h2>Frequently Asked Questions</h2>
-  <h3>Is this calculator free?</h3>
-  <p>Yes. This compound interest calculator is free to use.</p>
-  <h3>Does this calculator guarantee returns?</h3>
-  <p>No. The results are estimates only. Real investment returns may change based on market performance, fees, taxes, and risk.</p>
-  <h3>What interest rate should I use?</h3>
-  <p>Many people test examples like 5%, 7%, or 10%, but the right number depends on your investment type and risk level.</p>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Is this calculator free?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. This compound interest calculator is completely free to use.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Does this calculator guarantee returns?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>No. The results are estimates only and may vary based on market performance, fees, taxes, and other real-world factors.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        What interest rate should I use?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Many people test examples like 5%, 7%, or 10%, but the right number depends on your investment type and risk level.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        How often is interest compounded?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>This calculator supports annual, quarterly, monthly, and daily compounding.</p>
+      </div>
+    </div>
+  </div>
   <div class="notice">This calculator is for educational purposes only and should not be considered financial advice.</div>
 </section>
 </main>
@@ -670,18 +768,14 @@ document.body.classList.remove("dark");
 themeToggle.textContent = "🌙 Dark";
 themeToggle.addEventListener("click", () => {
   document.body.classList.add("fade-transition");
-
   setTimeout(() => {
     document.body.classList.toggle("dark");
-
     if(document.body.classList.contains("dark")){
       themeToggle.textContent = "☀️ Light";
     }else{
       themeToggle.textContent = "🌙 Dark";
     }
-
     calculate();
-
     requestAnimationFrame(() => {
       document.body.classList.remove("fade-transition");
     });
@@ -812,6 +906,20 @@ function clearForm(){
   const ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
+document.querySelectorAll(".faq-question").forEach(button => {
+  button.addEventListener("click", () => {
+    const item = button.closest(".faq-item");
+    const isActive = item.classList.contains("active");
+    document.querySelectorAll(".faq-item").forEach(faq => {
+      faq.classList.remove("active");
+      faq.querySelector(".faq-question").setAttribute("aria-expanded", "false");
+    });
+    if(!isActive){
+      item.classList.add("active");
+      button.setAttribute("aria-expanded", "true");
+    }
+  });
+});
 window.addEventListener("resize", calculate);
 calculate();
 </script>
