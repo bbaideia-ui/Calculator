@@ -1,7 +1,5 @@
 <!-- Salve como index.html -->
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,6 +69,12 @@ nav a:hover{color:var(--blue)}
 .menu-toggle{display:none}
 .hero{
   position:relative;
+  background:#0d1117;
+  padding:60px 16px 70px;
+  overflow:hidden;
+  border-bottom:1px solid var(--soft-border);
+}
+body.dark .hero{
   background:
     radial-gradient(ellipse at 50% 100%,
       rgba(159,122,234,0.72) 0%,
@@ -78,9 +82,6 @@ nav a:hover{color:var(--blue)}
       rgba(20,24,84,0.58) 48%,
       rgba(5,8,45,1) 80%
     );
-  padding:60px 16px 70px;
-  overflow:hidden;
-  border-bottom:1px solid var(--soft-border);
 }
 .hero-content{
   max-width:1120px;
@@ -717,3 +718,5 @@ calculate();
 </script>
 </body>
 </html>
+
+
