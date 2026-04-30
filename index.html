@@ -1,5 +1,5 @@
 <!-- Salve como index.html -->
-
+Claro. Aqui está o HTML completo, com o visual clean mantido e o detalhe dos anos no gráfico restaurado:
 
 <!DOCTYPE html>
 <html lang="en">
@@ -697,6 +697,11 @@ function drawChart(data){
   ctx.strokeStyle = isDark ? "#3fb950" : "#2da44e";
   ctx.lineWidth = 3;
   ctx.stroke();
+  const last = data[data.length - 1];
+  ctx.font = "12px Arial";
+  ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
+  ctx.fillText("Year 1", padding, height - 8);
+  ctx.fillText("Year " + last.year, width - padding - 60, height - 8);
 }
 function clearForm(){
   document.getElementById("principal").value = "";
