@@ -7,9 +7,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Compound Interest Calculator | Free Investment Growth Calculator</title>
 <meta name="description" content="Free compound interest calculator to estimate future investment value, monthly contributions, total interest earned, and long-term investment growth.">
+
 <style>
 *{box-sizing:border-box}
 html, body{overflow-x:hidden}
+
 :root{
   --bg:#f6f8fa; --card:#ffffff; --text:#24292f; --muted:#57606a;
   --border:#d0d7de; --header:#ffffff; --blue:#0969da; --green:#2da44e;
@@ -17,6 +19,7 @@ html, body{overflow-x:hidden}
   --soft-border:rgba(0,0,0,0.08);
   --soft-shadow:0 8px 28px rgba(0,0,0,0.06);
 }
+
 body.dark{
   --bg:#0d1117; --card:#161b22; --text:#f0f6fc; --muted:#8b949e;
   --border:#30363d; --header:#010409; --blue:#2f81f7; --green:#3fb950;
@@ -24,6 +27,7 @@ body.dark{
   --soft-border:rgba(255,255,255,0.08);
   --soft-shadow:0 10px 32px rgba(0,0,0,0.28);
 }
+
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
@@ -32,12 +36,14 @@ body{
   line-height:1.6;
   transition:.25s;
 }
+
 header{
   background:var(--header);
   border-bottom:1px solid var(--soft-border);
   position:relative;
   z-index:50;
 }
+
 .header-wrap{
   max-width:1120px;
   margin:auto;
@@ -46,9 +52,12 @@ header{
   justify-content:space-between;
   align-items:center;
 }
+
 .logo{font-size:22px;font-weight:800;color:var(--text)}
 .logo span{color:var(--green)}
+
 .header-right{display:flex;align-items:center;gap:14px}
+
 nav a{
   color:var(--text);
   text-decoration:none;
@@ -56,7 +65,9 @@ nav a{
   font-size:14px;
   font-weight:600;
 }
+
 nav a:hover{color:var(--blue)}
+
 .theme-toggle,.menu-toggle{
   padding:7px 12px;
   border-radius:8px;
@@ -66,14 +77,30 @@ nav a:hover{color:var(--blue)}
   cursor:pointer;
   font-weight:700;
 }
+
 .menu-toggle{display:none}
+
+/* 🔥 HERO MELHORADO */
 .hero{
   position:relative;
-  background:#0d1117;
+  background:#2da44e;
   padding:60px 16px 70px;
   overflow:hidden;
   border-bottom:1px solid var(--soft-border);
 }
+
+/* profundidade leve */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.16), transparent 55%),
+    radial-gradient(circle at 80% 0%, rgba(255,255,255,0.10), transparent 45%);
+  pointer-events:none;
+}
+
+/* DARK continua igual */
 body.dark .hero{
   background:
     radial-gradient(ellipse at 50% 100%,
@@ -83,12 +110,14 @@ body.dark .hero{
       rgba(5,8,45,1) 80%
     );
 }
+
 .hero-content{
   max-width:1120px;
   margin:auto;
   position:relative;
   z-index:1;
 }
+
 .hero h1{
   max-width:760px;
   font-size:42px;
@@ -96,12 +125,15 @@ body.dark .hero{
   margin:0 0 14px;
   color:#f0f6fc;
 }
+
 .hero p{
   max-width:720px;
   font-size:18px;
   margin:0;
   color:#c9d1d9;
 }
+
+/* 👉 RESTO DO SEU CÓDIGO CONTINUA EXATAMENTE IGUAL */
 .top-ad{
   max-width:1120px;
   margin:18px auto 0;
