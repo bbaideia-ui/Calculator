@@ -592,11 +592,9 @@ menuToggle.addEventListener("click", () => {
 });
 function setRate(value){
   document.getElementById("rate").value = value;
-  calculate();
 }
 function setYears(value){
   document.getElementById("years").value = value;
-  calculate();
 }
 function calculate(){
   const principal = Number(document.getElementById("principal").value);
