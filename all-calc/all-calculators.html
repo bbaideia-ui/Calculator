@@ -1,3 +1,4 @@
+Aqui 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +31,7 @@ body{
   transition:background-color .45s cubic-bezier(0.4,0,0.2,1),color .45s cubic-bezier(0.4,0,0.2,1),opacity .22s ease;
 }
 body.fade-transition{opacity:.72}
-body,header,.main-card,.calculator-card,.ad-box,.site-footer,input,button,nav{
+body,header,.main-card,.calculator-card,.ad-box,.site-footer,input,button,nav,.autocomplete-list{
   transition:background-color .45s cubic-bezier(0.4,0,0.2,1),color .45s cubic-bezier(0.4,0,0.2,1),border-color .35s ease,box-shadow .35s ease,transform .2s ease,opacity .25s ease;
 }
 header{
@@ -130,6 +131,7 @@ body.dark .hero{
   width:100%;
   max-width:640px;
   margin:22px auto 28px;
+  position:relative;
 }
 .search-box input{
   width:100%;
@@ -145,9 +147,44 @@ body.dark .hero{
   border-color:var(--blue);
   box-shadow:0 0 0 4px rgba(47,129,247,.16);
 }
-.category{
-  margin-top:34px;
+.autocomplete-list{
+  position:absolute;
+  top:calc(100% + 8px);
+  left:0;
+  right:0;
+  background:var(--card);
+  border:1px solid var(--soft-border);
+  border-radius:14px;
+  box-shadow:var(--soft-shadow);
+  max-height:280px;
+  overflow-y:auto;
+  display:none;
+  z-index:200;
 }
+.autocomplete-item{
+  padding:12px 14px;
+  cursor:pointer;
+  border-bottom:1px solid var(--soft-border);
+  font-size:14px;
+  color:var(--text);
+}
+.autocomplete-item:last-child{border-bottom:none}
+.autocomplete-item:hover,
+.autocomplete-item.active{
+  background:rgba(47,129,247,.08);
+  color:var(--blue);
+}
+.autocomplete-item strong{
+  display:block;
+  font-size:14px;
+}
+.autocomplete-item span{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-top:2px;
+}
+.category{margin-top:34px}
 .category h2{
   font-size:24px;
   margin:0 0 14px;
@@ -272,24 +309,20 @@ body.dark .hero{
     </div>
   </div>
 </header>
-
 <section class="hero">
   <div class="hero-content">
     <h1>All Calculators</h1>
     <p>Browse free financial calculators designed to help you estimate savings, loans, retirement, credit card payoff, and more.</p>
   </div>
 </section>
-
 <div class="page">
 <main class="main-card">
-<p>Use the search below to quickly find a calculator. More tools will be added as FinanceTools continues to grow.</p>
-
+<p>Use the search below to quickly find a calculator. Start typing and choose a suggestion, or filter the list in real time.</p>
 <div class="search-box">
-  <input type="text" id="calculatorSearch" placeholder="Search calculators...">
+  <input type="text" id="calculatorSearch" placeholder="Search calculators..." autocomplete="off">
+  <div class="autocomplete-list" id="autocompleteList"></div>
 </div>
-
 <div class="no-results" id="noResults">No calculators found.</div>
-
 <section class="category">
   <h2>Interest & Savings</h2>
   <div class="calculator-grid">
@@ -307,7 +340,6 @@ body.dark .hero{
     </a>
   </div>
 </section>
-
 <section class="category">
   <h2>Loan Calculators</h2>
   <div class="calculator-grid">
@@ -325,7 +357,6 @@ body.dark .hero{
     </a>
   </div>
 </section>
-
 <section class="category">
   <h2>Mortgage & Debt</h2>
   <div class="calculator-grid">
@@ -339,7 +370,6 @@ body.dark .hero{
     </a>
   </div>
 </section>
-
 <section class="category">
   <h2>Retirement Calculators</h2>
   <div class="calculator-grid">
@@ -361,12 +391,9 @@ body.dark .hero{
     </a>
   </div>
 </section>
-
 <div class="ad-box">Google AdSense Ad Space - In Content</div>
-
 </main>
 </div>
-
 <footer class="site-footer">
   <div class="footer-info">
     <p>
@@ -388,7 +415,6 @@ body.dark .hero{
     &nbsp; © 2026 FinanceTools
   </div>
 </footer>
-
 <script>
 const themeToggle = document.getElementById("themeToggle");
 const menuToggle = document.getElementById("menuToggle");
@@ -397,10 +423,10 @@ const searchInput = document.getElementById("calculatorSearch");
 const cards = document.querySelectorAll(".calculator-card");
 const categories = document.querySelectorAll(".category");
 const noResults = document.getElementById("noResults");
-
+const autocompleteList = document.getElementById("autocompleteList");
+let activeSuggestionIndex = -1;
 document.body.classList.remove("dark");
 themeToggle.textContent = "🌙 Dark";
-
 themeToggle.addEventListener("click", () => {
   document.body.classList.add("fade-transition");
   setTimeout(() => {
@@ -411,34 +437,111 @@ themeToggle.addEventListener("click", () => {
     });
   }, 140);
 });
-
 menuToggle.addEventListener("click", () => {
   mainNav.classList.toggle("open");
 });
-
-searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase().trim();
+const calculators = Array.from(cards).map(card => ({
+  name: card.querySelector("strong").textContent.trim(),
+  description: card.querySelector("span").textContent.trim(),
+  href: card.getAttribute("href"),
+  element: card
+}));
+function filterCards(query){
   let visibleCount = 0;
-
   cards.forEach(card => {
     const text = card.textContent.toLowerCase();
     const match = text.includes(query);
     card.style.display = match ? "block" : "none";
     if(match) visibleCount++;
   });
-
   categories.forEach(category => {
-    const visibleCards = category.querySelectorAll(".calculator-card[style='display: block;'], .calculator-card:not([style])");
     let hasVisible = false;
-
     category.querySelectorAll(".calculator-card").forEach(card => {
       if(card.style.display !== "none") hasVisible = true;
     });
-
     category.style.display = hasVisible ? "block" : "none";
   });
-
   noResults.style.display = visibleCount === 0 ? "block" : "none";
+}
+function showSuggestions(query){
+  autocompleteList.innerHTML = "";
+  activeSuggestionIndex = -1;
+  if(!query){
+    autocompleteList.style.display = "none";
+    return;
+  }
+  const matches = calculators
+    .filter(item =>
+      item.name.toLowerCase().includes(query) ||
+      item.description.toLowerCase().includes(query)
+    )
+    .slice(0, 8);
+  if(matches.length === 0){
+    autocompleteList.style.display = "none";
+    return;
+  }
+  matches.forEach(match => {
+    const item = document.createElement("div");
+    item.className = "autocomplete-item";
+    item.innerHTML = `<strong>${match.name}</strong><span>${match.description}</span>`;
+    item.addEventListener("click", () => {
+      chooseSuggestion(match);
+    });
+    autocompleteList.appendChild(item);
+  });
+  autocompleteList.style.display = "block";
+}
+function chooseSuggestion(match){
+  searchInput.value = match.name;
+  autocompleteList.style.display = "none";
+  filterCards(match.name.toLowerCase());
+  match.element.scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
+  match.element.style.borderColor = "var(--blue)";
+  setTimeout(() => {
+    match.element.style.borderColor = "";
+  }, 900);
+}
+function updateActiveSuggestion(items){
+  items.forEach(item => item.classList.remove("active"));
+  if(activeSuggestionIndex >= 0 && items[activeSuggestionIndex]){
+    items[activeSuggestionIndex].classList.add("active");
+  }
+}
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase().trim();
+  filterCards(query);
+  showSuggestions(query);
+});
+searchInput.addEventListener("keydown", (event) => {
+  const items = autocompleteList.querySelectorAll(".autocomplete-item");
+  if(autocompleteList.style.display !== "block" || items.length === 0) return;
+  if(event.key === "ArrowDown"){
+    event.preventDefault();
+    activeSuggestionIndex = (activeSuggestionIndex + 1) % items.length;
+    updateActiveSuggestion(items);
+  }
+  if(event.key === "ArrowUp"){
+    event.preventDefault();
+    activeSuggestionIndex = (activeSuggestionIndex - 1 + items.length) % items.length;
+    updateActiveSuggestion(items);
+  }
+  if(event.key === "Enter"){
+    if(activeSuggestionIndex >= 0){
+      event.preventDefault();
+      items[activeSuggestionIndex].click();
+    }
+  }
+  if(event.key === "Escape"){
+    autocompleteList.style.display = "none";
+  }
+});
+document.addEventListener("click", (event) => {
+  if(!event.target.closest(".search-box")){
+    autocompleteList.style.display = "none";
+  }
 });
 </script>
 </body>
