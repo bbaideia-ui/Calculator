@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -171,6 +172,27 @@ body.dark .hero{
   align-items:start;
   margin-bottom:15px;
 }
+.credit-card-list{
+  display:grid;
+  gap:14px;
+  margin-bottom:12px;
+}
+.credit-card-item{
+  border:1px solid var(--soft-border);
+  border-radius:14px;
+  padding:16px;
+  background:var(--bg);
+}
+.credit-card-item h3{
+  margin:0 0 12px;
+  font-size:16px;
+  color:var(--text);
+}
+.credit-card-item label{
+  display:block;
+  padding-top:0;
+  margin:10px 0 6px;
+}
 label{
   font-size:14px;
   font-weight:700;
@@ -211,26 +233,6 @@ input:focus{
   color:var(--blue);
   background:rgba(47,129,247,.08);
   transform:translateY(-1px);
-}
-.credit-card-list{
-  display:grid;
-  gap:14px;
-}
-.credit-card-item{
-  border:1px solid var(--soft-border);
-  border-radius:14px;
-  padding:16px;
-  background:var(--bg);
-}
-.credit-card-item h3{
-  margin:0 0 12px;
-  font-size:16px;
-  color:var(--text);
-}
-.credit-card-item label{
-  display:block;
-  padding-top:0;
-  margin:10px 0 6px;
 }
 .buttons{text-align:center;margin-top:16px}
 button{
@@ -487,104 +489,78 @@ th{background:var(--card);font-weight:800}
 }
 </style>
 </head>
-  
 <body>
-
 <header>
   <div class="header-wrap">
     <div class="logo">Finance<span>Tools</span></div>
-
     <div class="header-right">
       <button class="menu-toggle" id="menuToggle">☰ Menu</button>
-
       <nav id="mainNav">
         <a href="../all-calculators.html">All Calculators</a>
         <a href="../about.html">About</a>
         <a href="../terms.html">Terms</a>
         <a href="../privacy.html">Privacy</a>
       </nav>
-
       <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
     </div>
   </div>
 </header>
-
 <section class="hero">
   <div class="hero-content">
     <h1>Credit Card Payoff Calculator</h1>
-    <p>Estimate how long it may take to pay off multiple credit cards using a debt avalanche strategy.</p>
+    <p>Estimate how long it may take to pay off multiple credit cards using a debt avalanche payoff strategy.</p>
   </div>
 </section>
-
 <div class="page">
-
 <main class="main-card">
-
 <p>Use this free credit card payoff calculator to estimate payoff time, total interest, total debt, and a monthly payoff schedule.</p>
-
 <div class="calculator">
   <div class="calc-header">Credit Card Debt Payoff Calculator</div>
-
   <div class="calc-body">
-
     <div class="calc-row">
       <label>Monthly Budget</label>
       <div>
         <input type="number" id="monthlyBudget" value="500">
         <div class="quick-buttons">
-          <button onclick="setBudget(300)">$300</button>
-          <button onclick="setBudget(500)">$500</button>
-          <button onclick="setBudget(1000)">$1k</button>
+          <button type="button" onclick="setBudget(300)">$300</button>
+          <button type="button" onclick="setBudget(500)">$500</button>
+          <button type="button" onclick="setBudget(1000)">$1k</button>
         </div>
       </div>
     </div>
-
-    <!-- NOVO LAYOUT EM CARDS -->
     <div class="credit-card-list">
-
       <div class="credit-card-item">
         <h3>Card 1</h3>
         <label>Balance</label>
         <input type="number" id="balance1" value="4600">
-
         <label>Minimum Payment</label>
         <input type="number" id="min1" value="100">
-
         <label>Interest Rate (%)</label>
         <input type="number" id="rate1" value="18.99" step="0.01">
       </div>
-
       <div class="credit-card-item">
         <h3>Card 2</h3>
         <label>Balance</label>
         <input type="number" id="balance2" value="3900">
-
         <label>Minimum Payment</label>
         <input type="number" id="min2" value="90">
-
         <label>Interest Rate (%)</label>
         <input type="number" id="rate2" value="19.99" step="0.01">
       </div>
-
       <div class="credit-card-item">
         <h3>Card 3</h3>
         <label>Balance</label>
         <input type="number" id="balance3" value="6000">
-
         <label>Minimum Payment</label>
         <input type="number" id="min3" value="120">
-
         <label>Interest Rate (%)</label>
         <input type="number" id="rate3" value="15.99" step="0.01">
       </div>
-
     </div>
-
     <div class="buttons">
       <button class="calculate-btn" onclick="calculate()">Calculate</button>
       <button class="clear-btn" onclick="clearForm()">Clear</button>
     </div>
-
     <div class="result-box" id="resultBox">
       <div class="result-line">
         <span>Estimated Payoff Time</span>
@@ -603,20 +579,16 @@ th{background:var(--card);font-weight:800}
         <span class="result-value" id="totalPayments">$0.00</span>
       </div>
     </div>
-
   </div>
 </div>
-
 <div class="chart-wrap">
   <h2 class="chart-title">Debt Payoff Chart</h2>
-  <canvas id="payoffChart"></canvas>
+  <canvas id="payoffChart" width="560" height="260"></canvas>
 </div>
-
 <div class="chart-wrap">
   <h2 class="chart-title">Principal vs Interest Breakdown</h2>
-  <canvas id="breakdownChart"></canvas>
+  <canvas id="breakdownChart" width="560" height="260"></canvas>
 </div>
-
 <div class="table-wrap">
 <table>
   <thead>
@@ -630,124 +602,357 @@ th{background:var(--card);font-weight:800}
   <tbody id="tableBody"></tbody>
 </table>
 </div>
-
+<div class="ad-box" style="margin-top:24px;">Google AdSense Ad Space - In Content</div>
+<section class="content">
+  <h2>What Is a Credit Card Payoff Calculator?</h2>
+  <p>A credit card payoff calculator estimates how long it may take to pay off credit card balances based on your monthly budget, interest rates, and minimum payments.</p>
+  <h2>How This Calculator Works</h2>
+  <p>This calculator uses a debt avalanche strategy, which prioritizes extra payments toward the card with the highest interest rate while maintaining minimum payments on the others.</p>
+  <h2>Why Interest Rates Matter</h2>
+  <p>Credit card interest can grow quickly. Paying extra toward higher-interest balances first may reduce total interest paid over time.</p>
+  <h2>Example Calculation</h2>
+  <p>If you have multiple credit card balances and set aside $500 per month, this calculator can estimate your payoff timeline and total interest paid.</p>
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Is this credit card payoff calculator free?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. This calculator is completely free to use.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        What is the debt avalanche method?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>The debt avalanche method pays extra money toward the highest-interest debt first while continuing minimum payments on the others.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Does this calculator guarantee payoff results?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>No. Results are estimates only. Actual payoff time may vary based on fees, rate changes, new purchases, missed payments, and lender terms.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Can I use this for multiple credit cards?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. This version supports three credit cards and estimates a combined payoff plan.</p>
+      </div>
+    </div>
+  </div>
+  <div class="notice">This calculator is for educational purposes only and should not be considered financial advice.</div>
+</section>
 </main>
-
 <aside>
-
+  <div class="ad-box">Google AdSense Ad Space<br>300x250</div>
   <div class="sidebar-card">
     <h3>Related Calculators</h3>
-    <a href="../index.html">Compound Interest</a>
-    <a href="simple-interest-calculator.html">Simple Interest</a>
-    <a href="savings-calculator.html">Savings</a>
-    <a href="loan-calculator.html">Loan</a>
-    <a href="mortgage-calculator.html">Mortgage</a>
-    <a href="retirement-calculator.html">Retirement</a>
+    <a href="../index.html">Compound Interest Calculator</a>
+    <a href="simple-interest-calculator.html">Simple Interest Calculator</a>
+    <a href="savings-calculator.html">Savings Calculator</a>
+    <a href="loan-calculator.html">Loan Calculator</a>
+    <a href="mortgage-calculator.html">Mortgage Calculator</a>
+    <a href="retirement-calculator.html">Retirement Calculator</a>
+    <a href="credit-card-payoff-calculator.html">Credit Card Payoff Calculator</a>
   </div>
-
+  <div class="ad-box">Google AdSense Ad Space<br>300x600</div>
 </aside>
-
 </div>
-
+<footer class="site-footer">
+  <div class="footer-info">
+    <p>
+      FinanceTools is dedicated to providing fast, simple, and reliable online calculators to help users make better financial decisions.
+      Our goal is to create an accessible platform where people can quickly perform essential calculations without complexity.
+      All tools are completely free and require no registration.
+    </p>
+    <p>
+      Each calculator is carefully designed and tested to support accuracy and usability. While most tools are suitable for general use,
+      some results may vary depending on financial systems, regions, fees, taxes, and other real-world factors. We are continuously improving
+      and expanding our platform to provide even more useful tools over time.
+    </p>
+  </div>
+  <div class="footer-links">
+    <a href="../all-calculators.html">all calculators</a> |
+    <a href="../about.html">about us</a> |
+    <a href="../sitemap.html">sitemap</a> |
+    <a href="../terms.html">terms of use</a> |
+    <a href="../privacy.html">privacy policy</a>
+    &nbsp; © 2026 FinanceTools
+  </div>
+</footer>
 <script>
 const money = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD"
 });
-
-function setBudget(val){
-  document.getElementById("monthlyBudget").value = val;
-}
-
-function calculate(){
-  let budget = +monthlyBudget.value;
-
-  let cards = [
-    {b:+balance1.value, m:+min1.value, r:+rate1.value/100},
-    {b:+balance2.value, m:+min2.value, r:+rate2.value/100},
-    {b:+balance3.value, m:+min3.value, r:+rate3.value/100}
-  ].filter(c=>c.b>0);
-
-  if(budget<=0 || !cards.length) return alert("Enter valid values");
-
-  let totalDebt = cards.reduce((s,c)=>s+c.b,0);
-  let totalMin = cards.reduce((s,c)=>s+c.m,0);
-
-  if(budget<totalMin) return alert("Budget too low");
-
-  let month=0, totalInterest=0, totalPaid=0, data=[];
-
-  while(cards.some(c=>c.b>0.01) && month<600){
-    month++;
-
-    cards.forEach(c=>{
-      let interest=c.b*(c.r/12);
-      c.b+=interest;
-      totalInterest+=interest;
-    });
-
-    cards.forEach(c=>{
-      let pay=Math.min(c.m,c.b);
-      c.b-=pay;
-      totalPaid+=pay;
-    });
-
-    let extra=budget - totalMin;
-
-    while(extra>0 && cards.some(c=>c.b>0)){
-      let target=cards.filter(c=>c.b>0).sort((a,b)=>b.r-a.r)[0];
-      let pay=Math.min(extra,target.b);
-      target.b-=pay;
-      totalPaid+=pay;
-      extra-=pay;
+const themeToggle = document.getElementById("themeToggle");
+const menuToggle = document.getElementById("menuToggle");
+const mainNav = document.getElementById("mainNav");
+document.body.classList.remove("dark");
+themeToggle.textContent = "🌙 Dark";
+themeToggle.addEventListener("click", () => {
+  document.body.classList.add("fade-transition");
+  setTimeout(() => {
+    document.body.classList.toggle("dark");
+    if(document.body.classList.contains("dark")){
+      themeToggle.textContent = "☀️ Light";
+    }else{
+      themeToggle.textContent = "🌙 Dark";
     }
-
-    let remaining=cards.reduce((s,c)=>s+c.b,0);
-
-    data.push({month,remaining});
+    calculate();
+    requestAnimationFrame(() => {
+      document.body.classList.remove("fade-transition");
+    });
+  }, 140);
+});
+menuToggle.addEventListener("click", () => {
+  mainNav.classList.toggle("open");
+});
+function setBudget(value){
+  document.getElementById("monthlyBudget").value = value;
+}
+function calculate(){
+  const monthlyBudget = Number(document.getElementById("monthlyBudget").value);
+  let cards = [
+    {
+      balance:Number(document.getElementById("balance1").value),
+      min:Number(document.getElementById("min1").value),
+      rate:Number(document.getElementById("rate1").value) / 100
+    },
+    {
+      balance:Number(document.getElementById("balance2").value),
+      min:Number(document.getElementById("min2").value),
+      rate:Number(document.getElementById("rate2").value) / 100
+    },
+    {
+      balance:Number(document.getElementById("balance3").value),
+      min:Number(document.getElementById("min3").value),
+      rate:Number(document.getElementById("rate3").value) / 100
+    }
+  ].filter(card => card.balance > 0);
+  if(monthlyBudget <= 0 || !cards.length){
+    alert("Please enter valid numbers.");
+    return;
   }
-
-  payoffTime.textContent = month+" months";
-  totalDebtEl = document.getElementById("totalDebt");
-  totalDebtEl.textContent = money.format(totalDebt);
-  totalInterestEl = document.getElementById("totalInterest");
-  totalInterestEl.textContent = money.format(totalInterest);
-  totalPayments.textContent = money.format(totalPaid);
-
-  resultBox.style.display="block";
-
-  drawChart(data,totalDebt);
+  const totalStartingDebt = cards.reduce((sum, card) => sum + card.balance, 0);
+  const totalMinimum = cards.reduce((sum, card) => sum + card.min, 0);
+  if(monthlyBudget < totalMinimum){
+    alert("Monthly budget must be at least equal to total minimum payments.");
+    return;
+  }
+  let month = 0;
+  let totalInterest = 0;
+  let totalPaid = 0;
+  let payoffData = [];
+  while(cards.some(card => card.balance > 0.01) && month < 600){
+    month++;
+    let monthInterest = 0;
+    let monthPayment = 0;
+    cards.forEach(card => {
+      if(card.balance <= 0) return;
+      const interest = card.balance * (card.rate / 12);
+      card.balance += interest;
+      monthInterest += interest;
+    });
+    cards.forEach(card => {
+      if(card.balance <= 0.01) return;
+      let payment = Math.min(card.min, card.balance);
+      card.balance -= payment;
+      monthPayment += payment;
+    });
+    let extra = monthlyBudget - monthPayment;
+    while(extra > 0.01 && cards.some(card => card.balance > 0.01)){
+      let target = cards.filter(card => card.balance > 0.01).sort((a,b) => b.rate - a.rate)[0];
+      let extraPayment = Math.min(extra, target.balance);
+      target.balance -= extraPayment;
+      monthPayment += extraPayment;
+      extra -= extraPayment;
+    }
+    cards.forEach(card => {
+      if(card.balance < 0.01) card.balance = 0;
+    });
+    const remainingBalance = cards.reduce((sum, card) => sum + card.balance, 0);
+    totalInterest += monthInterest;
+    totalPaid += monthPayment;
+    payoffData.push({
+      month,
+      payment:monthPayment,
+      interest:monthInterest,
+      balance:remainingBalance
+    });
+  }
+  document.getElementById("payoffTime").textContent = month + " months";
+  document.getElementById("totalDebt").textContent = money.format(totalStartingDebt);
+  document.getElementById("totalInterest").textContent = money.format(totalInterest);
+  document.getElementById("totalPayments").textContent = money.format(totalPaid);
+  document.getElementById("resultBox").style.display = "block";
+  fillTable(payoffData);
+  drawPayoffChart(payoffData, totalStartingDebt);
+  drawBreakdownChart(totalStartingDebt, totalInterest);
 }
-
-function drawChart(data,start){
-  let c=document.getElementById("payoffChart");
-  let ctx=c.getContext("2d");
-
-  c.width=500; c.height=250;
-  ctx.clearRect(0,0,500,250);
-
-  ctx.beginPath();
-
-  data.forEach((d,i)=>{
-    let x=i*(500/data.length);
-    let y=250-(d.remaining/start)*200;
-
-    if(i===0) ctx.moveTo(x,y);
-    else ctx.lineTo(x,y);
+function fillTable(data){
+  const tableBody = document.getElementById("tableBody");
+  tableBody.innerHTML = "";
+  data.slice(0, 120).forEach(row => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${row.month}</td>
+      <td>${money.format(row.payment)}</td>
+      <td>${money.format(row.interest)}</td>
+      <td>${money.format(row.balance)}</td>
+    `;
+    tableBody.appendChild(tr);
   });
-
-  ctx.strokeStyle="#2f81f7";
-  ctx.lineWidth=3;
+}
+function drawPayoffChart(data, startingDebt){
+  const canvas = document.getElementById("payoffChart");
+  const ctx = canvas.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 260 * dpr;
+  ctx.scale(dpr, dpr);
+  const width = rect.width;
+  const height = 260;
+  ctx.clearRect(0, 0, width, height);
+  if(!data.length) return;
+  const padding = 34;
+  const chartWidth = width - padding * 2;
+  const chartHeight = height - padding * 2;
+  const isDark = document.body.classList.contains("dark");
+  ctx.strokeStyle = isDark ? "#30363d" : "#d0d7de";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(padding, padding);
+  ctx.lineTo(padding, height - padding);
+  ctx.lineTo(width - padding, height - padding);
   ctx.stroke();
+  const gradient = ctx.createLinearGradient(0, padding, 0, height - padding);
+  gradient.addColorStop(0, isDark ? "rgba(47,129,247,0.35)" : "rgba(9,105,218,0.22)");
+  gradient.addColorStop(1, "rgba(9,105,218,0)");
+  ctx.beginPath();
+  data.forEach((item, index) => {
+    const x = padding + (index / (data.length - 1 || 1)) * chartWidth;
+    const y = height - padding - (item.balance / startingDebt) * chartHeight;
+    if(index === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.lineTo(width - padding, height - padding);
+  ctx.lineTo(padding, height - padding);
+  ctx.closePath();
+  ctx.fillStyle = gradient;
+  ctx.fill();
+  ctx.beginPath();
+  data.forEach((item, index) => {
+    const x = padding + (index / (data.length - 1 || 1)) * chartWidth;
+    const y = height - padding - (item.balance / startingDebt) * chartHeight;
+    if(index === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.strokeStyle = isDark ? "#2f81f7" : "#0969da";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  ctx.font = "12px Arial";
+  ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
+  ctx.fillText("Month 1", padding, height - 8);
+  ctx.fillText("Month " + data[data.length - 1].month, width - padding - 75, height - 8);
 }
-
+function drawBreakdownChart(principal, interest){
+  const canvas = document.getElementById("breakdownChart");
+  const ctx = canvas.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 260 * dpr;
+  ctx.scale(dpr, dpr);
+  const width = rect.width;
+  const height = 260;
+  const isDark = document.body.classList.contains("dark");
+  ctx.clearRect(0, 0, width, height);
+  const total = principal + interest;
+  if(total <= 0) return;
+  const centerX = width / 2;
+  const centerY = 112;
+  const radius = 70;
+  const lineWidth = 22;
+  const principalAngle = (principal / total) * Math.PI * 2;
+  ctx.lineWidth = lineWidth;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.strokeStyle = isDark ? "#2f81f7" : "#0969da";
+  ctx.arc(centerX, centerY, radius, -Math.PI / 2, -Math.PI / 2 + principalAngle);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.strokeStyle = isDark ? "#3fb950" : "#2da44e";
+  ctx.arc(centerX, centerY, radius, -Math.PI / 2 + principalAngle, Math.PI * 1.5);
+  ctx.stroke();
+  ctx.font = "700 14px Arial";
+  ctx.fillStyle = isDark ? "#f0f6fc" : "#24292f";
+  ctx.textAlign = "center";
+  ctx.fillText("Total Paid", centerX, centerY - 4);
+  ctx.font = "12px Arial";
+  ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
+  ctx.fillText(money.format(total), centerX, centerY + 16);
+  ctx.textAlign = "left";
+  ctx.font = "12px Arial";
+  const legendX = width / 2 - 105;
+  const legendY = 218;
+  ctx.fillStyle = isDark ? "#2f81f7" : "#0969da";
+  ctx.fillRect(legendX, legendY, 10, 10);
+  ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
+  ctx.fillText("Principal", legendX + 16, legendY + 10);
+  ctx.fillStyle = isDark ? "#3fb950" : "#2da44e";
+  ctx.fillRect(legendX + 120, legendY, 10, 10);
+  ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
+  ctx.fillText("Interest", legendX + 136, legendY + 10);
+}
 function clearForm(){
-  document.querySelectorAll("input").forEach(i=>i.value="");
-  resultBox.style.display="none";
+  document.getElementById("monthlyBudget").value = "";
+  document.getElementById("balance1").value = "";
+  document.getElementById("min1").value = "";
+  document.getElementById("rate1").value = "";
+  document.getElementById("balance2").value = "";
+  document.getElementById("min2").value = "";
+  document.getElementById("rate2").value = "";
+  document.getElementById("balance3").value = "";
+  document.getElementById("min3").value = "";
+  document.getElementById("rate3").value = "";
+  document.getElementById("resultBox").style.display = "none";
+  document.getElementById("tableBody").innerHTML = "";
+  const payoffCanvas = document.getElementById("payoffChart");
+  const payoffCtx = payoffCanvas.getContext("2d");
+  payoffCtx.clearRect(0, 0, payoffCanvas.width, payoffCanvas.height);
+  const breakdownCanvas = document.getElementById("breakdownChart");
+  const breakdownCtx = breakdownCanvas.getContext("2d");
+  breakdownCtx.clearRect(0, 0, breakdownCanvas.width, breakdownCanvas.height);
 }
+document.querySelectorAll(".faq-question").forEach(button => {
+  button.addEventListener("click", () => {
+    const item = button.closest(".faq-item");
+    const isActive = item.classList.contains("active");
+    document.querySelectorAll(".faq-item").forEach(faq => {
+      faq.classList.remove("active");
+      faq.querySelector(".faq-question").setAttribute("aria-expanded", "false");
+    });
+    if(!isActive){
+      item.classList.add("active");
+      button.setAttribute("aria-expanded", "true");
+    }
+  });
+});
+window.addEventListener("resize", calculate);
+calculate();
 </script>
-
 </body>
 </html>
-
-
