@@ -487,6 +487,267 @@ th{background:var(--card);font-weight:800}
 }
 </style>
 </head>
+  
+<body>
 
-Me mande “parte 2” que eu envio o restante, começando do <body> até o </html>.
+<header>
+  <div class="header-wrap">
+    <div class="logo">Finance<span>Tools</span></div>
+
+    <div class="header-right">
+      <button class="menu-toggle" id="menuToggle">☰ Menu</button>
+
+      <nav id="mainNav">
+        <a href="../all-calculators.html">All Calculators</a>
+        <a href="../about.html">About</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+      </nav>
+
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Credit Card Payoff Calculator</h1>
+    <p>Estimate how long it may take to pay off multiple credit cards using a debt avalanche strategy.</p>
+  </div>
+</section>
+
+<div class="page">
+
+<main class="main-card">
+
+<p>Use this free credit card payoff calculator to estimate payoff time, total interest, total debt, and a monthly payoff schedule.</p>
+
+<div class="calculator">
+  <div class="calc-header">Credit Card Debt Payoff Calculator</div>
+
+  <div class="calc-body">
+
+    <div class="calc-row">
+      <label>Monthly Budget</label>
+      <div>
+        <input type="number" id="monthlyBudget" value="500">
+        <div class="quick-buttons">
+          <button onclick="setBudget(300)">$300</button>
+          <button onclick="setBudget(500)">$500</button>
+          <button onclick="setBudget(1000)">$1k</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOVO LAYOUT EM CARDS -->
+    <div class="credit-card-list">
+
+      <div class="credit-card-item">
+        <h3>Card 1</h3>
+        <label>Balance</label>
+        <input type="number" id="balance1" value="4600">
+
+        <label>Minimum Payment</label>
+        <input type="number" id="min1" value="100">
+
+        <label>Interest Rate (%)</label>
+        <input type="number" id="rate1" value="18.99" step="0.01">
+      </div>
+
+      <div class="credit-card-item">
+        <h3>Card 2</h3>
+        <label>Balance</label>
+        <input type="number" id="balance2" value="3900">
+
+        <label>Minimum Payment</label>
+        <input type="number" id="min2" value="90">
+
+        <label>Interest Rate (%)</label>
+        <input type="number" id="rate2" value="19.99" step="0.01">
+      </div>
+
+      <div class="credit-card-item">
+        <h3>Card 3</h3>
+        <label>Balance</label>
+        <input type="number" id="balance3" value="6000">
+
+        <label>Minimum Payment</label>
+        <input type="number" id="min3" value="120">
+
+        <label>Interest Rate (%)</label>
+        <input type="number" id="rate3" value="15.99" step="0.01">
+      </div>
+
+    </div>
+
+    <div class="buttons">
+      <button class="calculate-btn" onclick="calculate()">Calculate</button>
+      <button class="clear-btn" onclick="clearForm()">Clear</button>
+    </div>
+
+    <div class="result-box" id="resultBox">
+      <div class="result-line">
+        <span>Estimated Payoff Time</span>
+        <span class="result-value big-result" id="payoffTime">0 months</span>
+      </div>
+      <div class="result-line">
+        <span>Total Debt</span>
+        <span class="result-value" id="totalDebt">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Total Interest Paid</span>
+        <span class="result-value" id="totalInterest">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Total Payments</span>
+        <span class="result-value" id="totalPayments">$0.00</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="chart-wrap">
+  <h2 class="chart-title">Debt Payoff Chart</h2>
+  <canvas id="payoffChart"></canvas>
+</div>
+
+<div class="chart-wrap">
+  <h2 class="chart-title">Principal vs Interest Breakdown</h2>
+  <canvas id="breakdownChart"></canvas>
+</div>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Month</th>
+      <th>Payment</th>
+      <th>Interest</th>
+      <th>Remaining Balance</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody"></tbody>
+</table>
+</div>
+
+</main>
+
+<aside>
+
+  <div class="sidebar-card">
+    <h3>Related Calculators</h3>
+    <a href="../index.html">Compound Interest</a>
+    <a href="simple-interest-calculator.html">Simple Interest</a>
+    <a href="savings-calculator.html">Savings</a>
+    <a href="loan-calculator.html">Loan</a>
+    <a href="mortgage-calculator.html">Mortgage</a>
+    <a href="retirement-calculator.html">Retirement</a>
+  </div>
+
+</aside>
+
+</div>
+
+<script>
+const money = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD"
+});
+
+function setBudget(val){
+  document.getElementById("monthlyBudget").value = val;
+}
+
+function calculate(){
+  let budget = +monthlyBudget.value;
+
+  let cards = [
+    {b:+balance1.value, m:+min1.value, r:+rate1.value/100},
+    {b:+balance2.value, m:+min2.value, r:+rate2.value/100},
+    {b:+balance3.value, m:+min3.value, r:+rate3.value/100}
+  ].filter(c=>c.b>0);
+
+  if(budget<=0 || !cards.length) return alert("Enter valid values");
+
+  let totalDebt = cards.reduce((s,c)=>s+c.b,0);
+  let totalMin = cards.reduce((s,c)=>s+c.m,0);
+
+  if(budget<totalMin) return alert("Budget too low");
+
+  let month=0, totalInterest=0, totalPaid=0, data=[];
+
+  while(cards.some(c=>c.b>0.01) && month<600){
+    month++;
+
+    cards.forEach(c=>{
+      let interest=c.b*(c.r/12);
+      c.b+=interest;
+      totalInterest+=interest;
+    });
+
+    cards.forEach(c=>{
+      let pay=Math.min(c.m,c.b);
+      c.b-=pay;
+      totalPaid+=pay;
+    });
+
+    let extra=budget - totalMin;
+
+    while(extra>0 && cards.some(c=>c.b>0)){
+      let target=cards.filter(c=>c.b>0).sort((a,b)=>b.r-a.r)[0];
+      let pay=Math.min(extra,target.b);
+      target.b-=pay;
+      totalPaid+=pay;
+      extra-=pay;
+    }
+
+    let remaining=cards.reduce((s,c)=>s+c.b,0);
+
+    data.push({month,remaining});
+  }
+
+  payoffTime.textContent = month+" months";
+  totalDebtEl = document.getElementById("totalDebt");
+  totalDebtEl.textContent = money.format(totalDebt);
+  totalInterestEl = document.getElementById("totalInterest");
+  totalInterestEl.textContent = money.format(totalInterest);
+  totalPayments.textContent = money.format(totalPaid);
+
+  resultBox.style.display="block";
+
+  drawChart(data,totalDebt);
+}
+
+function drawChart(data,start){
+  let c=document.getElementById("payoffChart");
+  let ctx=c.getContext("2d");
+
+  c.width=500; c.height=250;
+  ctx.clearRect(0,0,500,250);
+
+  ctx.beginPath();
+
+  data.forEach((d,i)=>{
+    let x=i*(500/data.length);
+    let y=250-(d.remaining/start)*200;
+
+    if(i===0) ctx.moveTo(x,y);
+    else ctx.lineTo(x,y);
+  });
+
+  ctx.strokeStyle="#2f81f7";
+  ctx.lineWidth=3;
+  ctx.stroke();
+}
+
+function clearForm(){
+  document.querySelectorAll("input").forEach(i=>i.value="");
+  resultBox.style.display="none";
+}
+</script>
+
+</body>
+</html>
+
 
