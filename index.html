@@ -1,6 +1,5 @@
 <!-- Salve como index.html -->
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -480,6 +479,52 @@ th{
   opacity:1;
   transform:translateY(0);
 }
+
+/* Cookie Banner */
+.cookie-banner{
+  position:fixed;
+  left:16px;
+  right:16px;
+  bottom:16px;
+  max-width:1120px;
+  margin:auto;
+  background:var(--card);
+  color:var(--text);
+  border:1px solid var(--soft-border);
+  border-radius:16px;
+  box-shadow:var(--soft-shadow);
+  padding:16px;
+  z-index:9999;
+  display:none;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.cookie-banner p{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+}
+.cookie-banner a{
+  color:var(--blue);
+  font-weight:700;
+  text-decoration:underline;
+}
+.cookie-accept{
+  background:var(--green);
+  color:white;
+  padding:10px 18px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+  white-space:nowrap;
+}
+.cookie-accept:hover{
+  filter:brightness(1.05);
+  transform:translateY(-1px);
+}
+
 @media(max-width:860px){
   .header-wrap{
     display:flex;
@@ -551,6 +596,10 @@ th{
   .hero h1{font-size:32px}
   .calc-row{grid-template-columns:1fr}
   label{padding-top:0}
+  .cookie-banner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
 }
 </style>
 </head>
@@ -756,6 +805,17 @@ th{
     &nbsp; © 2026 FinanceTools
   </div>
 </footer>
+
+<div class="cookie-banner" id="cookieBanner">
+  <p>
+    We use cookies and similar technologies to improve your experience. 
+    By using this site, you agree to our 
+    <a href="privacy.html">Privacy Policy</a> and 
+    <a href="terms.html">Terms of Use</a>.
+  </p>
+  <button class="cookie-accept" id="cookieAccept">Accept</button>
+</div>
+
 <script>
 const money = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -764,6 +824,18 @@ const money = new Intl.NumberFormat("en-US", {
 const themeToggle = document.getElementById("themeToggle");
 const menuToggle = document.getElementById("menuToggle");
 const mainNav = document.getElementById("mainNav");
+const cookieBanner = document.getElementById("cookieBanner");
+const cookieAccept = document.getElementById("cookieAccept");
+
+if(!localStorage.getItem("financeToolsCookieAccepted")){
+  cookieBanner.style.display = "flex";
+}
+
+cookieAccept.addEventListener("click", () => {
+  localStorage.setItem("financeToolsCookieAccepted", "true");
+  cookieBanner.style.display = "none";
+});
+
 // Always start in light mode
 document.body.classList.remove("dark");
 themeToggle.textContent = "🌙 Dark";
