@@ -1,3 +1,9 @@
+Sim. Aqui está sua página Privacy completa corrigida. Corrigi:
+
+* .dark → html.dark
+* .dark .hero → html.dark .hero
+* removi const themeToggle = document.getElementById("themeToggle");
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy | FinanceTools</title>
 <meta name="description" content="Read the FinanceTools Privacy Policy, including information about cookies, data collection, advertising, third-party services, and user privacy.">
-  <script>
+<script>
 if(localStorage.getItem("financeToolsTheme") === "dark"){
   document.documentElement.classList.add("dark");
 }
@@ -20,7 +26,7 @@ html, body{overflow-x:hidden}
   --soft-border:rgba(0,0,0,0.07);
   --soft-shadow:0 12px 34px rgba(0,0,0,0.055);
 }
-.dark{
+html.dark{
   --bg:#0d1117; --card:#161b22; --text:#f0f6fc; --muted:#8b949e;
   --border:#30363d; --header:#010409; --blue:#2f81f7; --green:#3fb950;
   --table-bg:#0d1117; --input-bg:#0d1117;
@@ -132,7 +138,7 @@ button{
     radial-gradient(circle at 80% 0%, rgba(255,255,255,0.10), transparent 45%);
   pointer-events:none;
 }
-.dark .hero{
+html.dark .hero{
   background:
     radial-gradient(ellipse at 50% 100%,
       rgba(159,122,234,0.72) 0%,
@@ -578,30 +584,25 @@ th{
     </div>
   </div>
 </header>
-
 <section class="hero">
   <div class="hero-content">
     <h1>Privacy Policy</h1>
     <p>Learn how FinanceTools handles privacy, cookies, advertising, and basic website data.</p>
   </div>
 </section>
-
 <!-- Top Ad temporarily disabled
 <div class="top-ad">
   <div class="ad-box">Google AdSense Ad Space - Responsive Top Banner</div>
 </div>
 -->
-
 <div class="page">
 <main class="main-card">
 <p>This Privacy Policy explains how FinanceTools collects, uses, and protects information when you use this website.</p>
-
 <section class="content">
   <h2>Introduction</h2>
   <p>
     FinanceTools provides free online calculators and informational content. We respect your privacy and aim to keep our website simple, transparent, and easy to use.
   </p>
-
   <h2>Information We Collect</h2>
   <p>
     FinanceTools does not require users to create an account or register to use the calculators. In general, you may use our website without directly providing personal information.
@@ -609,12 +610,10 @@ th{
   <p>
     However, certain basic technical information may be collected automatically through your browser, hosting provider, analytics tools, cookies, advertising services, or similar technologies.
   </p>
-
   <h2>Calculator Inputs</h2>
   <p>
     The numbers and values you enter into our calculators are used to generate results directly in your browser. FinanceTools does not require these values to be submitted through an account or registration system.
   </p>
-
   <h2>Cookies and Similar Technologies</h2>
   <p>
     FinanceTools may use cookies, local storage, and similar technologies to improve user experience, remember preferences, support basic website functionality, and help with advertising or analytics.
@@ -622,7 +621,6 @@ th{
   <p>
     For example, when you accept the cookie notice on our website, your browser may store that preference so the notice does not appear again on future visits.
   </p>
-
   <h2>Advertising and Google AdSense</h2>
   <p>
     FinanceTools may display advertisements through third-party advertising services such as Google AdSense. These services may use cookies or similar technologies to serve ads, measure performance, prevent fraud, and personalize or limit advertising.
@@ -630,58 +628,47 @@ th{
   <p>
     Third-party advertising partners may collect certain information about your visits to this and other websites according to their own privacy policies.
   </p>
-
   <h2>Analytics</h2>
   <p>
     FinanceTools may use analytics tools in the future to understand how visitors use the website, which pages are visited, and how the site can be improved. These tools may collect non-personal technical information such as browser type, device type, approximate location, pages visited, and usage patterns.
   </p>
-
   <h2>How We Use Information</h2>
   <p>
     Information may be used to operate the website, improve user experience, maintain security, understand website performance, display advertising, and improve our calculators and content.
   </p>
-
   <h2>Third-Party Services</h2>
   <p>
     FinanceTools may use third-party services for hosting, analytics, advertising, security, or other website functions. These third-party services may process information according to their own privacy policies and terms.
   </p>
-
   <h2>External Links</h2>
   <p>
     FinanceTools may contain links to other websites. We are not responsible for the privacy practices, content, policies, or security of external websites.
   </p>
-
   <h2>Data Security</h2>
   <p>
     We take reasonable steps to keep the website safe and reliable. However, no website, online service, or method of electronic transmission can be guaranteed to be completely secure.
   </p>
-
   <h2>Your Choices</h2>
   <p>
     You may disable cookies through your browser settings. You may also clear cookies and local storage from your browser at any time. Please note that disabling cookies may affect some website features or preferences.
   </p>
-
   <h2>Children’s Privacy</h2>
   <p>
     FinanceTools is intended for general audiences and is not designed to knowingly collect personal information from children. If you believe a child has provided personal information, please contact us so we can review the issue.
   </p>
-
   <h2>Changes to This Privacy Policy</h2>
   <p>
     FinanceTools may update this Privacy Policy from time to time. Any changes will be posted on this page, and continued use of the website means you accept the updated policy.
   </p>
-
   <h2>Contact</h2>
   <p>
     If you have questions about this Privacy Policy, please contact us through the website contact page.
   </p>
-
   <div class="notice">
     FinanceTools uses cookies and similar technologies to improve user experience and may use third-party services such as advertising or analytics platforms.
   </div>
 </section>
 </main>
-
 <aside>
   <div class="ad-box">Google AdSense Ad Space<br>300x250</div>
   <div class="sidebar-card">
@@ -697,7 +684,6 @@ th{
   <div class="ad-box">Google AdSense Ad Space<br>300x600</div>
 </aside>
 </div>
-
 <footer class="site-footer">
   <div class="footer-info">
     <p>
@@ -721,20 +707,14 @@ th{
     &nbsp; © 2026 FinanceTools
   </div>
 </footer>
-
 <script>
-const themeToggle = document.getElementById("themeToggle");
 const menuToggle = document.getElementById("menuToggle");
 const mainNav = document.getElementById("mainNav");
-
-// Always start in light mode
-
-
 menuToggle.addEventListener("click", () => {
   mainNav.classList.toggle("open");
 });
 </script>
-  <script src="cookie/cookie.js"></script>
-  <script src="theme/theme.js"></script>
+<script src="cookie/cookie.js"></script>
+<script src="theme/theme.js"></script>
 </body>
 </html>
