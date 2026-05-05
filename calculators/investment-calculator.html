@@ -1,4 +1,6 @@
 
+André, aqui está o HTML completo corrigido:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Investment Calculator | Free Investment Growth Calculator</title>
 <meta name="description" content="Free investment calculator to estimate future value, total contributions, investment interest, and growth over time.">
-  <script>
+<script>
 if(localStorage.getItem("financeToolsTheme") === "dark"){
   document.documentElement.classList.add("dark");
 }
@@ -21,7 +23,7 @@ html, body{overflow-x:hidden}
   --soft-border:rgba(0,0,0,0.07);
   --soft-shadow:0 12px 34px rgba(0,0,0,0.055);
 }
-.dark{
+html.dark{
   --bg:#0d1117; --card:#161b22; --text:#f0f6fc; --muted:#8b949e;
   --border:#30363d; --header:#010409; --blue:#2f81f7; --green:#3fb950;
   --table-bg:#0d1117; --input-bg:#0d1117;
@@ -97,7 +99,7 @@ button:active{transform:scale(.97)}
     radial-gradient(circle at 80% 0%, rgba(255,255,255,0.10), transparent 45%);
   pointer-events:none;
 }
-.dark .hero{
+html.dark .hero{
   background:radial-gradient(ellipse at 50% 100%,rgba(159,122,234,0.72) 0%,rgba(88,80,236,0.38) 24%,rgba(20,24,84,0.58) 48%,rgba(5,8,45,1) 80%);
 }
 .hero-content{
@@ -491,18 +493,15 @@ th{background:var(--card);font-weight:800}
     </div>
   </div>
 </header>
-
 <section class="hero">
   <div class="hero-content">
     <h1>Investment Calculator</h1>
     <p>Estimate how your investment may grow over time with starting amount, contributions, return rate, and compounding.</p>
   </div>
 </section>
-
 <div class="page">
 <main class="main-card">
 <p>Use this free investment calculator to estimate future value, total contributions, total interest, and projected investment growth.</p>
-
 <div class="calculator">
   <div class="calc-header">Investment Growth Calculator</div>
   <div class="calc-body">
@@ -510,7 +509,6 @@ th{background:var(--card);font-weight:800}
       <label>Starting Amount</label>
       <input type="number" id="startingAmount" value="20000">
     </div>
-
     <div class="calc-row">
       <label>Investment Length</label>
       <div>
@@ -522,7 +520,6 @@ th{background:var(--card);font-weight:800}
         </div>
       </div>
     </div>
-
     <div class="calc-row">
       <label>Return Rate</label>
       <div>
@@ -534,7 +531,6 @@ th{background:var(--card);font-weight:800}
         </div>
       </div>
     </div>
-
     <div class="calc-row">
       <label>Additional Contribution</label>
       <div>
@@ -546,7 +542,6 @@ th{background:var(--card);font-weight:800}
         </div>
       </div>
     </div>
-
     <div class="calc-row">
       <label>Contribution Frequency</label>
       <select id="contributionFrequency">
@@ -554,7 +549,6 @@ th{background:var(--card);font-weight:800}
         <option value="1">Annually</option>
       </select>
     </div>
-
     <div class="calc-row">
       <label>Compound Frequency</label>
       <select id="compoundFrequency">
@@ -564,7 +558,6 @@ th{background:var(--card);font-weight:800}
         <option value="365">Daily</option>
       </select>
     </div>
-
     <div class="calc-row">
       <label>Contribute At</label>
       <select id="contributionTiming">
@@ -572,12 +565,10 @@ th{background:var(--card);font-weight:800}
         <option value="beginning">Beginning of Period</option>
       </select>
     </div>
-
     <div class="buttons">
       <button class="calculate-btn" onclick="calculate()">Calculate</button>
       <button class="clear-btn" onclick="clearForm()">Clear</button>
     </div>
-
     <div class="result-box" id="resultBox">
       <div class="result-line">
         <span>End Balance</span>
@@ -598,17 +589,14 @@ th{background:var(--card);font-weight:800}
     </div>
   </div>
 </div>
-
 <div class="chart-wrap">
   <h2 class="chart-title">Investment Growth Chart</h2>
   <canvas id="growthChart" width="560" height="260"></canvas>
 </div>
-
 <div class="chart-wrap">
   <h2 class="chart-title">Starting Amount, Contributions, and Interest</h2>
   <canvas id="breakdownChart" width="560" height="260"></canvas>
 </div>
-
 <div class="table-wrap">
 <table>
   <thead>
@@ -622,22 +610,16 @@ th{background:var(--card);font-weight:800}
   <tbody id="tableBody"></tbody>
 </table>
 </div>
-
 <div class="ad-box" style="margin-top:24px;">Google AdSense Ad Space - In Content</div>
-
 <section class="content">
   <h2>What Is an Investment Calculator?</h2>
   <p>An investment calculator estimates how money may grow over time based on a starting amount, regular contributions, expected return rate, and compounding frequency.</p>
-
   <h2>How This Calculator Works</h2>
   <p>This calculator projects investment growth by applying compound returns and adding contributions over the selected investment period.</p>
-
   <h2>Why Contributions Matter</h2>
   <p>Regular contributions can significantly increase long-term investment growth because each deposit has the potential to earn returns over time.</p>
-
   <h2>Example Calculation</h2>
   <p>If you start with $20,000, add $1,000 per month, and earn a 6% annual return for 10 years, this calculator estimates the ending balance, contributions, and interest earned.</p>
-
   <h2>Tips to Improve Investment Growth</h2>
   <ul>
     <li>Start investing earlier to give your money more time to compound.</li>
@@ -645,7 +627,6 @@ th{background:var(--card);font-weight:800}
     <li>Compare different return rates to understand risk and reward.</li>
     <li>Review fees, taxes, and inflation when making real investment decisions.</li>
   </ul>
-
   <h2>Frequently Asked Questions</h2>
   <div class="faq-list">
     <div class="faq-item">
@@ -657,7 +638,6 @@ th{background:var(--card);font-weight:800}
         <p>Yes. This calculator is completely free to use.</p>
       </div>
     </div>
-
     <div class="faq-item">
       <button class="faq-question" aria-expanded="false">
         What does end balance mean?
@@ -667,7 +647,6 @@ th{background:var(--card);font-weight:800}
         <p>End balance is the estimated future value of your investment after growth, contributions, and interest over the selected period.</p>
       </div>
     </div>
-
     <div class="faq-item">
       <button class="faq-question" aria-expanded="false">
         Does this calculator include taxes or fees?
@@ -677,7 +656,6 @@ th{background:var(--card);font-weight:800}
         <p>No. This calculator provides simplified estimates and does not include taxes, investment fees, inflation, or account-specific rules.</p>
       </div>
     </div>
-
     <div class="faq-item">
       <button class="faq-question" aria-expanded="false">
         Does this calculator guarantee investment returns?
@@ -688,11 +666,9 @@ th{background:var(--card);font-weight:800}
       </div>
     </div>
   </div>
-
   <div class="notice">This calculator is for educational purposes only and should not be considered financial advice.</div>
 </section>
 </main>
-
 <aside>
   <div class="ad-box">Google AdSense Ad Space<br>300x250</div>
   <div class="sidebar-card">
@@ -709,7 +685,6 @@ th{background:var(--card);font-weight:800}
   <div class="ad-box">Google AdSense Ad Space<br>300x600</div>
 </aside>
 </div>
-
 <footer class="site-footer">
   <div class="footer-info">
     <p>
@@ -733,35 +708,25 @@ th{background:var(--card);font-weight:800}
     &nbsp; © 2026 FinanceTools
   </div>
 </footer>
-
 <script>
 const money = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD"
 });
-
-const themeToggle = document.getElementById("themeToggle");
 const menuToggle = document.getElementById("menuToggle");
 const mainNav = document.getElementById("mainNav");
-
-
-
 menuToggle.addEventListener("click", () => {
   mainNav.classList.toggle("open");
 });
-
 function setRate(value){
   document.getElementById("rate").value = value;
 }
-
 function setYears(value){
   document.getElementById("years").value = value;
 }
-
 function setContribution(value){
   document.getElementById("contribution").value = value;
 }
-
 function calculate(){
   const startingAmount = Number(document.getElementById("startingAmount").value);
   const years = Number(document.getElementById("years").value);
@@ -770,46 +735,37 @@ function calculate(){
   const contributionFrequency = Number(document.getElementById("contributionFrequency").value);
   const compoundFrequency = Number(document.getElementById("compoundFrequency").value);
   const contributionTiming = document.getElementById("contributionTiming").value;
-
   if(startingAmount < 0 || years <= 0 || annualRate < 0 || contribution < 0){
     alert("Please enter valid numbers.");
     return;
   }
-
-  const totalPeriods = years * compoundFrequency;
   const periodRate = annualRate / compoundFrequency;
   const contributionPerCompoundPeriod = contributionFrequency === compoundFrequency
     ? contribution
     : contribution * contributionFrequency / compoundFrequency;
-
   let balance = startingAmount;
   let totalContributions = 0;
   let totalInterest = 0;
   const yearlyData = [];
-
   for(let year = 1; year <= years; year++){
     let yearDeposit = 0;
     let yearInterest = 0;
-
     for(let period = 1; period <= compoundFrequency; period++){
       if(contributionTiming === "beginning"){
         balance += contributionPerCompoundPeriod;
         totalContributions += contributionPerCompoundPeriod;
         yearDeposit += contributionPerCompoundPeriod;
       }
-
       const interest = balance * periodRate;
       balance += interest;
       totalInterest += interest;
       yearInterest += interest;
-
       if(contributionTiming === "end"){
         balance += contributionPerCompoundPeriod;
         totalContributions += contributionPerCompoundPeriod;
         yearDeposit += contributionPerCompoundPeriod;
       }
     }
-
     yearlyData.push({
       year,
       deposit: yearDeposit,
@@ -817,22 +773,18 @@ function calculate(){
       balance
     });
   }
-
   document.getElementById("endBalance").textContent = money.format(balance);
   document.getElementById("startingResult").textContent = money.format(startingAmount);
   document.getElementById("totalContributions").textContent = money.format(totalContributions);
   document.getElementById("totalInterest").textContent = money.format(totalInterest);
   document.getElementById("resultBox").style.display = "block";
-
   fillTable(yearlyData);
   drawGrowthChart(yearlyData, balance);
   drawBreakdownChart(startingAmount, totalContributions, totalInterest);
 }
-
 function fillTable(data){
   const tableBody = document.getElementById("tableBody");
   tableBody.innerHTML = "";
-
   data.forEach(row => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
@@ -844,153 +796,117 @@ function fillTable(data){
     tableBody.appendChild(tr);
   });
 }
-
 function drawGrowthChart(data, maxAmount){
   const canvas = document.getElementById("growthChart");
   const ctx = canvas.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.getBoundingClientRect();
-
   canvas.width = rect.width * dpr;
   canvas.height = 260 * dpr;
   ctx.scale(dpr, dpr);
-
   const width = rect.width;
   const height = 260;
-
   ctx.clearRect(0, 0, width, height);
   if(!data.length) return;
-
   const padding = 34;
   const chartWidth = width - padding * 2;
   const chartHeight = height - padding * 2;
-  const isDark = document.body.classList.contains("dark");
-
+  const isDark = document.documentElement.classList.contains("dark");
   ctx.strokeStyle = isDark ? "#30363d" : "#d0d7de";
   ctx.lineWidth = 1;
-
   ctx.beginPath();
   ctx.moveTo(padding, padding);
   ctx.lineTo(padding, height - padding);
   ctx.lineTo(width - padding, height - padding);
   ctx.stroke();
-
   const gradient = ctx.createLinearGradient(0, padding, 0, height - padding);
   gradient.addColorStop(0, isDark ? "rgba(47,129,247,0.35)" : "rgba(9,105,218,0.22)");
   gradient.addColorStop(1, "rgba(9,105,218,0)");
-
   ctx.beginPath();
-
   data.forEach((item, index) => {
     const x = padding + (index / (data.length - 1 || 1)) * chartWidth;
     const y = height - padding - (item.balance / maxAmount) * chartHeight;
-
     if(index === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
   });
-
   ctx.lineTo(width - padding, height - padding);
   ctx.lineTo(padding, height - padding);
   ctx.closePath();
   ctx.fillStyle = gradient;
   ctx.fill();
-
   ctx.beginPath();
-
   data.forEach((item, index) => {
     const x = padding + (index / (data.length - 1 || 1)) * chartWidth;
     const y = height - padding - (item.balance / maxAmount) * chartHeight;
-
     if(index === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
   });
-
   ctx.strokeStyle = isDark ? "#2f81f7" : "#0969da";
   ctx.lineWidth = 3;
   ctx.stroke();
-
   ctx.font = "12px Arial";
   ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
   ctx.fillText("Year 1", padding, height - 8);
   ctx.fillText("Year " + data[data.length - 1].year, width - padding - 60, height - 8);
 }
-
 function drawBreakdownChart(starting, contributions, interest){
   const canvas = document.getElementById("breakdownChart");
   const ctx = canvas.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.getBoundingClientRect();
-
   canvas.width = rect.width * dpr;
   canvas.height = 260 * dpr;
   ctx.scale(dpr, dpr);
-
   const width = rect.width;
   const height = 260;
-  const isDark = document.body.classList.contains("dark");
-
+  const isDark = document.documentElement.classList.contains("dark");
   ctx.clearRect(0, 0, width, height);
-
   const total = starting + contributions + interest;
   if(total <= 0) return;
-
   const centerX = width / 2;
   const centerY = 112;
   const radius = 70;
   const lineWidth = 22;
-
   const startingAngle = (starting / total) * Math.PI * 2;
   const contributionAngle = (contributions / total) * Math.PI * 2;
-
   ctx.lineWidth = lineWidth;
   ctx.lineCap = "round";
-
   ctx.beginPath();
   ctx.strokeStyle = isDark ? "#2f81f7" : "#0969da";
   ctx.arc(centerX, centerY, radius, -Math.PI / 2, -Math.PI / 2 + startingAngle);
   ctx.stroke();
-
   ctx.beginPath();
   ctx.strokeStyle = isDark ? "#3fb950" : "#2da44e";
   ctx.arc(centerX, centerY, radius, -Math.PI / 2 + startingAngle, -Math.PI / 2 + startingAngle + contributionAngle);
   ctx.stroke();
-
   ctx.beginPath();
   ctx.strokeStyle = "#b42318";
   ctx.arc(centerX, centerY, radius, -Math.PI / 2 + startingAngle + contributionAngle, Math.PI * 1.5);
   ctx.stroke();
-
   ctx.font = "700 14px Arial";
   ctx.fillStyle = isDark ? "#f0f6fc" : "#24292f";
   ctx.textAlign = "center";
   ctx.fillText("End Balance", centerX, centerY - 4);
-
   ctx.font = "12px Arial";
   ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
   ctx.fillText(money.format(total), centerX, centerY + 16);
-
   ctx.textAlign = "left";
   ctx.font = "12px Arial";
-
   const legendX = width / 2 - 135;
   const legendY = 214;
-
   ctx.fillStyle = isDark ? "#2f81f7" : "#0969da";
   ctx.fillRect(legendX, legendY, 10, 10);
   ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
   ctx.fillText("Starting", legendX + 16, legendY + 10);
-
   ctx.fillStyle = isDark ? "#3fb950" : "#2da44e";
   ctx.fillRect(legendX + 95, legendY, 10, 10);
   ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
   ctx.fillText("Contributions", legendX + 111, legendY + 10);
-
   ctx.fillStyle = "#b42318";
   ctx.fillRect(legendX + 215, legendY, 10, 10);
   ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
   ctx.fillText("Interest", legendX + 231, legendY + 10);
 }
-
 function clearForm(){
   document.getElementById("startingAmount").value = "";
   document.getElementById("years").value = "";
@@ -1001,37 +917,31 @@ function clearForm(){
   document.getElementById("contributionTiming").value = "end";
   document.getElementById("resultBox").style.display = "none";
   document.getElementById("tableBody").innerHTML = "";
-
   const growthCanvas = document.getElementById("growthChart");
   const growthCtx = growthCanvas.getContext("2d");
   growthCtx.clearRect(0, 0, growthCanvas.width, growthCanvas.height);
-
   const breakdownCanvas = document.getElementById("breakdownChart");
   const breakdownCtx = breakdownCanvas.getContext("2d");
   breakdownCtx.clearRect(0, 0, breakdownCanvas.width, breakdownCanvas.height);
 }
-
 document.querySelectorAll(".faq-question").forEach(button => {
   button.addEventListener("click", () => {
     const item = button.closest(".faq-item");
     const isActive = item.classList.contains("active");
-
     document.querySelectorAll(".faq-item").forEach(faq => {
       faq.classList.remove("active");
       faq.querySelector(".faq-question").setAttribute("aria-expanded", "false");
     });
-
     if(!isActive){
       item.classList.add("active");
       button.setAttribute("aria-expanded", "true");
     }
   });
 });
-
 window.addEventListener("resize", calculate);
 calculate();
 </script>
-  <script src="../cookie/cookie.js"></script>
-  <script src="../theme/theme.js"></script>
+<script src="../cookie/cookie.js"></script>
+<script src="../theme/theme.js"></script>
 </body>
 </html>
