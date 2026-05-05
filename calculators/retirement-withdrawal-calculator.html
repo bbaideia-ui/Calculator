@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Retirement Withdrawal Calculator | Free Retirement Income Calculator</title>
 <meta name="description" content="Free retirement withdrawal calculator to estimate how much you can withdraw monthly from your retirement savings over a set number of years.">
+  <script>
+if(localStorage.getItem("financeToolsTheme") === "dark"){
+  document.documentElement.classList.add("dark");
+}
+</script>
 <style>
 *{box-sizing:border-box}
 html, body{overflow-x:hidden}
@@ -15,7 +20,7 @@ html, body{overflow-x:hidden}
   --soft-border:rgba(0,0,0,0.07);
   --soft-shadow:0 12px 34px rgba(0,0,0,0.055);
 }
-body.dark{
+.dark{
   --bg:#0d1117; --card:#161b22; --text:#f0f6fc; --muted:#8b949e;
   --border:#30363d; --header:#010409; --blue:#2f81f7; --green:#3fb950;
   --table-bg:#0d1117; --input-bg:#0d1117;
@@ -92,7 +97,7 @@ button:active{transform:scale(.97)}
     radial-gradient(circle at 80% 0%, rgba(255,255,255,0.10), transparent 45%);
   pointer-events:none;
 }
-body.dark .hero{
+.dark .hero{
   background:radial-gradient(ellipse at 50% 100%,rgba(159,122,234,0.72) 0%,rgba(88,80,236,0.38) 24%,rgba(20,24,84,0.58) 48%,rgba(5,8,45,1) 80%);
 }
 .hero-content{
