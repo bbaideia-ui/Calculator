@@ -877,28 +877,7 @@ const themeToggle = document.getElementById("themeToggle");
 const menuToggle = document.getElementById("menuToggle");
 const mainNav = document.getElementById("mainNav");
 
-document.body.classList.remove("dark");
-themeToggle.textContent = "🌙 Dark";
 
-themeToggle.addEventListener("click", () => {
-  document.body.classList.add("fade-transition");
-
-  setTimeout(() => {
-    document.body.classList.toggle("dark");
-
-    if(document.body.classList.contains("dark")){
-      themeToggle.textContent = "☀️ Light";
-    }else{
-      themeToggle.textContent = "🌙 Dark";
-    }
-
-    calculate();
-
-    requestAnimationFrame(() => {
-      document.body.classList.remove("fade-transition");
-    });
-  }, 140);
-});
 
 menuToggle.addEventListener("click", () => {
   mainNav.classList.toggle("open");
@@ -1187,6 +1166,8 @@ document.querySelectorAll(".faq-question").forEach(button => {
 window.addEventListener("resize", calculate);
 calculate();
 </script>
+  <script src="cookie/cookie.js"></script>
+  <script src="theme/theme.js"></script>
 
 </body>
 </html>
