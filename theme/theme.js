@@ -1,32 +1,36 @@
 
 const themeToggle = document.getElementById("themeToggle");
 
+// Carrega tema salvo
 const savedTheme = localStorage.getItem("financeToolsTheme");
 
-if(savedTheme === "dark"){
+if (savedTheme === "dark") {
   document.body.classList.add("dark");
-  themeToggle.textContent = "☀️ Light";
-}else{
+  if (themeToggle) themeToggle.textContent = "☀️ Light";
+} else {
   document.body.classList.remove("dark");
-  themeToggle.textContent = "🌙 Dark";
+  if (themeToggle) themeToggle.textContent = "🌙 Dark";
 }
 
-themeToggle.addEventListener("click", () => {
-  document.body.classList.add("fade-transition");
+// Clique no botão
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.add("fade-transition");
 
-  setTimeout(() => {
-    document.body.classList.toggle("dark");
+    setTimeout(() => {
+      document.body.classList.toggle("dark");
 
-    if(document.body.classList.contains("dark")){
-      themeToggle.textContent = "☀️ Light";
-      localStorage.setItem("financeToolsTheme", "dark");
-    }else{
-      themeToggle.textContent = "🌙 Dark";
-      localStorage.setItem("financeToolsTheme", "light");
-    }
+      if (document.body.classList.contains("dark")) {
+        localStorage.setItem("financeToolsTheme", "dark");
+        themeToggle.textContent = "☀️ Light";
+      } else {
+        localStorage.setItem("financeToolsTheme", "light");
+        themeToggle.textContent = "🌙 Dark";
+      }
 
-    requestAnimationFrame(() => {
-      document.body.classList.remove("fade-transition");
-    });
-  }, 140);
-});
+      requestAnimationFrame(() => {
+        document.body.classList.remove("fade-transition");
+      });
+    }, 140);
+  });
+}
