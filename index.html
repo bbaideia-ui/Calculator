@@ -844,7 +844,7 @@ function drawChart(data){
   const chartWidth = width - padding * 2;
   const chartHeight = height - padding * 2;
   const maxValue = Math.max(...data.map(item => item.balance));
-  const isDark = document.body.classList.contains("dark");
+  const isDark = document.documentElement.classList.contains("dark");
   ctx.strokeStyle = isDark ? "#30363d" : "#d0d7de";
   ctx.lineWidth = 1;
   ctx.beginPath();
