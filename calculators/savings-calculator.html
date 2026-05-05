@@ -6,6 +6,13 @@
 <title>Savings Calculator | Free Savings Growth Calculator</title>
 <meta name="description" content="Free savings calculator to estimate future balance, total contributions, interest earned, and long-term savings growth.">
 
+<script>
+if(localStorage.getItem("financeToolsTheme") === "dark"){
+  document.documentElement.classList.add("dark");
+}
+</script>
+
+  
 <style>
 *{box-sizing:border-box}
 html, body{overflow-x:hidden}
@@ -1170,11 +1177,7 @@ calculate();
   <script src="../theme/theme.js"></script>
 
   
-  <script>
-if(localStorage.getItem("financeToolsTheme") === "dark"){
-  document.documentElement.classList.add("dark");
-}
-</script>
+  
 
 </body>
 </html>
