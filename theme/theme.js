@@ -1,5 +1,5 @@
 
-const themeToggle = document.getElementById("themeToggle");
+
 
 // Carrega tema salvo
 const savedTheme = localStorage.getItem("financeToolsTheme");
