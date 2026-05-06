@@ -1,3 +1,5 @@
+Aqui está completo com as alterações aplicadas:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +22,7 @@ html, body{overflow-x:hidden}
   --soft-border:rgba(0,0,0,0.07);
   --soft-shadow:0 12px 34px rgba(0,0,0,0.055);
 }
-.dark{
+html.dark{
   --bg:#0d1117; --card:#161b22; --text:#f0f6fc; --muted:#8b949e;
   --border:#30363d; --header:#010409; --blue:#2f81f7; --green:#3fb950;
   --table-bg:#0d1117; --input-bg:#0d1117;
@@ -124,7 +126,7 @@ button:active{
     radial-gradient(circle at 80% 0%, rgba(255,255,255,0.10), transparent 45%);
   pointer-events:none;
 }
-.dark .hero{
+html.dark .hero{
   background:
     radial-gradient(ellipse at 50% 100%,
       rgba(159,122,234,0.72) 0%,
@@ -482,7 +484,6 @@ th{
   opacity:1;
   transform:translateY(0);
 }
-
 /* All Calculators specific styles */
 .search-box{
   width:100%;
@@ -592,7 +593,6 @@ th{
   color:var(--muted);
   padding:24px;
 }
-
 @media(max-width:860px){
   .header-wrap{
     display:flex;
@@ -688,25 +688,20 @@ th{
     </div>
   </div>
 </header>
-
 <section class="hero">
   <div class="hero-content">
     <h1>All Calculators</h1>
     <p>Browse free financial calculators designed to help you estimate savings, loans, retirement, credit card payoff, and more.</p>
   </div>
 </section>
-
 <div class="page">
 <main class="main-card">
 <p>Use the search below to quickly find a calculator. Start typing and choose a suggestion, or filter the list in real time.</p>
-
 <div class="search-box">
   <input type="text" id="calculatorSearch" placeholder="Search calculators..." autocomplete="off">
   <div class="autocomplete-list" id="autocompleteList"></div>
 </div>
-
 <div class="no-results" id="noResults">No calculators found.</div>
-
 <section class="category">
   <h2>Interest, Savings & Investment</h2>
   <div class="calculator-grid">
@@ -728,7 +723,6 @@ th{
     </a>
   </div>
 </section>
-
 <section class="category">
   <h2>Loan Calculators</h2>
   <div class="calculator-grid">
@@ -746,7 +740,6 @@ th{
     </a>
   </div>
 </section>
-
 <section class="category">
   <h2>Mortgage & Debt</h2>
   <div class="calculator-grid">
@@ -760,7 +753,6 @@ th{
     </a>
   </div>
 </section>
-
 <section class="category">
   <h2>Retirement Calculators</h2>
   <div class="calculator-grid">
@@ -782,10 +774,8 @@ th{
     </a>
   </div>
 </section>
-
 <div class="ad-box" style="margin-top:24px;">Google AdSense Ad Space - In Content</div>
 </main>
-
 <aside>
   <div class="ad-box">Google AdSense Ad Space<br>300x250</div>
   <div class="sidebar-card">
@@ -802,7 +792,6 @@ th{
   <div class="ad-box">Google AdSense Ad Space<br>300x600</div>
 </aside>
 </div>
-
 <footer class="site-footer">
   <div class="footer-info">
     <p>
@@ -826,7 +815,6 @@ th{
     &nbsp; © 2026 FinanceTools
   </div>
 </footer>
-
 <script>
 const themeToggle = document.getElementById("themeToggle");
 const menuToggle = document.getElementById("menuToggle");
@@ -837,137 +825,107 @@ const categories = document.querySelectorAll(".category");
 const noResults = document.getElementById("noResults");
 const autocompleteList = document.getElementById("autocompleteList");
 let activeSuggestionIndex = -1;
-
-const themeToggle = document.getElementById("themeToggle");
 menuToggle.addEventListener("click", () => {
   mainNav.classList.toggle("open");
 });
-
 const calculators = Array.from(cards).map(card => ({
   name: card.querySelector("strong").textContent.trim(),
   description: card.querySelector("span").textContent.trim(),
   href: card.getAttribute("href"),
   element: card
 }));
-
 function filterCards(query){
   let visibleCount = 0;
-
   cards.forEach(card => {
     const text = card.textContent.toLowerCase();
     const match = text.includes(query);
     card.style.display = match ? "block" : "none";
     if(match) visibleCount++;
   });
-
   categories.forEach(category => {
     let hasVisible = false;
-
     category.querySelectorAll(".calculator-card").forEach(card => {
       if(card.style.display !== "none") hasVisible = true;
     });
-
     category.style.display = hasVisible ? "block" : "none";
   });
-
   noResults.style.display = visibleCount === 0 ? "block" : "none";
 }
-
 function showSuggestions(query){
   autocompleteList.innerHTML = "";
   activeSuggestionIndex = -1;
-
   if(!query){
     autocompleteList.style.display = "none";
     return;
   }
-
   const matches = calculators
     .filter(item =>
       item.name.toLowerCase().includes(query) ||
       item.description.toLowerCase().includes(query)
     )
     .slice(0, 8);
-
   if(matches.length === 0){
     autocompleteList.style.display = "none";
     return;
   }
-
   matches.forEach(match => {
     const item = document.createElement("div");
     item.className = "autocomplete-item";
     item.innerHTML = `<strong>${match.name}</strong><span>${match.description}</span>`;
-
     item.addEventListener("click", () => {
       chooseSuggestion(match);
     });
-
     autocompleteList.appendChild(item);
   });
-
   autocompleteList.style.display = "block";
 }
-
 function chooseSuggestion(match){
   searchInput.value = match.name;
   autocompleteList.style.display = "none";
   filterCards(match.name.toLowerCase());
-
   match.element.scrollIntoView({
     behavior:"smooth",
     block:"center"
   });
-
   match.element.style.borderColor = "var(--blue)";
   setTimeout(() => {
     match.element.style.borderColor = "";
   }, 900);
 }
-
 function updateActiveSuggestion(items){
   items.forEach(item => item.classList.remove("active"));
-
   if(activeSuggestionIndex >= 0 && items[activeSuggestionIndex]){
     items[activeSuggestionIndex].classList.add("active");
   }
 }
-
 searchInput.addEventListener("input", () => {
   const query = searchInput.value.toLowerCase().trim();
   filterCards(query);
   showSuggestions(query);
 });
-
 searchInput.addEventListener("keydown", (event) => {
   const items = autocompleteList.querySelectorAll(".autocomplete-item");
-
   if(autocompleteList.style.display !== "block" || items.length === 0) return;
-
   if(event.key === "ArrowDown"){
     event.preventDefault();
     activeSuggestionIndex = (activeSuggestionIndex + 1) % items.length;
     updateActiveSuggestion(items);
   }
-
   if(event.key === "ArrowUp"){
     event.preventDefault();
     activeSuggestionIndex = (activeSuggestionIndex - 1 + items.length) % items.length;
     updateActiveSuggestion(items);
   }
-
   if(event.key === "Enter"){
     if(activeSuggestionIndex >= 0){
       event.preventDefault();
       items[activeSuggestionIndex].click();
     }
   }
-
   if(event.key === "Escape"){
     autocompleteList.style.display = "none";
   }
 });
-
 document.addEventListener("click", (event) => {
   if(!event.target.closest(".search-box")){
     autocompleteList.style.display = "none";
