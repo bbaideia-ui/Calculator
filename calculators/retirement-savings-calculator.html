@@ -20,7 +20,7 @@ html, body{overflow-x:hidden}
   --soft-border:rgba(0,0,0,0.07);
   --soft-shadow:0 12px 34px rgba(0,0,0,0.055);
 }
-.dark{
+html.dark{
   --bg:#0d1117; --card:#161b22; --text:#f0f6fc; --muted:#8b949e;
   --border:#30363d; --header:#010409; --blue:#2f81f7; --green:#3fb950;
   --table-bg:#0d1117; --input-bg:#0d1117;
@@ -97,7 +97,7 @@ button:active{transform:scale(.97)}
     radial-gradient(circle at 80% 0%, rgba(255,255,255,0.10), transparent 45%);
   pointer-events:none;
 }
-.dark .hero{
+html.dark .hero{
   background:radial-gradient(ellipse at 50% 100%,rgba(159,122,234,0.72) 0%,rgba(88,80,236,0.38) 24%,rgba(20,24,84,0.58) 48%,rgba(5,8,45,1) 80%);
 }
 .hero-content{
@@ -692,11 +692,8 @@ const money = new Intl.NumberFormat("en-US", {
   currency: "USD"
 });
 
-const themeToggle = document.getElementById("themeToggle");
 const menuToggle = document.getElementById("menuToggle");
 const mainNav = document.getElementById("mainNav");
-
-
 
 menuToggle.addEventListener("click", () => {
   mainNav.classList.toggle("open");
@@ -798,7 +795,7 @@ function drawGrowthChart(data, goalAmount){
   const padding = 34;
   const chartWidth = width - padding * 2;
   const chartHeight = height - padding * 2;
-  const isDark = document.body.classList.contains("dark");
+  const isDark = document.documentElement.classList.contains("dark");
   const maxValue = Math.max(goalAmount, ...data.map(item => item.balance));
 
   ctx.strokeStyle = isDark ? "#30363d" : "#d0d7de";
@@ -872,7 +869,7 @@ function drawBreakdownChart(currentGrowth, newSavings){
 
   const width = rect.width;
   const height = 260;
-  const isDark = document.body.classList.contains("dark");
+  const isDark = document.documentElement.classList.contains("dark");
 
   ctx.clearRect(0, 0, width, height);
 
