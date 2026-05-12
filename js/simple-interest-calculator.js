@@ -1,5 +1,4 @@
 
-Sim. Aqui está o JavaScript inteiro, mantendo tudo igual e só atualizando o gráfico para remover aquele fio vertical:
 
 const money = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -7,9 +6,11 @@ const money = new Intl.NumberFormat("en-US", {
 });
 const menuToggle = document.getElementById("menuToggle");
 const mainNav = document.getElementById("mainNav");
-menuToggle.addEventListener("click", () => {
-  mainNav.classList.toggle("open");
-});
+if(menuToggle && mainNav){
+  menuToggle.addEventListener("click", () => {
+    mainNav.classList.toggle("open");
+  });
+}
 function setRate(value){
   document.getElementById("rate").value = value;
 }
@@ -21,7 +22,6 @@ function calculate(){
   const annualRate = Number(document.getElementById("rate").value) / 100;
   const years = Number(document.getElementById("years").value);
   if(principal < 0 || annualRate < 0 || years <= 0){
-    alert("Please enter valid numbers.");
     return;
   }
   const totalInterest = principal * annualRate * years;
@@ -48,6 +48,7 @@ function calculate(){
 }
 function fillTable(data){
   const tableBody = document.getElementById("tableBody");
+  if(!tableBody) return;
   tableBody.innerHTML = "";
   data.forEach(row => {
     const tr = document.createElement("tr");
@@ -62,10 +63,11 @@ function fillTable(data){
 }
 function drawGrowthChart(data){
   const canvas = document.getElementById("growthChart");
+  if(!canvas) return;
   const ctx = canvas.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.getBoundingClientRect();
-  ctx.setTransform(1,0,0,1,0,0);
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
   canvas.width = rect.width * dpr;
   canvas.height = 260 * dpr;
   ctx.scale(dpr, dpr);
@@ -95,17 +97,17 @@ function drawGrowthChart(data){
     const baseY = height - padding;
     ctx.fillStyle = isDark ? "#2f81f7" : "#0969da";
     ctx.fillRect(
-      Math.round(x - barWidth / 2),
-      Math.round(baseY - principalHeight),
-      Math.round(barWidth),
-      Math.round(principalHeight)
+      x - barWidth / 2,
+      baseY - principalHeight,
+      barWidth,
+      principalHeight
     );
     ctx.fillStyle = isDark ? "#3fb950" : "#2da44e";
     ctx.fillRect(
-      Math.round(x - barWidth / 2),
-      Math.round(baseY - principalHeight - interestHeight),
-      Math.round(barWidth),
-      Math.round(interestHeight)
+      x - barWidth / 2,
+      baseY - principalHeight - interestHeight,
+      barWidth,
+      interestHeight
     );
   });
   const last = data[data.length - 1];
@@ -116,10 +118,11 @@ function drawGrowthChart(data){
 }
 function drawBreakdownChart(principal, interest){
   const canvas = document.getElementById("breakdownChart");
+  if(!canvas) return;
   const ctx = canvas.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.getBoundingClientRect();
-  ctx.setTransform(1,0,0,1,0,0);
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
   canvas.width = rect.width * dpr;
   canvas.height = 260 * dpr;
   ctx.scale(dpr, dpr);
@@ -138,23 +141,11 @@ function drawBreakdownChart(principal, interest){
   ctx.lineCap = "round";
   ctx.beginPath();
   ctx.strokeStyle = isDark ? "#2f81f7" : "#0969da";
-  ctx.arc(
-    centerX,
-    centerY,
-    radius,
-    -Math.PI / 2,
-    -Math.PI / 2 + principalAngle
-  );
+  ctx.arc(centerX, centerY, radius, -Math.PI / 2, -Math.PI / 2 + principalAngle);
   ctx.stroke();
   ctx.beginPath();
   ctx.strokeStyle = isDark ? "#3fb950" : "#2da44e";
-  ctx.arc(
-    centerX,
-    centerY,
-    radius,
-    -Math.PI / 2 + principalAngle,
-    Math.PI * 1.5
-  );
+  ctx.arc(centerX, centerY, radius, -Math.PI / 2 + principalAngle, Math.PI * 1.5);
   ctx.stroke();
   ctx.font = "700 14px Arial";
   ctx.fillStyle = isDark ? "#f0f6fc" : "#24292f";
@@ -178,23 +169,18 @@ function clearForm(){
   document.getElementById("rate").value = "";
   document.getElementById("years").value = "";
   document.getElementById("resultBox").style.display = "none";
-  document.getElementById("tableBody").innerHTML = "";
+  const tableBody = document.getElementById("tableBody");
+  if(tableBody) tableBody.innerHTML = "";
   const growthCanvas = document.getElementById("growthChart");
-  const growthCtx = growthCanvas.getContext("2d");
-  growthCtx.clearRect(
-    0,
-    0,
-    growthCanvas.width,
-    growthCanvas.height
-  );
+  if(growthCanvas){
+    const growthCtx = growthCanvas.getContext("2d");
+    growthCtx.clearRect(0, 0, growthCanvas.width, growthCanvas.height);
+  }
   const breakdownCanvas = document.getElementById("breakdownChart");
-  const breakdownCtx = breakdownCanvas.getContext("2d");
-  breakdownCtx.clearRect(
-    0,
-    0,
-    breakdownCanvas.width,
-    breakdownCanvas.height
-  );
+  if(breakdownCanvas){
+    const breakdownCtx = breakdownCanvas.getContext("2d");
+    breakdownCtx.clearRect(0, 0, breakdownCanvas.width, breakdownCanvas.height);
+  }
 }
 document.querySelectorAll(".faq-question").forEach(button => {
   button.addEventListener("click", () => {
@@ -202,9 +188,7 @@ document.querySelectorAll(".faq-question").forEach(button => {
     const isActive = item.classList.contains("active");
     document.querySelectorAll(".faq-item").forEach(faq => {
       faq.classList.remove("active");
-      faq
-        .querySelector(".faq-question")
-        .setAttribute("aria-expanded", "false");
+      faq.querySelector(".faq-question").setAttribute("aria-expanded", "false");
     });
     if(!isActive){
       item.classList.add("active");
@@ -212,7 +196,8 @@ document.querySelectorAll(".faq-question").forEach(button => {
     }
   });
 });
-window.addEventListener("resize", calculate);
+window.addEventListener("resize", () => {
+  calculate();
+});
 calculate();
 
-Pode substituir o JS inteiro por esse.
