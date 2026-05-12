@@ -1,2 +1,181 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Calculators | FinanceTools</title>
+<meta name="description" content="Browse all FinanceTools calculators, including compound interest, investment, savings, loan, mortgage, retirement, credit card payoff, and more.">
 
+<script>
+if(localStorage.getItem("financeToolsTheme") === "dark"){
+  document.documentElement.classList.add("dark");
+}
+</script>
+
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+
+<body>
+
+<header>
+  <div class="header-wrap">
+    <div class="logo">Finance<span>Tools</span></div>
+    <div class="header-right">
+      <button class="menu-toggle" id="menuToggle">☰ Menu</button>
+      <nav id="mainNav">
+        <a href="all-calculators.html">All Calculators</a>
+        <a href="../about.html">About</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>All Calculators</h1>
+    <p>Browse free financial calculators designed to help you estimate savings, loans, retirement, credit card payoff, and more.</p>
+  </div>
+</section>
+
+<div class="page">
+<main class="main-card">
+<p>Use the search below to quickly find a calculator. Start typing and choose a suggestion, or filter the list in real time.</p>
+
+<div class="search-box">
+  <input type="text" id="calculatorSearch" placeholder="Search calculators..." autocomplete="off">
+  <div class="autocomplete-list" id="autocompleteList"></div>
+</div>
+
+<div class="no-results" id="noResults">No calculators found.</div>
+
+<section class="category">
+  <h2>Interest, Savings & Investment</h2>
+  <div class="calculator-grid">
+    <a class="calculator-card" href="../index.html">
+      <strong>Compound Interest Calculator</strong>
+      <span>Estimate investment growth with compound interest.</span>
+    </a>
+    <a class="calculator-card" href="../calculators/simple-interest-calculator.html">
+      <strong>Simple Interest Calculator</strong>
+      <span>Calculate simple interest over time.</span>
+    </a>
+    <a class="calculator-card" href="../calculators/savings-calculator.html">
+      <strong>Savings Calculator</strong>
+      <span>Estimate how your savings may grow.</span>
+    </a>
+    <a class="calculator-card" href="../calculators/investment-calculator.html">
+      <strong>Investment Calculator</strong>
+      <span>Estimate future value, contributions, and investment growth.</span>
+    </a>
+  </div>
+</section>
+
+<section class="category">
+  <h2>Loan Calculators</h2>
+  <div class="calculator-grid">
+    <a class="calculator-card" href="../calculators/loan-calculator.html">
+      <strong>Loan Calculator</strong>
+      <span>Estimate loan payments, interest, and payoff schedule.</span>
+    </a>
+    <a class="calculator-card" href="../calculators/deferred-payment-loan-calculator.html">
+      <strong>Deferred Payment Loan Calculator</strong>
+      <span>Estimate amount due at loan maturity.</span>
+    </a>
+    <a class="calculator-card" href="../calculators/bond-calculator.html">
+      <strong>Bond Calculator</strong>
+      <span>Estimate present value of a future lump sum.</span>
+    </a>
+  </div>
+</section>
+
+<section class="category">
+  <h2>Mortgage & Debt</h2>
+  <div class="calculator-grid">
+    <a class="calculator-card" href="../calculators/mortgage-calculator.html">
+      <strong>Mortgage Calculator</strong>
+      <span>Estimate mortgage payments and loan breakdown.</span>
+    </a>
+    <a class="calculator-card" href="../calculators/credit-card-payoff-calculator.html">
+      <strong>Credit Card Payoff Calculator</strong>
+      <span>Estimate payoff time and interest for credit cards.</span>
+    </a>
+  </div>
+</section>
+
+<section class="category">
+  <h2>Retirement Calculators</h2>
+  <div class="calculator-grid">
+    <a class="calculator-card" href="../calculators/retirement-calculator.html">
+      <strong>Retirement Calculator</strong>
+      <span>Estimate retirement savings needs and projected gap.</span>
+    </a>
+    <a class="calculator-card" href="../calculators/retirement-savings-calculator.html">
+      <strong>Retirement Savings Calculator</strong>
+      <span>Estimate how much to save monthly for retirement.</span>
+    </a>
+    <a class="calculator-card" href="../calculators/retirement-withdrawal-calculator.html">
+      <strong>Retirement Withdrawal Calculator</strong>
+      <span>Estimate monthly withdrawals from retirement savings.</span>
+    </a>
+    <a class="calculator-card" href="../calculators/retirement-duration-calculator.html">
+      <strong>Retirement Duration Calculator</strong>
+      <span>Estimate how long your retirement savings may last.</span>
+    </a>
+  </div>
+</section>
+
+<div class="ad-box" style="margin-top:24px;">Google AdSense Ad Space - In Content</div>
+</main>
+
+<aside>
+  <div class="ad-box">Google AdSense Ad Space<br>300x250</div>
+  <div class="sidebar-card">
+    <h3>Related Calculators</h3>
+    <a href="../index.html">Compound Interest Calculator</a>
+    <a href="../calculators/simple-interest-calculator.html">Simple Interest Calculator</a>
+    <a href="../calculators/savings-calculator.html">Savings Calculator</a>
+    <a href="../calculators/investment-calculator.html">Investment Calculator</a>
+    <a href="../calculators/loan-calculator.html">Loan Calculator</a>
+    <a href="../calculators/mortgage-calculator.html">Mortgage Calculator</a>
+    <a href="../calculators/retirement-calculator.html">Retirement Calculator</a>
+    <a href="../calculators/credit-card-payoff-calculator.html">Credit Card Payoff Calculator</a>
+  </div>
+  <div class="ad-box">Google AdSense Ad Space<br>300x600</div>
+</aside>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-info">
+    <p>
+      FinanceTools is dedicated to providing fast, simple, and reliable online calculators to help users make better financial decisions. 
+      Our goal is to create an accessible platform where people can quickly perform essential calculations without complexity. 
+      All tools are completely free and require no registration.
+    </p>
+    <p>
+      Each calculator is carefully designed and tested to support accuracy and usability. While most tools are suitable for general use, 
+      some results may vary depending on financial systems, regions, fees, taxes, and other real-world factors. We are continuously improving 
+      and expanding our platform to provide even more useful tools over time.
+    </p>
+  </div>
+  <div class="footer-links">
+    <a href="all-calculators.html">all calculators</a> |
+    <a href="../about.html">about us</a> |
+    <a href="../sitemap.html">sitemap</a> |
+    <a href="../terms.html">terms of use</a> |
+    <a href="../privacy.html">privacy policy</a>
+    <a href="../contact.html">Contact</a>
+    &nbsp; © 2026 FinanceTools
+  </div>
+</footer>
+
+<script src="../cookie/cookie.js"></script>
+<script src="../theme/theme.js"></script>
+
+</body>
+</html>
