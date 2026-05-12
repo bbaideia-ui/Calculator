@@ -1,4 +1,4 @@
-Aqui está o JavaScript corrigido. Eu mexi só na parte do Canvas para reduzir esse “pavio” visual.
+
 
 const money = new Intl.NumberFormat("en-US", {
   style: "currency",
