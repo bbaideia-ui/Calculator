@@ -1,7 +1,5 @@
 
-if(localStorage.getItem("financeToolsTheme") === "dark"){
-  document.documentElement.classList.add("dark");
-}
+
 
 const money = new Intl.NumberFormat("en-US", {
   style: "currency",
