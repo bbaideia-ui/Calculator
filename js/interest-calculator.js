@@ -43,6 +43,7 @@ function clearForm(){
 }
 
 function clearCanvas(id){
+
   const canvas = document.getElementById(id);
   const ctx = canvas.getContext("2d");
 
@@ -332,6 +333,7 @@ function drawBreakdownChart(
   });
 
   ctx.beginPath();
+
   ctx.fillStyle =
     document.documentElement.classList.contains("dark")
       ? "#161b22"
@@ -372,9 +374,29 @@ document.querySelectorAll(".faq-question").forEach(button => {
 
   button.addEventListener("click", () => {
 
-    const item = button.parentElement;
+    const item = button.closest(".faq-item");
 
-    item.classList.toggle("active");
+    const isActive =
+      item.classList.contains("active");
+
+    document.querySelectorAll(".faq-item").forEach(faq => {
+
+      faq.classList.remove("active");
+
+      faq
+        .querySelector(".faq-question")
+        .setAttribute("aria-expanded","false");
+    });
+
+    if(!isActive){
+
+      item.classList.add("active");
+
+      button.setAttribute(
+        "aria-expanded",
+        "true"
+      );
+    }
   });
 });
 
