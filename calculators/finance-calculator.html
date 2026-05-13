@@ -1,1 +1,272 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance Calculator | CalcFinance</title>
+<meta name="description" content="Free finance calculator to calculate future value, present value, payment, interest rate, and number of periods using time value of money.">
+<script>
+if(localStorage.getItem("financeToolsTheme") === "dark"){
+  document.documentElement.classList.add("dark");
+}
+</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="header-wrap">
+    <div class="logo">Calc<span>Finance</span></div>
+    <div class="header-right">
+      <button class="menu-toggle" id="menuToggle">☰ Menu</button>
+      <nav id="mainNav">
+        <a href="../all-calc/all-calculators.html">All Calculators</a>
+        <a href="../about.html">About</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Finance Calculator</h1>
+    <p>Calculate future value, present value, payment, interest rate, or number of periods using time value of money.</p>
+  </div>
+</section>
+
+<div class="page">
+<main class="main-card">
+
+<p>Use this free finance calculator to estimate common time value of money values, including FV, PV, PMT, interest rate, and number of periods.</p>
+
+<div class="calculator">
+  <div class="calc-header">Time Value of Money Calculator</div>
+
+  <div class="calc-body">
+
+    <div class="tab-buttons">
+      <button type="button" class="tab-btn active" data-target="fv">FV</button>
+      <button type="button" class="tab-btn" data-target="pmt">PMT</button>
+      <button type="button" class="tab-btn" data-target="rate">I/Y</button>
+      <button type="button" class="tab-btn" data-target="periods">N</button>
+      <button type="button" class="tab-btn" data-target="pv">PV</button>
+    </div>
+
+    <div class="calc-row">
+      <label>Calculate</label>
+      <select id="calculateFor">
+        <option value="fv" selected>Future Value (FV)</option>
+        <option value="pmt">Payment (PMT)</option>
+        <option value="rate">Interest Rate (I/Y)</option>
+        <option value="periods">Number of Periods (N)</option>
+        <option value="pv">Present Value (PV)</option>
+      </select>
+    </div>
+
+    <div class="calc-row input-row" id="rowPeriods">
+      <label>N (# of periods)</label>
+      <input type="number" id="periods" value="10" step="1">
+    </div>
+
+    <div class="calc-row input-row" id="rowRate">
+      <label>I/Y (Interest per year)</label>
+      <input type="number" id="rate" value="6" step="0.01">
+    </div>
+
+    <div class="calc-row input-row" id="rowPV">
+      <label>PV (Present Value)</label>
+      <input type="number" id="presentValue" value="20000">
+    </div>
+
+    <div class="calc-row input-row" id="rowPMT">
+      <label>PMT (Periodic Payment)</label>
+      <input type="number" id="payment" value="-2000">
+    </div>
+
+    <div class="calc-row input-row" id="rowFV">
+      <label>FV (Future Value)</label>
+      <input type="number" id="futureValue" value="0">
+    </div>
+
+    <div class="calc-row">
+      <label>Compounding</label>
+      <select id="compoundFrequency">
+        <option value="1" selected>Annually</option>
+        <option value="2">Semiannually</option>
+        <option value="4">Quarterly</option>
+        <option value="12">Monthly</option>
+      </select>
+    </div>
+
+    <div class="calc-row">
+      <label>Payment Timing</label>
+      <select id="paymentTiming">
+        <option value="end" selected>End of Period</option>
+        <option value="beginning">Beginning of Period</option>
+      </select>
+    </div>
+
+    <div class="buttons">
+      <button class="calculate-btn" onclick="calculate()">Calculate</button>
+      <button class="clear-btn" onclick="clearForm()">Clear</button>
+    </div>
+
+    <div class="result-box" id="resultBox">
+      <div class="result-line">
+        <span id="primaryResultLabel">Future Value</span>
+        <span class="result-value big-result" id="primaryResult">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Present Value</span>
+        <span class="result-value" id="pvResult">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Total Payments</span>
+        <span class="result-value" id="totalPayments">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Total Interest</span>
+        <span class="result-value" id="totalInterest">$0.00</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="chart-wrap">
+  <h2 class="chart-title">Value Changes Over Time</h2>
+  <canvas id="financeChart" width="560" height="260"></canvas>
+</div>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Period</th>
+      <th>PV</th>
+      <th>PMT</th>
+      <th>Interest</th>
+      <th>FV</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody"></tbody>
+</table>
+</div>
+
+<div class="ad-box" style="margin-top:24px;">Google AdSense Ad Space - In Content</div>
+
+<section class="content">
+  <h2>What Is a Finance Calculator?</h2>
+  <p>A finance calculator helps estimate time value of money values such as future value, present value, payment, interest rate, and number of periods.</p>
+
+  <h2>How This Calculator Works</h2>
+  <p>Select the value you want to calculate, enter the known values, and the calculator estimates the missing result using standard finance formulas.</p>
+
+  <h2>What Can You Calculate?</h2>
+  <p>You can calculate FV, PMT, I/Y, N, and PV. These values are commonly used in savings, loans, investments, and financial planning.</p>
+
+  <h2>Example Calculation</h2>
+  <p>If you start with $20,000, make periodic payments of $2,000, use a 6% annual interest rate, and choose 10 periods, this calculator estimates the future value and schedule.</p>
+
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Is this finance calculator free?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. This finance calculator is completely free to use.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        What does FV mean?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>FV means future value. It is the estimated value of money at a future point after interest and payments are applied.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        What does PV mean?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>PV means present value. It is the current value of a future amount or payment stream based on a selected interest rate.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Does this calculator provide financial advice?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>No. Results are estimates only and should be used for educational purposes, not as financial advice.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="notice">This calculator is for educational purposes only and should not be considered financial advice.</div>
+</section>
+
+</main>
+
+<aside>
+  <div class="ad-box">Google AdSense Ad Space<br>300x250</div>
+
+  <div class="sidebar-card">
+    <h3>Related Calculators</h3>
+    <a href="../index.html">Compound Interest Calculator</a>
+    <a href="simple-interest-calculator.html">Simple Interest Calculator</a>
+    <a href="savings-calculator.html">Savings Calculator</a>
+    <a href="investment-calculator.html">Investment Calculator</a>
+    <a href="loan-calculator.html">Loan Calculator</a>
+    <a href="mortgage-calculator.html">Mortgage Calculator</a>
+    <a href="retirement-calculator.html">Retirement Calculator</a>
+    <a href="credit-card-payoff-calculator.html">Credit Card Payoff Calculator</a>
+  </div>
+
+  <div class="ad-box">Google AdSense Ad Space<br>300x600</div>
+</aside>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-info">
+    <p>
+      CalcFinance is dedicated to providing fast, simple, and reliable online calculators to help users make better financial decisions.
+      Our goal is to create an accessible platform where people can quickly perform essential calculations without complexity.
+      All tools are completely free and require no registration.
+    </p>
+    <p>
+      Each calculator is carefully designed and tested to support accuracy and usability. While most tools are suitable for general use,
+      some results may vary depending on financial systems, regions, fees, taxes, and other real-world factors. We are continuously improving
+      and expanding our platform to provide even more useful tools over time.
+    </p>
+  </div>
+
+  <div class="footer-links">
+    <a href="../all-calc/all-calculators.html">all calculators</a> |
+    <a href="../about.html">about us</a> |
+    <a href="../sitemap.html">sitemap</a> |
+    <a href="../terms.html">terms of use</a> |
+    <a href="../privacy.html">privacy policy</a>
+    <a href="../contact.html">Contact</a>
+    &nbsp; © 2026 CalcFinance
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="../cookie/cookie.js"></script>
+<script src="../theme/theme.js"></script>
+</body>
+</html>
