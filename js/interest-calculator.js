@@ -52,13 +52,13 @@ function calculate(){
 
   const totalYears = years + months / 12;
   const periodicRate = interestRate / compoundFrequency;
+  const fullYears = Math.floor(totalYears);
 
   let balance = initialInvestment;
   let totalContributions = 0;
   let totalInterest = 0;
 
   const yearlyData = [];
-  const fullYears = Math.floor(totalYears);
 
   for(let year = 1; year <= fullYears; year++){
     let yearDeposit = 0;
@@ -146,16 +146,12 @@ function setupCanvas(canvas, height = 260){
 
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-  return {
-    ctx,
-    width,
-    height
-  };
+  return { ctx, width, height };
 }
 
 function drawBreakdownChart(principal, contributions, interest){
   const canvas = document.getElementById("breakdownChart");
-  const { ctx, width, height } = setupCanvas(canvas, 320);
+  const { ctx, width, height } = setupCanvas(canvas, 260);
 
   ctx.clearRect(0, 0, width, height);
 
@@ -165,9 +161,9 @@ function drawBreakdownChart(principal, contributions, interest){
   const isDark = document.documentElement.classList.contains("dark");
 
   const centerX = width / 2;
-  const centerY = 135;
-  const radius = 82;
-  const lineWidth = 34;
+  const centerY = 115;
+  const radius = 62;
+  const lineWidth = 26;
 
   const parts = [
     { label: "Initial", value: principal, color: isDark ? "#2f81f7" : "#0969da" },
@@ -193,23 +189,23 @@ function drawBreakdownChart(principal, contributions, interest){
     startAngle += angle;
   });
 
-  ctx.font = "700 14px Arial";
+  ctx.font = "700 13px Arial";
   ctx.fillStyle = isDark ? "#f0f6fc" : "#24292f";
   ctx.textAlign = "center";
   ctx.fillText("End Balance", centerX, centerY - 4);
 
   ctx.font = "12px Arial";
   ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
-  ctx.fillText(money.format(total), centerX, centerY + 16);
+  ctx.fillText(money.format(total), centerX, centerY + 15);
 
   ctx.textAlign = "left";
   ctx.font = "12px Arial";
 
-  const legendY = 270;
-  const legendX = Math.max(20, width / 2 - 170);
+  const legendY = 218;
+  const legendX = Math.max(28, width / 2 - 150);
 
   parts.forEach((part, index) => {
-    const x = legendX + index * 115;
+    const x = legendX + index * 105;
 
     ctx.fillStyle = part.color;
     ctx.fillRect(x, legendY, 10, 10);
@@ -233,22 +229,16 @@ function drawGrowthChart(data, initialInvestment){
 
   const maxValue = Math.max(...data.map(row => row.balance), 1);
 
-  ctx.strokeStyle = isDark ? "#30363d" : "#d0d7de";
-  ctx.lineWidth = 1;
-
-  ctx.beginPath();
-  ctx.moveTo(padding, padding);
-  ctx.lineTo(padding, height - padding);
-  ctx.lineTo(width - padding, height - padding);
-  ctx.stroke();
-
   data.forEach((row, index) => {
     const x = padding + (index / (data.length - 1 || 1)) * chartWidth;
     const baseY = height - padding;
 
+    const totalDeposits = row.deposit * row.year;
+    const interestOnly = Math.max(0, row.balance - initialInvestment - totalDeposits);
+
     const initialHeight = (initialInvestment / maxValue) * chartHeight;
-    const contributionHeight = (row.deposit * row.year / maxValue) * chartHeight;
-    const interestHeight = Math.max(0, (row.balance - initialInvestment - row.deposit * row.year) / maxValue) * chartHeight;
+    const contributionHeight = (totalDeposits / maxValue) * chartHeight;
+    const interestHeight = (interestOnly / maxValue) * chartHeight;
 
     const barWidth = Math.max(12, Math.min(28, chartWidth / data.length * 0.45));
 
