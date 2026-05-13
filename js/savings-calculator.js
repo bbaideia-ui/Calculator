@@ -1,5 +1,5 @@
 
-Claro. Substitua todo o JavaScript por este código completo atualizado:
+
 
 const money = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -65,12 +65,16 @@ function calculate(){
     yearDeposit += annualContribution;
     totalContributions += annualContribution;
     const yearInterest = balance - previousBalance - yearDeposit;
+    const cumulativeContributions = totalContributions - initialDeposit;
+    const cumulativeInterest = balance - totalContributions;
     yearlyData.push({
       year,
       deposit: yearDeposit,
       interest: yearInterest,
       balance,
-      totalContributions
+      totalContributions,
+      cumulativeContributions,
+      cumulativeInterest
     });
     previousBalance = balance;
     annualContribution *= (1 + annualIncrease);
@@ -132,11 +136,9 @@ function drawGrowthChart(data, initialDeposit){
   ctx.stroke();
   data.forEach((item, index) => {
     const x = padding + (index / (data.length - 1 || 1)) * chartWidth;
-    const contributionsOnly = Math.max(0, item.totalContributions - initialDeposit);
-    const interestOnly = Math.max(0, item.balance - item.totalContributions);
     const initialHeight = (initialDeposit / maxValue) * chartHeight;
-    const contributionHeight = (contributionsOnly / maxValue) * chartHeight;
-    const interestHeight = (interestOnly / maxValue) * chartHeight;
+    const contributionHeight = (item.cumulativeContributions / maxValue) * chartHeight;
+    const interestHeight = (item.cumulativeInterest / maxValue) * chartHeight;
     const barWidth = Math.max(
       12,
       Math.min(28, chartWidth / data.length * 0.45)
@@ -144,12 +146,7 @@ function drawGrowthChart(data, initialDeposit){
     const baseY = height - padding;
     const barX = x - barWidth / 2;
     ctx.fillStyle = isDark ? "#2f81f7" : "#0969da";
-    ctx.fillRect(
-      barX,
-      baseY - initialHeight,
-      barWidth,
-      initialHeight
-    );
+    ctx.fillRect(barX, baseY - initialHeight, barWidth, initialHeight);
     ctx.fillStyle = isDark ? "#3fb950" : "#2da44e";
     ctx.fillRect(
       barX,
@@ -292,4 +289,3 @@ window.addEventListener("resize", () => {
 });
 calculate();
 
-Esse código remove a linha vertical do gráfico e mantém os resultados funcionando.
