@@ -1,4 +1,9 @@
-Você tem razão. O CSS que eu mandei depois saiu do seu padrão. Use este aqui: é o CSS original da calculadora nova, mantendo seu layout padrão, só com a classe extra necessária da calculadora (split-inputs).
+O HTML não precisa mudar, desde que os gráficos estejam assim:
+
+<canvas id="breakdownChart" width="560" height="260"></canvas>
+<canvas id="growthChart" width="560" height="260"></canvas>
+
+Aqui está o CSS completo original, mantendo o seu padrão e adicionando apenas .split-inputs:
 
 *{box-sizing:border-box}
 html, body{overflow-x:hidden}
