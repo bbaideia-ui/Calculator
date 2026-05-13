@@ -1,1 +1,212 @@
 
+Agora sim, usando o seu HTML padrão como base.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interest Rate Calculator | Free Loan Interest Rate Calculator</title>
+<meta name="description" content="Free interest rate calculator to estimate the annual interest rate on a loan based on loan amount, loan term, and monthly payment.">
+<script>
+if(localStorage.getItem("financeToolsTheme") === "dark"){
+  document.documentElement.classList.add("dark");
+}
+</script>
+<link rel="stylesheet" href="../css/interest-rate-calculator.css">
+</head>
+<body>
+<header>
+  <div class="header-wrap">
+    <div class="logo">Calc<span>Finance</span></div>
+    <div class="header-right">
+      <button class="menu-toggle" id="menuToggle">☰ Menu</button>
+      <nav id="mainNav">
+        <a href="../all-calc/all-calculators.html">All Calculators</a>
+        <a href="../about.html">About</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </div>
+  </div>
+</header>
+<section class="hero">
+  <div class="hero-content">
+    <h1>Interest Rate Calculator</h1>
+    <p>Estimate the annual interest rate on a loan using the loan amount, loan term, and monthly payment.</p>
+  </div>
+</section>
+<div class="page">
+<main class="main-card">
+<p>Use this free interest rate calculator to estimate the real annual interest rate on a fixed-payment loan.</p>
+<div class="calculator">
+  <div class="calc-header">Loan Interest Rate Calculator</div>
+  <div class="calc-body">
+    <div class="calc-row">
+      <label>Loan Amount</label>
+      <input type="number" id="loanAmount" value="32000">
+    </div>
+    <div class="calc-row">
+      <label>Loan Term</label>
+      <div>
+        <input type="number" id="years" value="3">
+        <div class="quick-buttons">
+          <button type="button" onclick="setYears(3)">3y</button>
+          <button type="button" onclick="setYears(5)">5y</button>
+          <button type="button" onclick="setYears(7)">7y</button>
+        </div>
+      </div>
+    </div>
+    <div class="calc-row">
+      <label>Additional Months</label>
+      <input type="number" id="months" value="0">
+    </div>
+    <div class="calc-row">
+      <label>Monthly Payment</label>
+      <div>
+        <input type="number" id="monthlyPayment" value="960">
+        <div class="quick-buttons">
+          <button type="button" onclick="setMonthlyPayment(500)">$500</button>
+          <button type="button" onclick="setMonthlyPayment(750)">$750</button>
+          <button type="button" onclick="setMonthlyPayment(1000)">$1k</button>
+        </div>
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="calculate-btn" onclick="calculate()">Calculate</button>
+      <button class="clear-btn" onclick="clearForm()">Clear</button>
+    </div>
+    <div class="result-box" id="resultBox">
+      <div class="result-line">
+        <span>Interest Rate</span>
+        <span class="result-value big-result" id="interestRateResult">0.00%</span>
+      </div>
+      <div class="result-line">
+        <span>Total Payments</span>
+        <span class="result-value" id="totalPayments">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Total Interest Paid</span>
+        <span class="result-value" id="totalInterest">$0.00</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="chart-wrap">
+  <h2 class="chart-title">Loan Amortization Graph</h2>
+  <canvas id="balanceChart" width="560" height="260"></canvas>
+</div>
+<div class="chart-wrap">
+  <h2 class="chart-title">Payment Breakdown</h2>
+  <canvas id="breakdownChart" width="560" height="260"></canvas>
+</div>
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Balance</th>
+      <th>Interest</th>
+      <th>Principal</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody"></tbody>
+</table>
+</div>
+<div class="ad-box" style="margin-top:24px;">Google AdSense Ad Space - In Content</div>
+<section class="content">
+  <h2>What Is an Interest Rate Calculator?</h2>
+  <p>An interest rate calculator estimates the annual rate on a loan when you know the loan amount, monthly payment, and repayment term.</p>
+  <h2>How to Use This Interest Rate Calculator</h2>
+  <p>Enter the loan amount, loan term, and monthly payment. The calculator estimates the annual interest rate, total payments, and total interest paid.</p>
+  <h2>Why Interest Rate Matters</h2>
+  <p>The interest rate affects how much you pay over the life of a loan. Even a small difference in rate can change the total interest paid.</p>
+  <h2>Example Calculation</h2>
+  <p>If you borrow $32,000 for 3 years and pay $960 per month, this calculator can estimate the interest rate and total interest paid.</p>
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Is this interest rate calculator free?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. This calculator is completely free to use.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        What does interest rate mean?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Interest rate is the percentage charged by a lender for borrowing money.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Can I use this for auto loans?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. This calculator can be used for auto loans, personal loans, and other fixed monthly payment loans.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Does this include taxes and fees?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>No. This calculator estimates the rate based only on loan amount, term, and monthly payment.</p>
+      </div>
+    </div>
+  </div>
+  <div class="notice">This calculator is for educational purposes only and should not be considered financial advice.</div>
+</section>
+</main>
+<aside>
+  <div class="ad-box">Google AdSense Ad Space<br>300x250</div>
+  <div class="sidebar-card">
+    <h3>Related Calculators</h3>
+    <a href="../index.html">Compound Interest Calculator</a>
+    <a href="simple-interest-calculator.html">Simple Interest Calculator</a>
+    <a href="interest-calculator.html">Interest Calculator</a>
+    <a href="loan-calculator.html">Loan Calculator</a>
+    <a href="mortgage-calculator.html">Mortgage Calculator</a>
+    <a href="payment-calculator.html">Payment Calculator</a>
+    <a href="amortization-calculator.html">Amortization Calculator</a>
+  </div>
+  <div class="ad-box">Google AdSense Ad Space<br>300x600</div>
+</aside>
+</div>
+<footer class="site-footer">
+  <div class="footer-info">
+    <p>
+      CalcFinance is dedicated to providing fast, simple, and reliable online calculators to help users make better financial decisions. 
+      Our goal is to create an accessible platform where people can quickly perform essential calculations without complexity. 
+      All tools are completely free and require no registration.
+    </p>
+    <p>
+      Each calculator is carefully designed and tested to support accuracy and usability. While most tools are suitable for general use, 
+      some results may vary depending on financial systems, regions, fees, taxes, and other real-world factors. We are continuously improving 
+      and expanding our platform to provide even more useful tools over time.
+    </p>
+  </div>
+  <div class="footer-links">
+    <a href="../all-calc/all-calculators.html">all calculators</a> |
+    <a href="../about.html">about us</a> |
+    <a href="../sitemap.html">sitemap</a> |
+    <a href="../terms.html">terms of use</a> |
+    <a href="../privacy.html">privacy policy</a>
+    <a href="../contact.html">Contact</a>
+    &nbsp; © 2026 CalcFinance
+  </div>
+</footer>
+<script src="../js/interest-rate-calculator.js"></script>
+<script src="../cookie/cookie.js"></script>
+<script src="../theme/theme.js"></script>
+</body>
+</html>
