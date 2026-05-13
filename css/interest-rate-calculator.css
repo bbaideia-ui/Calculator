@@ -1,6 +1,6 @@
-
 *{box-sizing:border-box}
 html, body{overflow-x:hidden}
+
 :root{
   --bg:#f6f8fa;
   --card:#ffffff;
@@ -15,6 +15,7 @@ html, body{overflow-x:hidden}
   --soft-border:rgba(0,0,0,0.07);
   --soft-shadow:0 12px 34px rgba(0,0,0,0.055);
 }
+
 html.dark{
   --bg:#0d1117;
   --card:#161b22;
@@ -29,6 +30,7 @@ html.dark{
   --soft-border:rgba(255,255,255,0.08);
   --soft-shadow:0 14px 36px rgba(0,0,0,0.32);
 }
+
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
@@ -40,7 +42,10 @@ body{
     color .45s cubic-bezier(0.4,0,0.2,1),
     opacity .22s ease;
 }
-body.fade-transition{opacity:.72}
+
+body.fade-transition{
+  opacity:.72;
+}
 
 body,
 header,
@@ -70,6 +75,7 @@ header{
   position:relative;
   z-index:50;
 }
+
 .header-wrap{
   max-width:1120px;
   margin:auto;
@@ -78,12 +84,16 @@ header{
   justify-content:space-between;
   align-items:center;
 }
+
 .logo{
   font-size:22px;
   font-weight:800;
   color:var(--text);
 }
-.logo span{color:var(--green)}
+
+.logo span{
+  color:var(--green);
+}
 
 .header-right{
   display:flex;
@@ -98,7 +108,10 @@ nav a{
   font-size:14px;
   font-weight:600;
 }
-nav a:hover{color:var(--blue)}
+
+nav a:hover{
+  color:var(--blue);
+}
 
 .theme-toggle,
 .menu-toggle{
@@ -110,6 +123,7 @@ nav a:hover{color:var(--blue)}
   cursor:pointer;
   font-weight:700;
 }
+
 .theme-toggle:hover,
 .menu-toggle:hover{
   border-color:var(--blue);
@@ -117,8 +131,13 @@ nav a:hover{color:var(--blue)}
   transform:translateY(-1px);
 }
 
-button:active{transform:scale(.97)}
-.menu-toggle{display:none}
+button:active{
+  transform:scale(.97);
+}
+
+.menu-toggle{
+  display:none;
+}
 
 .hero{
   position:relative;
@@ -127,6 +146,7 @@ button:active{transform:scale(.97)}
   overflow:hidden;
   border-bottom:1px solid var(--soft-border);
 }
+
 .hero::before{
   content:"";
   position:absolute;
@@ -136,6 +156,7 @@ button:active{transform:scale(.97)}
     radial-gradient(circle at 80% 0%, rgba(255,255,255,0.10), transparent 45%);
   pointer-events:none;
 }
+
 html.dark .hero{
   background:
     radial-gradient(
@@ -146,12 +167,14 @@ html.dark .hero{
       rgba(5,8,45,1) 80%
     );
 }
+
 .hero-content{
   max-width:1120px;
   margin:auto;
   position:relative;
   z-index:1;
 }
+
 .hero h1{
   max-width:760px;
   font-size:42px;
@@ -160,6 +183,7 @@ html.dark .hero{
   color:#f0f6fc;
   letter-spacing:-0.03em;
 }
+
 .hero p{
   max-width:720px;
   font-size:18px;
@@ -184,6 +208,7 @@ html.dark .hero{
   padding:30px;
   box-shadow:var(--soft-shadow);
 }
+
 .main-card:hover,
 .sidebar-card:hover{
   transform:translateY(-1px);
@@ -226,7 +251,9 @@ html.dark .hero{
   font-weight:bold;
 }
 
-.calc-body{padding:20px}
+.calc-body{
+  padding:20px;
+}
 
 .calc-row{
   display:grid;
@@ -303,6 +330,7 @@ button{
   background:var(--green);
   color:white;
 }
+
 .calculate-btn:hover{
   filter:brightness(1.05);
   transform:translateY(-1px);
@@ -314,6 +342,7 @@ button{
   border:1px solid var(--soft-border);
   margin-left:8px;
 }
+
 .clear-btn:hover{
   border-color:var(--blue);
   color:var(--blue);
@@ -336,7 +365,10 @@ button{
   padding:9px 0;
   border-bottom:1px solid var(--soft-border);
 }
-.result-line:last-child{border-bottom:none}
+
+.result-line:last-child{
+  border-bottom:none;
+}
 
 .result-value{
   font-weight:800;
@@ -366,11 +398,23 @@ button{
   color:var(--text);
 }
 
+/* ===== CANVAS FIX ===== */
+
 canvas{
   width:100%;
-  height:260px;
+  height:auto;
+  display:block;
+  aspect-ratio:560 / 260;
+}
+
+#breakdownChart{
+  aspect-ratio:1 / 1;
+  max-width:340px;
+  margin:auto;
   display:block;
 }
+
+/* ===================== */
 
 .table-wrap{
   width:100%;
@@ -430,7 +474,9 @@ th{
   font-size:14px;
 }
 
-.sidebar-card{margin-bottom:20px}
+.sidebar-card{
+  margin-bottom:20px;
+}
 
 .sidebar-card h3{
   margin-top:0;
@@ -446,7 +492,10 @@ th{
   font-size:14px;
   font-weight:600;
 }
-.sidebar-card a:hover{text-decoration:underline}
+
+.sidebar-card a:hover{
+  text-decoration:underline;
+}
 
 .site-footer{
   margin-top:44px;
@@ -462,7 +511,10 @@ th{
   font-size:14px;
   line-height:1.6;
 }
-.footer-info p{margin:0 0 14px}
+
+.footer-info p{
+  margin:0 0 14px;
+}
 
 .footer-links{
   text-align:center;
@@ -489,6 +541,7 @@ th{
 .faq-item{
   border-bottom:1px solid var(--soft-border);
 }
+
 .faq-item:last-child{
   border-bottom:none;
 }
@@ -657,7 +710,7 @@ th{
     padding-top:0;
   }
 
-  canvas{
-    height:240px;
+  #breakdownChart{
+    max-width:280px;
   }
 }
