@@ -1,5 +1,5 @@
 
-Aqui está o JavaScript completo da Interest Calculator com o gráfico corrigido:
+
 
 const money = new Intl.NumberFormat("en-US", {
   style: "currency",
