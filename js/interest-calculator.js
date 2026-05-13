@@ -1,28 +1,26 @@
 
+Aqui está o JavaScript completo da Interest Calculator com o gráfico corrigido:
+
 const money = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD"
 });
-
 const menuToggle = document.getElementById("menuToggle");
 const mainNav = document.getElementById("mainNav");
-
-menuToggle.addEventListener("click", () => {
-  mainNav.classList.toggle("open");
-});
-
+if(menuToggle && mainNav){
+  menuToggle.addEventListener("click", () => {
+    mainNav.classList.toggle("open");
+  });
+}
 function setRate(value){
   document.getElementById("interestRate").value = value;
 }
-
 function setAnnualContribution(value){
   document.getElementById("annualContribution").value = value;
 }
-
 function setMonthlyContribution(value){
   document.getElementById("monthlyContribution").value = value;
 }
-
 function calculate(){
   const initialInvestment = Number(document.getElementById("initialInvestment").value);
   const annualContribution = Number(document.getElementById("annualContribution").value);
@@ -34,7 +32,6 @@ function calculate(){
   const taxRate = Number(document.getElementById("taxRate").value) / 100;
   const inflationRate = Number(document.getElementById("inflationRate").value) / 100;
   const contributionTiming = document.getElementById("contributeTiming").value;
-
   if(
     initialInvestment < 0 ||
     annualContribution < 0 ||
@@ -49,60 +46,67 @@ function calculate(){
     alert("Please enter valid numbers.");
     return;
   }
-
   const totalYears = years + months / 12;
-  const periodicRate = interestRate / compoundFrequency;
-  const fullYears = Math.floor(totalYears);
-
+  const totalMonths = Math.round(totalYears * 12);
+  if(totalMonths <= 0){
+    alert("Please enter a valid investment length.");
+    return;
+  }
   let balance = initialInvestment;
   let totalContributions = 0;
   let totalInterest = 0;
-
   const yearlyData = [];
-
-  for(let year = 1; year <= fullYears; year++){
-    let yearDeposit = 0;
-    let yearInterest = 0;
-
-    for(let period = 1; period <= compoundFrequency; period++){
-      const periodicAnnualContribution = annualContribution / compoundFrequency;
-      const periodicMonthlyContribution = (monthlyContribution * 12) / compoundFrequency;
-      const periodicContribution = periodicAnnualContribution + periodicMonthlyContribution;
-
-      if(contributionTiming === "beginning"){
-        balance += periodicContribution;
-      }
-
-      const interestEarned = balance * periodicRate;
-      balance += interestEarned;
-
-      if(contributionTiming === "end"){
-        balance += periodicContribution;
-      }
-
-      yearDeposit += periodicContribution;
-      totalContributions += periodicContribution;
-      yearInterest += interestEarned;
-      totalInterest += interestEarned;
+  const monthlyRate = Math.pow(1 + interestRate / compoundFrequency, compoundFrequency / 12) - 1;
+  for(let month = 1; month <= totalMonths; month++){
+    const yearlyIndex = Math.ceil(month / 12);
+    if(!yearlyData[yearlyIndex - 1]){
+      yearlyData[yearlyIndex - 1] = {
+        year: yearlyIndex,
+        deposit: 0,
+        interest: 0,
+        balance: 0,
+        totalContributions: 0
+      };
     }
-
-    yearlyData.push({
-      year,
-      deposit: yearDeposit,
-      interest: yearInterest,
-      balance
-    });
+    const currentYear = Math.floor((month - 1) / 12);
+    const adjustedMonthlyContribution = monthlyContribution * Math.pow(1, currentYear);
+    if(contributionTiming === "beginning"){
+      balance += adjustedMonthlyContribution;
+      totalContributions += adjustedMonthlyContribution;
+      yearlyData[yearlyIndex - 1].deposit += adjustedMonthlyContribution;
+    }
+    const interestBeforeTax = balance * monthlyRate;
+    const interestAfterTax = interestBeforeTax * (1 - taxRate);
+    balance += interestAfterTax;
+    totalInterest += interestAfterTax;
+    yearlyData[yearlyIndex - 1].interest += interestAfterTax;
+    if(contributionTiming === "end"){
+      balance += adjustedMonthlyContribution;
+      totalContributions += adjustedMonthlyContribution;
+      yearlyData[yearlyIndex - 1].deposit += adjustedMonthlyContribution;
+    }
+    if(month % 12 === 0){
+      const adjustedAnnualContribution = annualContribution * Math.pow(1, currentYear);
+      if(contributionTiming === "beginning"){
+        balance += adjustedAnnualContribution;
+        totalContributions += adjustedAnnualContribution;
+        yearlyData[yearlyIndex - 1].deposit += adjustedAnnualContribution;
+      }
+      if(contributionTiming === "end"){
+        balance += adjustedAnnualContribution;
+        totalContributions += adjustedAnnualContribution;
+        yearlyData[yearlyIndex - 1].deposit += adjustedAnnualContribution;
+      }
+    }
+    yearlyData[yearlyIndex - 1].balance = balance;
+    yearlyData[yearlyIndex - 1].totalContributions = totalContributions;
   }
-
-  const taxesPaid = totalInterest * taxRate;
-  const endingBalance = balance - taxesPaid;
+  const endingBalance = balance;
   const totalPrincipal = initialInvestment;
   const inflationAdjusted = endingBalance / Math.pow(1 + inflationRate, totalYears);
-
   const initialOnlyBalance = initialInvestment * Math.pow(1 + interestRate, totalYears);
   const initialInterest = Math.max(0, initialOnlyBalance - initialInvestment);
   const contributionInterest = Math.max(0, totalInterest - initialInterest);
-
   document.getElementById("endingBalance").textContent = money.format(endingBalance);
   document.getElementById("totalPrincipal").textContent = money.format(totalPrincipal);
   document.getElementById("totalContributions").textContent = money.format(totalContributions);
@@ -111,153 +115,115 @@ function calculate(){
   document.getElementById("contributionInterest").textContent = money.format(contributionInterest);
   document.getElementById("inflationAdjusted").textContent = money.format(inflationAdjusted);
   document.getElementById("resultBox").style.display = "block";
-
   fillTable(yearlyData);
-  drawBreakdownChart(totalPrincipal, totalContributions, totalInterest);
+  drawBreakdownChart(totalPrincipal, totalContributions, totalInterest, endingBalance);
   drawGrowthChart(yearlyData, totalPrincipal);
 }
-
 function fillTable(data){
   const tableBody = document.getElementById("tableBody");
   tableBody.innerHTML = "";
-
   data.forEach(row => {
     const tr = document.createElement("tr");
-
     tr.innerHTML = `
       <td>${row.year}</td>
       <td>${money.format(row.deposit)}</td>
       <td>${money.format(row.interest)}</td>
       <td>${money.format(row.balance)}</td>
     `;
-
     tableBody.appendChild(tr);
   });
 }
-
-function setupCanvas(canvas, height = 260){
+function setupCanvas(canvas){
   const ctx = canvas.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.getBoundingClientRect();
   const width = rect.width || 560;
-
+  const height = 260;
   canvas.width = width * dpr;
   canvas.height = height * dpr;
-
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
   return { ctx, width, height };
 }
-
-function drawBreakdownChart(principal, contributions, interest){
+function setupSquareCanvas(canvas){
+  const ctx = canvas.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  const parentWidth = canvas.parentElement.clientWidth || 560;
+  const size = Math.min(parentWidth, 260);
+  canvas.width = size * dpr;
+  canvas.height = size * dpr;
+  canvas.style.width = size + "px";
+  canvas.style.height = size + "px";
+  canvas.style.margin = "0 auto";
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { ctx, width: size, height: size };
+}
+function drawBreakdownChart(principal, contributions, interest, endingBalance){
   const canvas = document.getElementById("breakdownChart");
-  const { ctx, width, height } = setupCanvas(canvas, 260);
-
+  const { ctx, width, height } = setupSquareCanvas(canvas);
   ctx.clearRect(0, 0, width, height);
-
   const total = principal + contributions + interest;
   if(total <= 0) return;
-
   const isDark = document.documentElement.classList.contains("dark");
-
   const centerX = width / 2;
-  const centerY = 115;
-  const radius = 62;
-  const lineWidth = 26;
-
+  const centerY = height / 2 - 4;
+  const radius = Math.min(width, height) * 0.31;
+  const lineWidth = Math.min(width, height) * 0.12;
   const parts = [
     { label: "Initial", value: principal, color: isDark ? "#2f81f7" : "#0969da" },
     { label: "Contributions", value: contributions, color: isDark ? "#3fb950" : "#2da44e" },
     { label: "Interest", value: interest, color: isDark ? "#f85149" : "#cf222e" }
   ];
-
   let startAngle = -Math.PI / 2;
-
   ctx.lineWidth = lineWidth;
   ctx.lineCap = "butt";
-
   parts.forEach(part => {
     if(part.value <= 0) return;
-
     const angle = (part.value / total) * Math.PI * 2;
-
     ctx.beginPath();
     ctx.strokeStyle = part.color;
     ctx.arc(centerX, centerY, radius, startAngle, startAngle + angle);
     ctx.stroke();
-
     startAngle += angle;
   });
-
   ctx.font = "700 13px Arial";
   ctx.fillStyle = isDark ? "#f0f6fc" : "#24292f";
   ctx.textAlign = "center";
   ctx.fillText("End Balance", centerX, centerY - 4);
-
   ctx.font = "12px Arial";
   ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
-  ctx.fillText(money.format(total), centerX, centerY + 15);
-
-  ctx.textAlign = "left";
-  ctx.font = "12px Arial";
-
-  const legendY = 218;
-  const legendX = Math.max(28, width / 2 - 150);
-
-  parts.forEach((part, index) => {
-    const x = legendX + index * 105;
-
-    ctx.fillStyle = part.color;
-    ctx.fillRect(x, legendY, 10, 10);
-
-    ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
-    ctx.fillText(part.label, x + 15, legendY + 10);
-  });
+  ctx.fillText(money.format(endingBalance), centerX, centerY + 15);
 }
-
 function drawGrowthChart(data, initialInvestment){
   const canvas = document.getElementById("growthChart");
-  const { ctx, width, height } = setupCanvas(canvas, 260);
-
+  const { ctx, width, height } = setupCanvas(canvas);
   ctx.clearRect(0, 0, width, height);
   if(!data.length) return;
-
   const padding = 36;
   const chartWidth = width - padding * 2;
   const chartHeight = height - padding * 2;
   const isDark = document.documentElement.classList.contains("dark");
-
   const maxValue = Math.max(...data.map(row => row.balance), 1);
-
   data.forEach((row, index) => {
     const x = padding + (index / (data.length - 1 || 1)) * chartWidth;
     const baseY = height - padding;
-
-    const totalDeposits = row.deposit * row.year;
+    const totalDeposits = row.totalContributions;
     const interestOnly = Math.max(0, row.balance - initialInvestment - totalDeposits);
-
     const initialHeight = (initialInvestment / maxValue) * chartHeight;
     const contributionHeight = (totalDeposits / maxValue) * chartHeight;
     const interestHeight = (interestOnly / maxValue) * chartHeight;
-
     const barWidth = Math.max(12, Math.min(28, chartWidth / data.length * 0.45));
-
     ctx.fillStyle = isDark ? "#2f81f7" : "#0969da";
     ctx.fillRect(x - barWidth / 2, baseY - initialHeight, barWidth, initialHeight);
-
     ctx.fillStyle = isDark ? "#3fb950" : "#2da44e";
     ctx.fillRect(x - barWidth / 2, baseY - initialHeight - contributionHeight, barWidth, contributionHeight);
-
     ctx.fillStyle = isDark ? "#f85149" : "#cf222e";
     ctx.fillRect(x - barWidth / 2, baseY - initialHeight - contributionHeight - interestHeight, barWidth, interestHeight);
   });
-
   ctx.font = "12px Arial";
   ctx.fillStyle = isDark ? "#8b949e" : "#57606a";
   ctx.fillText("Year 1", padding, height - 8);
   ctx.fillText("Year " + data[data.length - 1].year, width - padding - 60, height - 8);
 }
-
 function clearForm(){
   document.getElementById("initialInvestment").value = "";
   document.getElementById("annualContribution").value = "";
@@ -270,33 +236,26 @@ function clearForm(){
   document.getElementById("inflationRate").value = "";
   document.getElementById("resultBox").style.display = "none";
   document.getElementById("tableBody").innerHTML = "";
-
   const breakdownCanvas = document.getElementById("breakdownChart");
   const breakdownCtx = breakdownCanvas.getContext("2d");
   breakdownCtx.clearRect(0, 0, breakdownCanvas.width, breakdownCanvas.height);
-
   const growthCanvas = document.getElementById("growthChart");
   const growthCtx = growthCanvas.getContext("2d");
   growthCtx.clearRect(0, 0, growthCanvas.width, growthCanvas.height);
 }
-
 document.querySelectorAll(".faq-question").forEach(button => {
   button.addEventListener("click", () => {
     const item = button.closest(".faq-item");
     const isActive = item.classList.contains("active");
-
     document.querySelectorAll(".faq-item").forEach(faq => {
       faq.classList.remove("active");
       faq.querySelector(".faq-question").setAttribute("aria-expanded", "false");
     });
-
     if(!isActive){
       item.classList.add("active");
       button.setAttribute("aria-expanded", "true");
     }
   });
 });
-
 window.addEventListener("resize", calculate);
-
 calculate();
