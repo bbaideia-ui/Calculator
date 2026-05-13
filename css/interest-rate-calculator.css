@@ -402,9 +402,9 @@ button{
 
 canvas{
   width:100%;
-  height:auto;
+  height:260px;
   display:block;
-  aspect-ratio:560 / 260;
+
 }
 
 #breakdownChart{
