@@ -1,1 +1,319 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interest Calculator | CalcFinance</title>
+<meta name="description" content="Free interest calculator to estimate ending balance, total contributions, total interest, taxes, inflation adjustment, and investment growth over time.">
+<script>
+if(localStorage.getItem("financeToolsTheme") === "dark"){
+  document.documentElement.classList.add("dark");
+}
+</script>
+<link rel="stylesheet" href="../css/interest-calculator.css">
+</head>
+
+<body>
+
+<header>
+  <div class="header-wrap">
+    <div class="logo">Calc<span>Finance</span></div>
+
+    <div class="header-right">
+      <button class="menu-toggle" id="menuToggle">☰ Menu</button>
+
+      <nav id="mainNav">
+        <a href="../all-calc/all-calculators.html">All Calculators</a>
+        <a href="../about.html">About</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Interest Calculator</h1>
+    <p>Estimate compound interest growth, total contributions, ending balance, taxes, and inflation-adjusted value over time.</p>
+  </div>
+</section>
+
+<div class="page">
+
+<main class="main-card">
+
+<p>Use this free interest calculator to estimate how your money may grow with an initial investment, regular contributions, compound interest, taxes, and inflation.</p>
+
+<div class="calculator">
+  <div class="calc-header">Compound Interest Calculator</div>
+
+  <div class="calc-body">
+
+    <div class="calc-row">
+      <label>Initial Investment</label>
+      <input type="number" id="initialInvestment" value="20000">
+    </div>
+
+    <div class="calc-row">
+      <label>Annual Contribution</label>
+      <div>
+        <input type="number" id="annualContribution" value="5000">
+        <div class="quick-buttons">
+          <button type="button" onclick="setAnnualContribution(1000)">$1k</button>
+          <button type="button" onclick="setAnnualContribution(5000)">$5k</button>
+          <button type="button" onclick="setAnnualContribution(10000)">$10k</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-row">
+      <label>Monthly Contribution</label>
+      <div>
+        <input type="number" id="monthlyContribution" value="0">
+        <div class="quick-buttons">
+          <button type="button" onclick="setMonthlyContribution(100)">$100</button>
+          <button type="button" onclick="setMonthlyContribution(300)">$300</button>
+          <button type="button" onclick="setMonthlyContribution(500)">$500</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-row">
+      <label>Contribute At</label>
+      <select id="contributeTiming">
+        <option value="beginning" selected>Beginning of Period</option>
+        <option value="end">End of Period</option>
+      </select>
+    </div>
+
+    <div class="calc-row">
+      <label>Interest Rate</label>
+      <div>
+        <input type="number" id="interestRate" value="5" step="0.01">
+        <div class="quick-buttons">
+          <button type="button" onclick="setRate(3)">3%</button>
+          <button type="button" onclick="setRate(5)">5%</button>
+          <button type="button" onclick="setRate(7)">7%</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-row">
+      <label>Compound</label>
+      <select id="compoundFrequency">
+        <option value="1" selected>Annually</option>
+        <option value="2">Semiannually</option>
+        <option value="4">Quarterly</option>
+        <option value="12">Monthly</option>
+        <option value="365">Daily</option>
+      </select>
+    </div>
+
+    <div class="calc-row">
+      <label>Investment Length</label>
+      <div class="split-inputs">
+        <input type="number" id="years" value="5">
+        <input type="number" id="months" value="0">
+      </div>
+    </div>
+
+    <div class="calc-row">
+      <label>Tax Rate</label>
+      <input type="number" id="taxRate" value="0" step="0.01">
+    </div>
+
+    <div class="calc-row">
+      <label>Inflation Rate</label>
+      <input type="number" id="inflationRate" value="3" step="0.01">
+    </div>
+
+    <div class="buttons">
+      <button class="calculate-btn" onclick="calculate()">Calculate</button>
+      <button class="clear-btn" onclick="clearForm()">Clear</button>
+    </div>
+
+    <div class="result-box" id="resultBox">
+      <div class="result-line">
+        <span>Ending Balance</span>
+        <span class="result-value big-result" id="endingBalance">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Total Principal</span>
+        <span class="result-value" id="totalPrincipal">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Total Contributions</span>
+        <span class="result-value" id="totalContributions">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Total Interest</span>
+        <span class="result-value" id="totalInterest">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Interest of Initial Investment</span>
+        <span class="result-value" id="initialInterest">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Interest of Contributions</span>
+        <span class="result-value" id="contributionInterest">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Inflation Adjusted Balance</span>
+        <span class="result-value" id="inflationAdjusted">$0.00</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="chart-wrap">
+  <h2 class="chart-title">Interest Growth Breakdown</h2>
+  <canvas id="breakdownChart" width="560" height="260"></canvas>
+</div>
+
+<div class="chart-wrap">
+  <h2 class="chart-title">Accumulation Over Time</h2>
+  <canvas id="growthChart" width="560" height="260"></canvas>
+</div>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Deposit</th>
+      <th>Interest</th>
+      <th>Ending Balance</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody"></tbody>
+</table>
+</div>
+
+<div class="ad-box" style="margin-top:24px;">Google AdSense Ad Space - In Content</div>
+
+<section class="content">
+  <h2>What Is an Interest Calculator?</h2>
+  <p>An interest calculator estimates how much money may grow over time based on an initial balance, contributions, interest rate, compounding frequency, taxes, and inflation.</p>
+
+  <h2>How This Interest Calculator Works</h2>
+  <p>Enter your starting amount, contribution amounts, interest rate, compounding frequency, investment length, tax rate, and inflation rate. The calculator estimates ending balance, total principal, contributions, interest earned, and inflation-adjusted value.</p>
+
+  <h2>Compound Interest</h2>
+  <p>Compound interest means interest can grow on both the original principal and previously earned interest. More frequent compounding may increase the ending balance over time.</p>
+
+  <h2>Contributions</h2>
+  <p>Regular contributions can significantly increase long-term growth. This calculator allows annual and monthly contributions and lets you choose whether contributions happen at the beginning or end of the period.</p>
+
+  <h2>Tax and Inflation Adjustments</h2>
+  <p>Taxes may reduce interest earned, while inflation may reduce purchasing power over time. This calculator includes optional tax and inflation inputs to create a more complete estimate.</p>
+
+  <h2>Example Calculation</h2>
+  <p>If you start with $20,000, contribute $5,000 per year, earn 5% interest, and invest for 5 years, this calculator can estimate your ending balance and total interest earned.</p>
+
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Is this interest calculator free?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. This interest calculator is completely free to use.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        What is compound interest?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Compound interest is interest calculated on both the original amount and previously earned interest.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Does contribution timing matter?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. Contributions made at the beginning of a period may earn more interest than contributions made at the end of a period.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Does this calculator guarantee returns?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>No. Results are estimates only. Actual results may vary based on rates, taxes, fees, inflation, and real-world conditions.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="notice">This calculator is for educational purposes only and should not be considered financial advice.</div>
+</section>
+
+</main>
+
+<aside>
+  <div class="ad-box">Google AdSense Ad Space<br>300x250</div>
+
+  <div class="sidebar-card">
+    <h3>Related Calculators</h3>
+    <a href="../index.html">Compound Interest Calculator</a>
+    <a href="simple-interest-calculator.html">Simple Interest Calculator</a>
+    <a href="savings-calculator.html">Savings Calculator</a>
+    <a href="investment-calculator.html">Investment Calculator</a>
+    <a href="finance-calculator.html">Finance Calculator</a>
+    <a href="loan-calculator.html">Loan Calculator</a>
+    <a href="mortgage-calculator.html">Mortgage Calculator</a>
+    <a href="retirement-calculator.html">Retirement Calculator</a>
+  </div>
+
+  <div class="ad-box">Google AdSense Ad Space<br>300x600</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-info">
+    <p>
+      CalcFinance is dedicated to providing fast, simple, and reliable online calculators to help users make better financial decisions.
+      Our goal is to create an accessible platform where people can quickly perform essential calculations without complexity.
+      All tools are completely free and require no registration.
+    </p>
+
+    <p>
+      Each calculator is carefully designed and tested to support accuracy and usability. While most tools are suitable for general use,
+      some results may vary depending on financial systems, regions, fees, taxes, and other real-world factors. We are continuously improving
+      and expanding our platform to provide even more useful tools over time.
+    </p>
+  </div>
+
+  <div class="footer-links">
+    <a href="../all-calc/all-calculators.html">all calculators</a> |
+    <a href="../about.html">about us</a> |
+    <a href="../sitemap.html">sitemap</a> |
+    <a href="../terms.html">terms of use</a> |
+    <a href="../privacy.html">privacy policy</a>
+    <a href="../contact.html">Contact</a>
+    &nbsp; © 2026 CalcFinance
+  </div>
+</footer>
+
+<script src="../js/interest-calculator.js"></script>
+<script src="../cookie/cookie.js"></script>
+<script src="../theme/theme.js"></script>
+
+</body>
+</html>
