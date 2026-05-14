@@ -1,1 +1,232 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amortization Calculator | Free Amortization Schedule Calculator</title>
+<meta name="description" content="Free amortization calculator to estimate monthly payment, total interest, total payments, and yearly loan amortization schedule.">
+<script>
+if(localStorage.getItem("financeToolsTheme") === "dark"){
+  document.documentElement.classList.add("dark");
+}
+</script>
+<link rel="stylesheet" href="../css/amortization-calculator.css">
+</head>
+<body>
+<header>
+  <div class="header-wrap">
+    <div class="logo">Calc<span>Finance</span></div>
+    <div class="header-right">
+      <button class="menu-toggle" id="menuToggle">☰ Menu</button>
+      <nav id="mainNav">
+        <a href="../all-calc/all-calculators.html">All Calculators</a>
+        <a href="../about.html">About</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Amortization Calculator</h1>
+    <p>Estimate monthly payment, total interest, total payments, and a yearly amortization schedule for fixed-rate loans.</p>
+  </div>
+</section>
+
+<div class="page">
+<main class="main-card">
+<p>Use this free amortization calculator to estimate your monthly loan payment and see how your balance may decrease over time.</p>
+
+<div class="calculator">
+  <div class="calc-header">Amortization Calculator</div>
+  <div class="calc-body">
+    <div class="calc-row">
+      <label>Loan Amount</label>
+      <input type="number" id="loanAmount" value="200000">
+    </div>
+
+    <div class="calc-row">
+      <label>Loan Term</label>
+      <div>
+        <input type="number" id="years" value="15">
+        <div class="quick-buttons">
+          <button type="button" onclick="setYears(10)">10y</button>
+          <button type="button" onclick="setYears(15)">15y</button>
+          <button type="button" onclick="setYears(30)">30y</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-row">
+      <label>Interest Rate</label>
+      <div>
+        <input type="number" id="rate" value="6" step="0.01">
+        <div class="quick-buttons">
+          <button type="button" onclick="setRate(5)">5%</button>
+          <button type="button" onclick="setRate(6)">6%</button>
+          <button type="button" onclick="setRate(7)">7%</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="calculate-btn" onclick="calculate()">Calculate</button>
+      <button class="clear-btn" onclick="clearForm()">Clear</button>
+    </div>
+
+    <div class="result-box" id="resultBox">
+      <div class="result-line">
+        <span>Monthly Payment</span>
+        <span class="result-value big-result" id="monthlyPayment">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Total Payments</span>
+        <span class="result-value" id="totalPayments">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Total Interest</span>
+        <span class="result-value" id="totalInterest">$0.00</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chart-wrap">
+  <h2 class="chart-title">Payment Breakdown</h2>
+  <canvas id="breakdownChart" width="560" height="260"></canvas>
+</div>
+
+<div class="chart-wrap">
+  <h2 class="chart-title">Amortization Graph</h2>
+  <canvas id="amortizationChart" width="560" height="260"></canvas>
+</div>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Interest</th>
+      <th>Principal</th>
+      <th>Ending Balance</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody"></tbody>
+</table>
+</div>
+
+<div class="ad-box" style="margin-top:24px;">Google AdSense Ad Space - In Content</div>
+
+<section class="content">
+  <h2>What Is an Amortization Calculator?</h2>
+  <p>An amortization calculator shows how a fixed-rate loan is paid down over time through regular payments.</p>
+
+  <h2>How to Use This Amortization Calculator</h2>
+  <p>Enter the loan amount, loan term, and annual interest rate. The calculator will estimate monthly payment, total interest, total payments, and a yearly amortization schedule.</p>
+
+  <h2>Why Amortization Matters</h2>
+  <p>Amortization helps you understand how much of each payment goes toward interest and how much goes toward reducing the loan balance.</p>
+
+  <h2>Amortization Schedule</h2>
+  <p>The amortization schedule shows estimated yearly interest, principal paid, and remaining balance for the selected loan term.</p>
+
+  <h2>Example Calculation</h2>
+  <p>If you borrow $200,000 for 15 years at a 6% annual interest rate, this calculator can estimate your monthly payment and payoff schedule.</p>
+
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Is this amortization calculator free?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. This amortization calculator is completely free to use.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        What does amortization mean?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Amortization is the process of paying off a loan over time through scheduled payments.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Does this calculator show principal and interest?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. The schedule estimates how much goes toward interest and principal each year.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Does this include taxes, insurance, or fees?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>No. This calculator estimates principal and interest only. Taxes, insurance, and additional fees are not included.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="notice">This calculator is for educational purposes only and should not be considered financial advice.</div>
+</section>
+</main>
+
+<aside>
+  <div class="ad-box">Google AdSense Ad Space<br>300x250</div>
+  <div class="sidebar-card">
+    <h3>Related Calculators</h3>
+    <a href="../index.html">Compound Interest Calculator</a>
+    <a href="loan-calculator.html">Loan Calculator</a>
+    <a href="payment-calculator.html">Payment Calculator</a>
+    <a href="interest-rate-calculator.html">Interest Rate Calculator</a>
+    <a href="mortgage-calculator.html">Mortgage Calculator</a>
+    <a href="auto-loan-calculator.html">Auto Loan Calculator</a>
+    <a href="credit-card-payoff-calculator.html">Credit Card Payoff Calculator</a>
+  </div>
+  <div class="ad-box">Google AdSense Ad Space<br>300x600</div>
+</aside>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-info">
+    <p>
+      CalcFinance is dedicated to providing fast, simple, and reliable online calculators to help users make better financial decisions. 
+      Our goal is to create an accessible platform where people can quickly perform essential calculations without complexity. 
+      All tools are completely free and require no registration.
+    </p>
+    <p>
+      Each calculator is carefully designed and tested to support accuracy and usability. While most tools are suitable for general use, 
+      some results may vary depending on financial systems, regions, fees, taxes, and other real-world factors. We are continuously improving 
+      and expanding our platform to provide even more useful tools over time.
+    </p>
+  </div>
+  <div class="footer-links">
+    <a href="../all-calc/all-calculators.html">all calculators</a> |
+    <a href="../about.html">about us</a> |
+    <a href="../sitemap.html">sitemap</a> |
+    <a href="../terms.html">terms of use</a> |
+    <a href="../privacy.html">privacy policy</a>
+    <a href="../contact.html">Contact</a>
+    &nbsp; © 2026 CalcFinance
+  </div>
+</footer>
+
+<script src="../js/amortization-calculator.js"></script>
+<script src="../cookie/cookie.js"></script>
+<script src="../theme/theme.js"></script>
+</body>
+</html>
