@@ -1,4 +1,4 @@
-Sim. Pela lista que nós já trabalhamos até agora, o arquivo calculator-search.js pode começar assim:
+
 
 const calculators = [
   {
