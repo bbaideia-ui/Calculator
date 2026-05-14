@@ -577,11 +577,7 @@ th{
 
 
 @media(max-width:600px){
-  aside .ad-box{
-    margin-bottom:14px !important;
-  }
-
-  aside .sidebar-card{
-    margin-top:0 !important;
+  aside{
+    margin-top:12px !important;
   }
 }
