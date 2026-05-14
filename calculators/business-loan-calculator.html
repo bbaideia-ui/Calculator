@@ -1,1 +1,272 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Loan Calculator | Free Business Loan Payment Calculator</title>
+<meta name="description" content="Free business loan calculator to estimate monthly payments, total interest, total cost, fees, APR, and loan amortization schedule.">
+<script>
+if(localStorage.getItem("financeToolsTheme") === "dark"){
+  document.documentElement.classList.add("dark");
+}
+</script>
+<link rel="stylesheet" href="../css/business-loan-calculator.css">
+</head>
+<body>
+<header>
+  <div class="header-wrap">
+    <div class="logo">Calc<span>Finance</span></div>
+    <div class="header-right">
+      <button class="menu-toggle" id="menuToggle">☰ Menu</button>
+      <nav id="mainNav">
+        <a href="../all-calc/all-calculators.html">All Calculators</a>
+        <a href="../about.html">About</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Business Loan Calculator</h1>
+    <p>Estimate business loan payments, total interest, fees, APR, and repayment schedule.</p>
+  </div>
+</section>
+
+<div class="page">
+<main class="main-card">
+<p>Use this free business loan calculator to estimate monthly payments, total repayment cost, total interest, fees, and estimated APR.</p>
+
+<div class="calculator">
+  <div class="calc-header">Business Loan Calculator</div>
+  <div class="calc-body">
+
+    <div class="calc-row">
+      <label>Loan Amount</label>
+      <input type="number" id="loanAmount" value="10000">
+    </div>
+
+    <div class="calc-row">
+      <label>Interest Rate</label>
+      <div>
+        <input type="number" id="rate" value="10" step="0.01">
+        <div class="quick-buttons">
+          <button type="button" onclick="setRate(8)">8%</button>
+          <button type="button" onclick="setRate(10)">10%</button>
+          <button type="button" onclick="setRate(12)">12%</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-row">
+      <label>Compound</label>
+      <select id="compound">
+        <option value="12" selected>Monthly (APR)</option>
+        <option value="365">Daily</option>
+        <option value="4">Quarterly</option>
+        <option value="1">Annually</option>
+      </select>
+    </div>
+
+    <div class="calc-row">
+      <label>Loan Term</label>
+      <div>
+        <input type="number" id="years" value="5">
+        <div class="quick-buttons">
+          <button type="button" onclick="setYears(3)">3y</button>
+          <button type="button" onclick="setYears(5)">5y</button>
+          <button type="button" onclick="setYears(7)">7y</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-row">
+      <label>Additional Months</label>
+      <input type="number" id="months" value="0">
+    </div>
+
+    <div class="calc-row">
+      <label>Origination Fee</label>
+      <input type="number" id="originationFee" value="5" step="0.01">
+    </div>
+
+    <div class="calc-row">
+      <label>Documentation Fee</label>
+      <input type="number" id="documentationFee" value="750">
+    </div>
+
+    <div class="calc-row">
+      <label>Other Fees</label>
+      <input type="number" id="otherFees" value="0">
+    </div>
+
+    <div class="buttons">
+      <button class="calculate-btn" onclick="calculate()">Calculate</button>
+      <button class="clear-btn" onclick="clearForm()">Clear</button>
+    </div>
+
+    <div class="result-box" id="resultBox">
+      <div class="result-line">
+        <span>Monthly Payment</span>
+        <span class="result-value big-result" id="monthlyPayment">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Total Payments</span>
+        <span class="result-value" id="totalPayments">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Total Interest</span>
+        <span class="result-value" id="totalInterest">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Total Fees</span>
+        <span class="result-value" id="totalFees">$0.00</span>
+      </div>
+      <div class="result-line">
+        <span>Estimated APR</span>
+        <span class="result-value" id="estimatedApr">0.00%</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="chart-wrap">
+  <h2 class="chart-title">Business Loan Cost Breakdown</h2>
+  <canvas id="breakdownChart" width="560" height="260"></canvas>
+</div>
+
+<div class="chart-wrap">
+  <h2 class="chart-title">Business Loan Balance Over Time</h2>
+  <canvas id="balanceChart" width="560" height="260"></canvas>
+</div>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Interest</th>
+      <th>Principal</th>
+      <th>Ending Balance</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody"></tbody>
+</table>
+</div>
+
+<div class="ad-box" style="margin-top:24px;">Google AdSense Ad Space - In Content</div>
+
+<section class="content">
+  <h2>What Is a Business Loan Calculator?</h2>
+  <p>A business loan calculator estimates the cost of borrowing money for business purposes, including payment amount, interest, fees, and total repayment cost.</p>
+
+  <h2>How to Use This Business Loan Calculator</h2>
+  <p>Enter the loan amount, interest rate, term, and fees. The calculator will estimate monthly payment, total interest, total fees, estimated APR, and an amortization schedule.</p>
+
+  <h2>Why Business Loan Fees Matter</h2>
+  <p>Business loans may include origination fees, documentation fees, and other costs. These fees can increase the true cost of borrowing beyond the stated interest rate.</p>
+
+  <h2>APR vs Interest Rate</h2>
+  <p>The interest rate shows the cost of borrowing before fees. APR gives a broader estimate of the cost because it includes certain fees in the calculation.</p>
+
+  <h2>Example Calculation</h2>
+  <p>If a business borrows $10,000 for 5 years at a 10% interest rate with fees, this calculator can estimate monthly payment, total cost, and APR.</p>
+
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Is this business loan calculator free?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. This business loan calculator is completely free to use.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Does this calculator include business loan fees?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. It includes origination fee, documentation fee, and other fees entered by the user.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        What is APR?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>APR is an annual percentage rate that estimates the broader yearly cost of borrowing, including certain fees.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Can I use this for SBA loans?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>You can use it for general estimates, but real SBA loan terms, fees, and qualification rules may vary.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="notice">This calculator is for educational purposes only and should not be considered financial advice.</div>
+</section>
+</main>
+
+<aside>
+  <div class="ad-box">Google AdSense Ad Space<br>300x250</div>
+  <div class="sidebar-card">
+    <h3>Related Calculators</h3>
+    <a href="loan-calculator.html">Loan Calculator</a>
+    <a href="payment-calculator.html">Payment Calculator</a>
+    <a href="amortization-calculator.html">Amortization Calculator</a>
+    <a href="interest-rate-calculator.html">Interest Rate Calculator</a>
+    <a href="debt-payoff-calculator.html">Debt Payoff Calculator</a>
+    <a href="mortgage-calculator.html">Mortgage Calculator</a>
+    <a href="../index.html">Compound Interest Calculator</a>
+  </div>
+  <div class="ad-box">Google AdSense Ad Space<br>300x600</div>
+</aside>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-info">
+    <p>
+      CalcFinance is dedicated to providing fast, simple, and reliable online calculators to help users make better financial decisions. 
+      Our goal is to create an accessible platform where people can quickly perform essential calculations without complexity. 
+      All tools are completely free and require no registration.
+    </p>
+    <p>
+      Each calculator is carefully designed and tested to support accuracy and usability. While most tools are suitable for general use, 
+      some results may vary depending on financial systems, regions, fees, taxes, and other real-world factors. We are continuously improving 
+      and expanding our platform to provide even more useful tools over time.
+    </p>
+  </div>
+  <div class="footer-links">
+    <a href="../all-calc/all-calculators.html">all calculators</a> |
+    <a href="../about.html">about us</a> |
+    <a href="../sitemap.html">sitemap</a> |
+    <a href="../terms.html">terms of use</a> |
+    <a href="../privacy.html">privacy policy</a>
+    <a href="../contact.html">Contact</a>
+    &nbsp; © 2026 CalcFinance
+  </div>
+</footer>
+
+<script src="../js/business-loan-calculator.js"></script>
+<script src="../cookie/cookie.js"></script>
+<script src="../theme/theme.js"></script>
+</body>
+</html>
