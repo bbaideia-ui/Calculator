@@ -557,9 +557,10 @@ th{
     display:block;
     width:100%;
     max-width:560px;
-    margin:24px auto 0;
+    margin:24px auto 24px;
+  }
+
+  aside .search-sidebar{
+    display:none;
   }
 }
-
-
-
