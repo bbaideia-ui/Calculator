@@ -547,18 +547,19 @@ th{
 
 
   
-
-
-
-  @media(max-width:600px){
-
-  aside{
-    display:flex;
-    flex-direction:column;
-  }
-
-  .search-sidebar{
-    order:-1;
-  }
+.mobile-search-card{
+  display:none;
 }
 
+@media(max-width:600px){
+  aside .search-sidebar{
+    display:none;
+  }
+
+  .mobile-search-card{
+    display:block;
+    width:100%;
+    max-width:560px;
+    margin:24px auto 0;
+  }
+}
