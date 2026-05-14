@@ -544,3 +544,21 @@ th{
 }
 
 @media(max-width:860px){
+
+
+  
+
+
+
+  @media(max-width:600px){
+
+  aside{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .search-sidebar{
+    order:-1;
+  }
+}
+
