@@ -138,4 +138,4 @@ if(searchInput && autocompleteList){
   });
 }
 
-Esse já inclui as calculadoras que eu lembro do seu site até agora.
+
