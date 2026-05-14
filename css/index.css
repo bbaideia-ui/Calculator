@@ -566,7 +566,7 @@ th{
 
 
 @media(max-width:600px){
-  .site-footer{
+  aside .sidebar-card + .ad-box{
     margin-top:12px !important;
   }
 }
