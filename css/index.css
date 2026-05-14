@@ -576,14 +576,12 @@ th{
   }
 
 
-  @media(max-width:600px){
-  .sidebar-card{
-    margin-bottom:14px;
+@media(max-width:600px){
+  aside .ad-box{
+    margin-bottom:14px !important;
   }
 
-  .ad-box{
-    margin-bottom:14px;
+  aside .sidebar-card{
+    margin-top:0 !important;
   }
 }
-}
-
