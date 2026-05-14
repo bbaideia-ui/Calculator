@@ -574,5 +574,16 @@ th{
   .site-footer{
     margin-top:18px;
   }
+
+
+  @media(max-width:600px){
+  .sidebar-card{
+    margin-bottom:14px;
+  }
+
+  .ad-box{
+    margin-bottom:14px;
+  }
+}
 }
 
