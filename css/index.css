@@ -562,3 +562,17 @@ th{
     display:none !important;
   }
 }
+
+
+
+
+@media(max-width:600px){
+  .ad-box{
+    margin-bottom:12px;
+  }
+
+  .site-footer{
+    margin-top:18px;
+  }
+}
+
