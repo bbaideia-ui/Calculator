@@ -102,13 +102,15 @@ const calculators = [
   }
 ];
 
-const searchInput =
-  document.getElementById("sidebarCalculatorSearch");
+function setupCalculatorSearch(inputId, listId){
 
-const autocompleteList =
-  document.getElementById("sidebarAutocompleteList");
+  const searchInput =
+    document.getElementById(inputId);
 
-if(searchInput && autocompleteList){
+  const autocompleteList =
+    document.getElementById(listId);
+
+  if(!searchInput || !autocompleteList) return;
 
   searchInput.addEventListener("input", () => {
 
@@ -156,9 +158,22 @@ if(searchInput && autocompleteList){
 
   document.addEventListener("click", event => {
 
-    if(!event.target.closest(".sidebar-card")){
+    if(
+      !searchInput.contains(event.target) &&
+      !autocompleteList.contains(event.target)
+    ){
 
       autocompleteList.style.display = "none";
     }
   });
 }
+
+setupCalculatorSearch(
+  "sidebarCalculatorSearch",
+  "sidebarAutocompleteList"
+);
+
+setupCalculatorSearch(
+  "mobileCalculatorSearch",
+  "mobileAutocompleteList"
+);
