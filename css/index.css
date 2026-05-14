@@ -584,3 +584,16 @@ th{
     margin-bottom:12px !important;
   }
 }
+
+
+@media(max-width:600px){
+
+  .main-card{
+    margin-bottom:12px !important;
+  }
+
+  .site-footer{
+    margin-top:12px !important;
+  }
+}
+
