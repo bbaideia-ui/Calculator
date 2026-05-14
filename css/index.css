@@ -546,20 +546,4 @@ th{
 @media(max-width:860px){
 
 
-  
-.mobile-search-card{
-  display:none;
-}
 
-@media(max-width:600px){
-  aside .search-sidebar{
-    display:none;
-  }
-
-  .mobile-search-card{
-    display:block;
-    width:100%;
-    max-width:560px;
-    margin:24px auto 0;
-  }
-}
