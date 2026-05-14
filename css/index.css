@@ -543,10 +543,22 @@ th{
   color:var(--muted);
 }
 
-@media(max-width:860px){
 
 
 
 .mobile-search-card{
   display:none !important;
+}
+
+@media(max-width:600px){
+  .mobile-search-card{
+    display:block !important;
+    width:100%;
+    max-width:560px;
+    margin:24px auto;
+  }
+
+  aside .search-sidebar{
+    display:none !important;
+  }
 }
