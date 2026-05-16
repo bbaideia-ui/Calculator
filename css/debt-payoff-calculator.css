@@ -433,3 +433,35 @@ th{background:var(--card);font-weight:800}
   .calc-row{grid-template-columns:1fr}
   label{padding-top:0}
 }
+
+
+
+
+@media(max-width:600px){
+
+  aside{
+    margin-top:12px !important;
+    margin-bottom:12px !important;
+  }
+
+  aside .sidebar-card{
+    margin-top:12px !important;
+    margin-bottom:12px !important;
+  }
+
+  aside .ad-box{
+    margin-bottom:12px !important;
+  }
+}
+
+
+@media(max-width:600px){
+
+  .main-card{
+    margin-bottom:12px !important;
+  }
+
+  .site-footer{
+    margin-top:-14px !important;
+  }
+}
