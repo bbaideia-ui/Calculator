@@ -505,3 +505,33 @@ th{background:var(--card);font-weight:800}
     height:190px !important;
   }
 }
+
+
+@media(max-width:600px){
+
+  aside{
+    margin-top:12px !important;
+    margin-bottom:12px !important;
+  }
+
+  aside .sidebar-card{
+    margin-top:12px !important;
+    margin-bottom:12px !important;
+  }
+
+  aside .ad-box{
+    margin-bottom:12px !important;
+  }
+}
+
+
+@media(max-width:600px){
+
+  .main-card{
+    margin-bottom:12px !important;
+  }
+
+  .site-footer{
+    margin-top:-14px !important;
+  }
+}
