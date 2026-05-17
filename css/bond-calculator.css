@@ -509,9 +509,3 @@ th{background:var(--card);font-weight:800}
 
 
 
-@media only screen and (max-width:768px){
-  aside .search-sidebar{
-    display:none !important;
-  }
-}
-
