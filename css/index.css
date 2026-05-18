@@ -652,33 +652,19 @@ header{
   background:var(--card);
 }
 
-Não troca o CSS inteiro.
-É para substituir APENAS a parte mobile que eu tinha mandado antes.
 
-Ou seja, dentro do seu CSS atual, encontre este bloco:
 
-@media(max-width:860px){
-  .logo{
-    font-size:17px;
-  }
-  .header-right{
-    gap:6px;
-  }
-  .menu-toggle,
-  .theme-toggle,
-  .search-toggle{
-    padding:7px 9px;
-    font-size:13px;
-  }
-  .theme-toggle{
-    font-size:0;
-  }
-  .theme-toggle::first-letter{
-    font-size:16px;
-  }
-}
 
-E substitua por este:
+
+
+
+
+
+
+
+
+
+
 
 @media(max-width:860px){
   .logo{
@@ -713,5 +699,12 @@ E substitua por este:
   }
 }
 
-Só isso.
-O resto do CSS continua exatamente igual.
+
+
+
+
+@media(max-width:860px){
+  .logo{
+    font-size:18px;
+  }
+}
