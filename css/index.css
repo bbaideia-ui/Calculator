@@ -681,11 +681,12 @@ header{
 
 
 /* Mostra busca do header só em celular */
-.search-toggle,
-.header-search-box{
-  display:none !important;
+@media(min-width:601px){
+  .search-toggle,
+  .header-search-box{
+    display:none !important;
+  }
 }
-
 @media(max-width:600px){
   .search-toggle{
     display:flex !important;
