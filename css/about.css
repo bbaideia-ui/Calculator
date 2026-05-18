@@ -76,7 +76,6 @@ nav a:hover{color:var(--blue)}
 }
 button:active{transform:scale(.97)}
 button{
-  padding:10px 22px;
   border:none;
   border-radius:10px;
   cursor:pointer;
