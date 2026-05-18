@@ -628,3 +628,52 @@ th{
     display:block;
   }
 }
+
+
+
+
+
+
+/* Corrige descentralização no mobile */
+@media(max-width:860px){
+  html, body{
+    width:100%;
+    overflow-x:hidden;
+  }
+
+  .page{
+    width:100%;
+    max-width:100%;
+    margin:24px auto;
+    padding-left:16px;
+    padding-right:16px;
+  }
+
+  .main-card{
+    width:100%;
+    max-width:760px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+}
+
+/* Esconde busca/sidebar search no telefone */
+@media only screen and (max-width:767px){
+  aside .search-sidebar{
+    display:none !important;
+  }
+}
+
+/* Corrige busca torta no sidebar desktop/tablet */
+.search-sidebar input{
+  width:100%;
+  display:block;
+  padding:11px 12px;
+  border:1px solid var(--soft-border);
+  border-radius:10px;
+  font-size:15px;
+  background:var(--input-bg);
+  color:var(--text);
+}
+
+
