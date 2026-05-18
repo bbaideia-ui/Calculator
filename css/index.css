@@ -680,34 +680,28 @@ header{
 
 
 
-/* Search no header: só aparece no celular */
+
+
+
+Depois deixa SOMENTE este bloco no final do CSS:
+
+/* Esconde busca do header em tablet e desktop */
 @media(min-width:601px){
-  header .header-right .search-toggle{
+  .search-toggle{
     display:none !important;
-    visibility:hidden !important;
   }
-
-  .header-search-box,
-  #headerSearchBox{
+  .header-search-box{
     display:none !important;
-    visibility:hidden !important;
   }
 }
-
+/* Mostra somente no celular */
 @media(max-width:600px){
-  header .header-right .search-toggle{
+  .search-toggle{
     display:flex !important;
-    visibility:visible !important;
-  }
-
-  .header-search-box,
-  #headerSearchBox{
-    display:none !important;
-    visibility:visible !important;
-  }
-
-  .header-search-box.open,
-  #headerSearchBox.open{
-    display:block !important;
   }
 }
+
+
+    
+
+    
