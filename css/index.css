@@ -684,10 +684,7 @@ header{
   .search-toggle{
     font-size:13;
   }
-  .search-toggle::before{
-    content:"🔍";
-    font-size:18px;
-  }
+  
   .theme-toggle{
     font-size:0;
   }
