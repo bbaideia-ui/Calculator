@@ -741,3 +741,22 @@ th{
     margin-top:-14px !important;
   }
 }
+
+
+
+@media(max-width:600px){
+
+  .main-card{
+    margin-bottom:12px !important;
+  }
+
+  .site-footer{
+    margin-top:-14px !important;
+  }
+
+  aside .search-sidebar{
+    display:none !important;
+  }
+
+}
+
