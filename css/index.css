@@ -678,3 +678,21 @@ header{
     font-size:18px;
   }
 }
+
+
+
+
+
+
+@media(max-width:860px){
+  .menu-toggle,
+  .search-toggle,
+  .theme-toggle{
+    height:48px;
+    min-height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+}
+    
