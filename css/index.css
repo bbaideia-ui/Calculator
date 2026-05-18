@@ -679,7 +679,7 @@ header{
     padding:8px 10px;
   }
   .search-toggle{
-    font-size:0;
+    font-size:13;
   }
   .search-toggle::before{
     content:"🔍";
