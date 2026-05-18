@@ -680,15 +680,18 @@ header{
 
 
 
+/* Mostra busca do header só em celular */
+.search-toggle,
+.header-search-box{
+  display:none !important;
+}
 
-    /* Desktop e tablet */
-@media(min-width:861px){
-
+@media(max-width:600px){
   .search-toggle{
-    display:none !important;
+    display:flex !important;
   }
 
-  .header-search-box{
-    display:none !important;
+  .header-search-box.open{
+    display:block !important;
   }
 }
