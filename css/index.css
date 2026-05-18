@@ -677,3 +677,18 @@ header{
     font-size:18px;
   }
 }
+
+
+
+
+    /* Desktop e tablet */
+@media(min-width:861px){
+
+  .search-toggle{
+    display:none !important;
+  }
+
+  .header-search-box{
+    display:none !important;
+  }
+}
