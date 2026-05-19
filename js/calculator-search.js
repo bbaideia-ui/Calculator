@@ -191,3 +191,32 @@ if(mobileSearchToggle && mobileSearchBox){
   });
 }
 
+
+
+
+
+
+@media(max-width:600px){
+
+  .header-wrap{
+    padding:14px 16px;
+  }
+
+  .header-right{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-left:14px;
+  }
+
+  .menu-toggle,
+  .mobile-search-toggle,
+  .theme-toggle{
+    height:56px;
+    min-height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+}
