@@ -156,8 +156,10 @@ document.addEventListener("DOMContentLoaded", () => {
     "mobileHeaderAutocompleteList"
   );
   const mobileSearchToggle = document.getElementById("mobileSearchToggle");
-  const mobileSearchBox = document.getElementById("mobileSearchBox");
-  if(mobileSearchToggle && mobileSearchBox){
+const mobileSearchBox = document.getElementById("mobileSearchBox");
+
+if(mobileSearchToggle && mobileSearchBox){
+
   mobileSearchToggle.addEventListener("click", event => {
     event.stopPropagation();
 
@@ -174,4 +176,5 @@ document.addEventListener("DOMContentLoaded", () => {
       mobileSearchToggle.classList.remove("open");
     }
   });
+
 }
