@@ -192,3 +192,32 @@ if(mobileSearchToggle && mobileSearchBox){
   });
 }
 
+
+
+
+const menuToggle = document.getElementById("menuToggle");
+const mainNav = document.getElementById("mainNav");
+const themeToggle = document.getElementById("themeToggle");
+
+if(mobileSearchToggle){
+  mobileSearchToggle.addEventListener("click", () => {
+    mainNav.classList.remove("open");
+  });
+}
+
+if(themeToggle){
+  themeToggle.addEventListener("click", () => {
+    mainNav.classList.remove("open");
+  });
+}
+
+document.addEventListener("click", event => {
+
+  if(
+    !menuToggle.contains(event.target) &&
+    !mainNav.contains(event.target)
+  ){
+    mainNav.classList.remove("open");
+  }
+
+});
