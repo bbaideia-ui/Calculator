@@ -1,8 +1,9 @@
 
 
+Atualizei o CSS completo. Ajustei principalmente:
 
-
-
+.credit-card-item{ overflow:hidden; }
+.credit-card-item input{ width:100%; max-width:100%; display:block; }
 *{box-sizing:border-box}
 html, body{overflow-x:hidden}
 :root{
@@ -176,6 +177,7 @@ html.dark .hero{
   border-radius:14px;
   padding:16px;
   background:rgba(255,255,255,0.03);
+  overflow:hidden;
 }
 .credit-card-item h3{
   margin:0 0 12px;
@@ -186,6 +188,11 @@ html.dark .hero{
   display:block;
   padding-top:0;
   margin:10px 0 6px;
+}
+.credit-card-item input{
+  width:100%;
+  max-width:100%;
+  display:block;
 }
 label{
   font-size:14px;
@@ -505,3 +512,5 @@ th{background:var(--card);font-weight:800}
     display:none !important;
   }
 }
+
+
