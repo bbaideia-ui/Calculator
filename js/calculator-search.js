@@ -1,4 +1,6 @@
 
+
+
 const calculators = [
   {
     name: "Compound Interest Calculator",
@@ -101,97 +103,61 @@ const calculators = [
     url: "/Calculator/calculators/retirement-duration-calculator.html"
   }
 ];
-
 function setupCalculatorSearch(inputId, listId){
-
-  const searchInput =
-    document.getElementById(inputId);
-
-  const autocompleteList =
-    document.getElementById(listId);
-
+  const searchInput = document.getElementById(inputId);
+  const autocompleteList = document.getElementById(listId);
   if(!searchInput || !autocompleteList) return;
-
   searchInput.addEventListener("input", () => {
-
-    const query =
-      searchInput.value.toLowerCase().trim();
-
+    const query = searchInput.value.toLowerCase().trim();
     autocompleteList.innerHTML = "";
-
     if(!query){
-
       autocompleteList.style.display = "none";
       return;
     }
-
     const matches = calculators
       .filter(calc =>
         calc.name.toLowerCase().includes(query) ||
         calc.description.toLowerCase().includes(query)
       )
       .slice(0, 8);
-
     if(matches.length === 0){
-
       autocompleteList.style.display = "none";
       return;
     }
-
     matches.forEach(calc => {
-
-      const item =
-        document.createElement("a");
-
+      const item = document.createElement("a");
       item.href = calc.url;
-
       item.className = "autocomplete-item";
-
-      item.innerHTML =
-        `<strong>${calc.name}</strong><span>${calc.description}</span>`;
-
+      item.innerHTML = `<strong>${calc.name}</strong><span>${calc.description}</span>`;
       autocompleteList.appendChild(item);
     });
-
     autocompleteList.style.display = "block";
   });
-
   document.addEventListener("click", event => {
-
     if(
       !searchInput.contains(event.target) &&
       !autocompleteList.contains(event.target)
     ){
-
       autocompleteList.style.display = "none";
     }
   });
 }
-
 setupCalculatorSearch(
   "sidebarCalculatorSearch",
   "sidebarAutocompleteList"
 );
-
 setupCalculatorSearch(
   "mobileCalculatorSearch",
   "mobileAutocompleteList"
 );
-
-
-
-
-
+setupCalculatorSearch(
+  "mobileHeaderCalculatorSearch",
+  "mobileHeaderAutocompleteList"
+);
 const mobileSearchToggle = document.getElementById("mobileSearchToggle");
 const mobileSearchBox = document.getElementById("mobileSearchBox");
-
 if(mobileSearchToggle && mobileSearchBox){
   mobileSearchToggle.addEventListener("click", () => {
     mobileSearchBox.classList.toggle("open");
   });
 }
-
-
-
-
-
