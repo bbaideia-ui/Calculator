@@ -173,10 +173,10 @@ html.dark .hero{
   margin-bottom:12px;
 }
 .credit-card-item{
-  padding:16px 0;
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:14px;
+  padding:16px;
   background:transparent;
-  border:none;
-  border-radius:0;
   overflow:hidden;
 }
 .credit-card-item h3{
