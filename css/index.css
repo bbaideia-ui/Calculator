@@ -683,25 +683,21 @@ header{
 
 
 
-Depois deixa SOMENTE este bloco no final do CSS:
-
-/* Esconde busca do header em tablet e desktop */
-@media(min-width:601px){
-  .search-toggle{
-    display:none !important;
-  }
-  .header-search-box{
-    display:none !important;
-  }
+#searchToggle,
+.search-toggle,
+#headerSearchBox,
+.header-search-box{
+  display:none !important;
 }
-/* Mostra somente no celular */
+
 @media(max-width:600px){
+  #searchToggle,
   .search-toggle{
     display:flex !important;
   }
+
+  #headerSearchBox.open,
+  .header-search-box.open{
+    display:block !important;
+  }
 }
-
-
-    
-
-    
