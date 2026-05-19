@@ -1,11 +1,7 @@
 
-Atualizei o CSS completo. A mudança principal está em:
 
-.credit-card-item{
-  background:rgba(255,255,255,0.03);
-}
 
-Isso deixa o card cinza escuro e os inputs continuam pretos, igual ao padrão correto.
+
 
 *{box-sizing:border-box}
 html, body{overflow-x:hidden}
