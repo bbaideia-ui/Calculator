@@ -641,10 +641,13 @@ th{
 
 /* Header fixo sem afetar o layout geral */
 header{
-  position:sticky;
+  position:fixed;
   top:0;
+  left:0;
+  right:0;
   z-index:9999;
 }
 
-
-
+body{
+  padding-top:92px;
+}
