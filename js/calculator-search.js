@@ -158,9 +158,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileSearchToggle = document.getElementById("mobileSearchToggle");
   const mobileSearchBox = document.getElementById("mobileSearchBox");
   if(mobileSearchToggle && mobileSearchBox){
-  mobileSearchToggle.addEventListener("click", () => {
+  mobileSearchToggle.addEventListener("click", event => {
+    event.stopPropagation();
+
     mobileSearchBox.classList.toggle("open");
     mobileSearchToggle.classList.toggle("open");
   });
+
+  document.addEventListener("click", event => {
+    if(
+      !mobileSearchToggle.contains(event.target) &&
+      !mobileSearchBox.contains(event.target)
+    ){
+      mobileSearchBox.classList.remove("open");
+      mobileSearchToggle.classList.remove("open");
+    }
+  });
 }
-});
