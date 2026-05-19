@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,95 +31,98 @@ if(localStorage.getItem("financeToolsTheme") === "dark"){
     </div>
   </div>
 </header>
-
 <section class="hero">
   <div class="hero-content">
     <h1>Debt Payoff Calculator</h1>
     <p>Estimate how long it may take to pay off multiple debts and how much interest you may pay over time.</p>
   </div>
 </section>
-
 <div class="page">
 <main class="main-card">
 <p>Use this free debt payoff calculator to compare balances, payments, interest rates, and extra payments to create a debt repayment estimate.</p>
-
 <div class="calculator">
   <div class="calc-header">Debt Payoff Calculator</div>
   <div class="calc-body">
-
-    <div class="calc-row">
-      <label>Debt 1 Name</label>
-      <input type="text" id="debtName1" value="Auto Loan">
+    <div class="debt-card">
+      <h3>Debt 1</h3>
+      <div class="calc-row">
+        <label>Debt 1 Name</label>
+        <input type="text" id="debtName1" value="Auto Loan">
+      </div>
+      <div class="calc-row">
+        <label>Debt 1 Balance</label>
+        <input type="number" id="balance1" value="25000">
+      </div>
+      <div class="calc-row">
+        <label>Debt 1 Monthly Payment</label>
+        <input type="number" id="payment1" value="519">
+      </div>
+      <div class="calc-row">
+        <label>Debt 1 Interest Rate</label>
+        <input type="number" id="rate1" value="4.9" step="0.01">
+      </div>
     </div>
-    <div class="calc-row">
-      <label>Debt 1 Balance</label>
-      <input type="number" id="balance1" value="25000">
+    <div class="debt-card">
+      <h3>Debt 2</h3>
+      <div class="calc-row">
+        <label>Debt 2 Name</label>
+        <input type="text" id="debtName2" value="Home Mortgage">
+      </div>
+      <div class="calc-row">
+        <label>Debt 2 Balance</label>
+        <input type="number" id="balance2" value="250000">
+      </div>
+      <div class="calc-row">
+        <label>Debt 2 Monthly Payment</label>
+        <input type="number" id="payment2" value="1800">
+      </div>
+      <div class="calc-row">
+        <label>Debt 2 Interest Rate</label>
+        <input type="number" id="rate2" value="4" step="0.01">
+      </div>
     </div>
-    <div class="calc-row">
-      <label>Debt 1 Monthly Payment</label>
-      <input type="number" id="payment1" value="519">
+    <div class="debt-card">
+      <h3>Debt 3</h3>
+      <div class="calc-row">
+        <label>Debt 3 Name</label>
+        <input type="text" id="debtName3" value="Credit Card 1">
+      </div>
+      <div class="calc-row">
+        <label>Debt 3 Balance</label>
+        <input type="number" id="balance3" value="6000">
+      </div>
+      <div class="calc-row">
+        <label>Debt 3 Monthly Payment</label>
+        <input type="number" id="payment3" value="150">
+      </div>
+      <div class="calc-row">
+        <label>Debt 3 Interest Rate</label>
+        <input type="number" id="rate3" value="18.99" step="0.01">
+      </div>
     </div>
-    <div class="calc-row">
-      <label>Debt 1 Interest Rate</label>
-      <input type="number" id="rate1" value="4.9" step="0.01">
+    <div class="debt-card">
+      <h3>Debt 4</h3>
+      <div class="calc-row">
+        <label>Debt 4 Name</label>
+        <input type="text" id="debtName4" value="Credit Card 2">
+      </div>
+      <div class="calc-row">
+        <label>Debt 4 Balance</label>
+        <input type="number" id="balance4" value="3000">
+      </div>
+      <div class="calc-row">
+        <label>Debt 4 Monthly Payment</label>
+        <input type="number" id="payment4" value="60">
+      </div>
+      <div class="calc-row">
+        <label>Debt 4 Interest Rate</label>
+        <input type="number" id="rate4" value="16.99" step="0.01">
+      </div>
     </div>
-
-    <div class="calc-row">
-      <label>Debt 2 Name</label>
-      <input type="text" id="debtName2" value="Home Mortgage">
-    </div>
-    <div class="calc-row">
-      <label>Debt 2 Balance</label>
-      <input type="number" id="balance2" value="250000">
-    </div>
-    <div class="calc-row">
-      <label>Debt 2 Monthly Payment</label>
-      <input type="number" id="payment2" value="1800">
-    </div>
-    <div class="calc-row">
-      <label>Debt 2 Interest Rate</label>
-      <input type="number" id="rate2" value="4" step="0.01">
-    </div>
-
-    <div class="calc-row">
-      <label>Debt 3 Name</label>
-      <input type="text" id="debtName3" value="Credit Card 1">
-    </div>
-    <div class="calc-row">
-      <label>Debt 3 Balance</label>
-      <input type="number" id="balance3" value="6000">
-    </div>
-    <div class="calc-row">
-      <label>Debt 3 Monthly Payment</label>
-      <input type="number" id="payment3" value="150">
-    </div>
-    <div class="calc-row">
-      <label>Debt 3 Interest Rate</label>
-      <input type="number" id="rate3" value="18.99" step="0.01">
-    </div>
-
-    <div class="calc-row">
-      <label>Debt 4 Name</label>
-      <input type="text" id="debtName4" value="Credit Card 2">
-    </div>
-    <div class="calc-row">
-      <label>Debt 4 Balance</label>
-      <input type="number" id="balance4" value="3000">
-    </div>
-    <div class="calc-row">
-      <label>Debt 4 Monthly Payment</label>
-      <input type="number" id="payment4" value="60">
-    </div>
-    <div class="calc-row">
-      <label>Debt 4 Interest Rate</label>
-      <input type="number" id="rate4" value="16.99" step="0.01">
-    </div>
-
     <div class="calc-row">
       <label>Extra Monthly Payment</label>
       <input type="number" id="extraMonthly" value="100">
     </div>
-
     <div class="calc-row">
       <label>Payoff Strategy</label>
       <select id="strategy">
@@ -126,12 +130,10 @@ if(localStorage.getItem("financeToolsTheme") === "dark"){
         <option value="snowball">Debt Snowball</option>
       </select>
     </div>
-
     <div class="buttons">
       <button class="calculate-btn" onclick="calculate()">Calculate</button>
       <button class="clear-btn" onclick="clearForm()">Clear</button>
     </div>
-
     <div class="result-box" id="resultBox">
       <div class="result-line">
         <span>Payoff Time</span>
@@ -146,15 +148,12 @@ if(localStorage.getItem("financeToolsTheme") === "dark"){
         <span class="result-value" id="totalInterest">$0.00</span>
       </div>
     </div>
-
   </div>
 </div>
-
 <div class="chart-wrap">
   <h2 class="chart-title">Debt Payoff Progress</h2>
   <canvas id="payoffChart" width="560" height="260"></canvas>
 </div>
-
 <div class="table-wrap">
 <table>
   <thead>
@@ -168,29 +167,18 @@ if(localStorage.getItem("financeToolsTheme") === "dark"){
   <tbody id="tableBody"></tbody>
 </table>
 </div>
-
-
-
-  
-
 <div class="ad-box" style="margin-top:24px;">Google AdSense Ad Space - In Content</div>
-
 <section class="content">
   <h2>What Is a Debt Payoff Calculator?</h2>
   <p>A debt payoff calculator estimates how long it may take to pay off multiple debts based on balances, interest rates, monthly payments, and extra payments.</p>
-
   <h2>How to Use This Debt Payoff Calculator</h2>
   <p>Enter each debt balance, monthly payment, interest rate, and any extra monthly payment. Then choose a payoff strategy to estimate your repayment schedule.</p>
-
   <h2>Debt Avalanche vs. Debt Snowball</h2>
   <p>The debt avalanche method focuses on debts with the highest interest rate first. The debt snowball method focuses on the smallest balance first.</p>
-
   <h2>Why Extra Payments Matter</h2>
   <p>Extra payments can reduce payoff time and total interest because more money goes toward lowering your remaining balances.</p>
-
   <h2>Example Calculation</h2>
   <p>If you have credit cards, an auto loan, and other debts, this calculator can estimate how extra monthly payments may change your payoff timeline.</p>
-
   <h2>Frequently Asked Questions</h2>
   <div class="faq-list">
     <div class="faq-item">
@@ -202,7 +190,6 @@ if(localStorage.getItem("financeToolsTheme") === "dark"){
         <p>Yes. This debt payoff calculator is completely free to use.</p>
       </div>
     </div>
-
     <div class="faq-item">
       <button class="faq-question" aria-expanded="false">
         What is the debt avalanche method?
@@ -212,7 +199,6 @@ if(localStorage.getItem("financeToolsTheme") === "dark"){
         <p>The debt avalanche method pays extra toward the debt with the highest interest rate first.</p>
       </div>
     </div>
-
     <div class="faq-item">
       <button class="faq-question" aria-expanded="false">
         What is the debt snowball method?
@@ -222,7 +208,6 @@ if(localStorage.getItem("financeToolsTheme") === "dark"){
         <p>The debt snowball method pays extra toward the smallest balance first.</p>
       </div>
     </div>
-
     <div class="faq-item">
       <button class="faq-question" aria-expanded="false">
         Does this calculator include fees?
@@ -233,21 +218,16 @@ if(localStorage.getItem("financeToolsTheme") === "dark"){
       </div>
     </div>
   </div>
-
   <div class="notice">This calculator is for educational purposes only and should not be considered financial advice.</div>
 </section>
 </main>
-
 <aside>
-
 <div class="sidebar-card search-sidebar">
   <h3>Search Calculators</h3>
-
   <input
     type="text"
     id="sidebarCalculatorSearch"
     placeholder="Search calculators...">
-
   <div
     class="autocomplete-list"
     id="sidebarAutocompleteList">
@@ -268,7 +248,6 @@ if(localStorage.getItem("financeToolsTheme") === "dark"){
   <div class="ad-box">Google AdSense Ad Space<br>300x600</div>
 </aside>
 </div>
-
 <footer class="site-footer">
   <div class="footer-info">
     <p>
