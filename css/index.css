@@ -1,10 +1,6 @@
 
 
-Sim. O seu CSS tinha um erro importante: faltava fechar } neste bloco:
 
-@media only screen and (max-width:767px){
-
-Também removi a busca do header e mantive a busca do sidebar.
 
 *{box-sizing:border-box}
 html, body{overflow-x:hidden}
