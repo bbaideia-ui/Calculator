@@ -158,8 +158,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileSearchToggle = document.getElementById("mobileSearchToggle");
   const mobileSearchBox = document.getElementById("mobileSearchBox");
   if(mobileSearchToggle && mobileSearchBox){
-    mobileSearchToggle.addEventListener("click", () => {
-      mobileSearchBox.classList.toggle("open");
-    });
-  }
+  mobileSearchToggle.addEventListener("click", () => {
+    mobileSearchBox.classList.toggle("open");
+    mobileSearchToggle.classList.toggle("open");
+  });
+}
 });
