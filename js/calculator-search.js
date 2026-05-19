@@ -1,5 +1,4 @@
 
-Aqui está o JS completo atualizado, mantendo compatibilidade com páginas antigas e ativando a nova busca mobile do header:
 
 const calculators = [
   {
