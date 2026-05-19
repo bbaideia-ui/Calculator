@@ -38,7 +38,7 @@ body,header,.main-card,.sidebar-card,.calculator,.result-box,.chart-wrap,.ad-box
 }
 header{
   background:var(--header);
-  border-bottom:none;
+  border-bottom: 1px solid var(--soft-border);
   position:sticky;
   top:0;
   z-index:9999;
