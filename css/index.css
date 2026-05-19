@@ -682,22 +682,13 @@ header{
 
 
 
-
-#searchToggle,
-.search-toggle,
-#headerSearchBox,
-.header-search-box{
+.mobile-only-search,
+#headerSearchBox{
   display:none !important;
 }
 
 @media(max-width:600px){
-  #searchToggle,
-  .search-toggle{
+  .mobile-only-search{
     display:flex !important;
-  }
-
-  #headerSearchBox.open,
-  .header-search-box.open{
-    display:block !important;
   }
 }
