@@ -1,9 +1,8 @@
 
 
 
+Atualizei o CSS completo no padrão que você desenhou: cards contínuos, separados por divisões suaves, sem caixas individuais fortes.
 
-.credit-card-item{ overflow:hidden; }
-.credit-card-item input{ width:100%; max-width:100%; display:block; }
 *{box-sizing:border-box}
 html, body{overflow-x:hidden}
 :root{
@@ -168,16 +167,21 @@ html.dark .hero{
   margin-bottom:15px;
 }
 .credit-card-list{
-  display:grid;
-  gap:14px;
+  display:flex;
+  flex-direction:column;
+  gap:0;
   margin-bottom:12px;
 }
 .credit-card-item{
-  border:1px solid rgba(255,255,255,0.06);
-  border-radius:14px;
-  padding:16px;
+  border:none;
+  border-top:1px solid rgba(255,255,255,0.06);
+  border-radius:0;
+  padding:22px 20px;
   background:transparent;
   overflow:hidden;
+}
+.credit-card-item:first-child{
+  border-top:1px solid rgba(255,255,255,0.06);
 }
 .credit-card-item h3{
   margin:0 0 12px;
@@ -511,24 +515,13 @@ th{background:var(--card);font-weight:800}
   aside .search-sidebar{
     display:none !important;
   }
-}
-
-
-
-
-@media(max-width:600px){
-
   .credit-card-item{
-    padding:16px 14px;
+    padding:20px 14px;
     overflow:hidden;
   }
-
   .credit-card-item input{
     width:100%;
     max-width:100%;
     display:block;
   }
-
 }
-
-
