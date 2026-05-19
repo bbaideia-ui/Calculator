@@ -682,13 +682,3 @@ header{
 
 
 
-.mobile-only-search,
-#headerSearchBox{
-  display:none !important;
-}
-
-@media(max-width:600px){
-  .mobile-only-search{
-    display:flex !important;
-  }
-}
