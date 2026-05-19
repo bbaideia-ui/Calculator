@@ -671,3 +671,14 @@ body{
   }
 
 }
+
+
+
+
+.mobile-search-toggle:focus,
+.mobile-search-toggle:focus-visible,
+.mobile-search-toggle.open{
+  border-color:var(--blue) !important;
+  color:var(--blue) !important;
+  box-shadow:0 0 0 2px rgba(47,129,247,.18);
+}
