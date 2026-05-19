@@ -435,20 +435,29 @@ th{background:var(--card);font-weight:800}
   label{padding-top:0}
 }
 .debt-card{
-  background:rgba(255,255,255,0.03);
-  border:1px solid var(--soft-border);
-  border-radius:16px;
-  padding:18px;
-  margin-bottom:18px;
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:14px;
+  padding:16px;
+  background:transparent;
+  overflow:hidden;
+  margin-bottom:14px;
 }
+
 .debt-card h3{
-  margin:0 0 16px;
-  font-size:18px;
+  margin:0 0 12px;
+  font-size:16px;
   color:var(--text);
-  letter-spacing:-0.01em;
 }
+
 .debt-card .calc-row:last-child{
   margin-bottom:0;
+}
+
+.debt-card input,
+.debt-card select{
+  width:100%;
+  max-width:100%;
+  display:block;
 }
 @media(max-width:600px){
   aside{
