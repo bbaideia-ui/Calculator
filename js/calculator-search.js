@@ -195,29 +195,28 @@ if(mobileSearchToggle && mobileSearchBox){
 
 
 
-const menuToggle = document.getElementById("menuToggle");
-const mainNav = document.getElementById("mainNav");
-const themeToggle = document.getElementById("themeToggle");
-
-if(mobileSearchToggle){
-  mobileSearchToggle.addEventListener("click", () => {
-    mainNav.classList.remove("open");
-  });
-}
-
-if(themeToggle){
-  themeToggle.addEventListener("click", () => {
-    mainNav.classList.remove("open");
-  });
-}
-
 document.addEventListener("click", event => {
+  const menuBtn = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("mainNav");
+  const searchBtn = document.getElementById("mobileSearchToggle");
+  const themeBtn = document.getElementById("themeToggle");
 
-  if(
-    !menuToggle.contains(event.target) &&
-    !mainNav.contains(event.target)
-  ){
-    mainNav.classList.remove("open");
+  if(!navMenu || !menuBtn) return;
+
+  if(searchBtn && searchBtn.contains(event.target)){
+    navMenu.classList.remove("open");
+    return;
   }
 
+  if(themeBtn && themeBtn.contains(event.target)){
+    navMenu.classList.remove("open");
+    return;
+  }
+
+  if(
+    !menuBtn.contains(event.target) &&
+    !navMenu.contains(event.target)
+  ){
+    navMenu.classList.remove("open");
+  }
 });
