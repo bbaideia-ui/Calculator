@@ -157,14 +157,27 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const mobileSearchToggle = document.getElementById("mobileSearchToggle");
 const mobileSearchBox = document.getElementById("mobileSearchBox");
+const mainNav = document.getElementById("mainNav");
+const menuToggle = document.getElementById("menuToggle");
 
 if(mobileSearchToggle && mobileSearchBox){
 
   mobileSearchToggle.addEventListener("click", event => {
+    event.preventDefault();
     event.stopPropagation();
 
-    mobileSearchBox.classList.toggle("open");
-    mobileSearchToggle.classList.toggle("open");
+    const isOpen = mobileSearchBox.classList.contains("open");
+
+    mobileSearchBox.classList.toggle("open", !isOpen);
+    mobileSearchToggle.classList.toggle("open", !isOpen);
+
+    if(mainNav){
+      mainNav.classList.remove("open");
+    }
+
+    if(menuToggle){
+      menuToggle.classList.remove("open");
+    }
   });
 
   document.addEventListener("click", event => {
