@@ -1,6 +1,4 @@
 
-
-
 const calculators = [
   {
     name: "Compound Interest Calculator",
@@ -103,91 +101,97 @@ const calculators = [
     url: "/Calculator/calculators/retirement-duration-calculator.html"
   }
 ];
+
 function setupCalculatorSearch(inputId, listId){
-  const searchInput = document.getElementById(inputId);
-  const autocompleteList = document.getElementById(listId);
+
+  const searchInput =
+    document.getElementById(inputId);
+
+  const autocompleteList =
+    document.getElementById(listId);
+
   if(!searchInput || !autocompleteList) return;
+
   searchInput.addEventListener("input", () => {
-    const query = searchInput.value.toLowerCase().trim();
+
+    const query =
+      searchInput.value.toLowerCase().trim();
+
     autocompleteList.innerHTML = "";
+
     if(!query){
+
       autocompleteList.style.display = "none";
       return;
     }
+
     const matches = calculators
       .filter(calc =>
         calc.name.toLowerCase().includes(query) ||
         calc.description.toLowerCase().includes(query)
       )
       .slice(0, 8);
+
     if(matches.length === 0){
+
       autocompleteList.style.display = "none";
       return;
     }
+
     matches.forEach(calc => {
-      const item = document.createElement("a");
+
+      const item =
+        document.createElement("a");
+
       item.href = calc.url;
+
       item.className = "autocomplete-item";
-      item.innerHTML = `<strong>${calc.name}</strong><span>${calc.description}</span>`;
+
+      item.innerHTML =
+        `<strong>${calc.name}</strong><span>${calc.description}</span>`;
+
       autocompleteList.appendChild(item);
     });
+
     autocompleteList.style.display = "block";
   });
+
   document.addEventListener("click", event => {
+
     if(
       !searchInput.contains(event.target) &&
       !autocompleteList.contains(event.target)
     ){
+
       autocompleteList.style.display = "none";
     }
   });
 }
-document.addEventListener("DOMContentLoaded", () => {
-  setupCalculatorSearch(
-    "sidebarCalculatorSearch",
-    "sidebarAutocompleteList"
-  );
-  setupCalculatorSearch(
-    "mobileCalculatorSearch",
-    "mobileAutocompleteList"
-  );
-  setupCalculatorSearch(
-    "mobileHeaderCalculatorSearch",
-    "mobileHeaderAutocompleteList"
-  );
-  const mobileSearchToggle = document.getElementById("mobileSearchToggle");
+
+setupCalculatorSearch(
+  "sidebarCalculatorSearch",
+  "sidebarAutocompleteList"
+);
+
+setupCalculatorSearch(
+  "mobileCalculatorSearch",
+  "mobileAutocompleteList"
+);
+
+
+
+
+
+const mobileSearchToggle = document.getElementById("mobileSearchToggle");
 const mobileSearchBox = document.getElementById("mobileSearchBox");
-const mainNav = document.getElementById("mainNav");
-const menuToggle = document.getElementById("menuToggle");
 
 if(mobileSearchToggle && mobileSearchBox){
-
-  mobileSearchToggle.addEventListener("click", event => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const isOpen = mobileSearchBox.classList.contains("open");
-
-    mobileSearchBox.classList.toggle("open", !isOpen);
-    mobileSearchToggle.classList.toggle("open", !isOpen);
-
-    if(mainNav){
-      mainNav.classList.remove("open");
-    }
-
-    if(menuToggle){
-      menuToggle.classList.remove("open");
-    }
+  mobileSearchToggle.addEventListener("click", () => {
+    mobileSearchBox.classList.toggle("open");
   });
-
-  document.addEventListener("click", event => {
-    if(
-      !mobileSearchToggle.contains(event.target) &&
-      !mobileSearchBox.contains(event.target)
-    ){
-      mobileSearchBox.classList.remove("open");
-      mobileSearchToggle.classList.remove("open");
-    }
-  });
-
 }
+
+
+
+
+
