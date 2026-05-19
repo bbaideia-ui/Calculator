@@ -1,5 +1,6 @@
 
 
+
 const calculators = [
   {
     name: "Compound Interest Calculator",
@@ -141,22 +142,24 @@ function setupCalculatorSearch(inputId, listId){
     }
   });
 }
-setupCalculatorSearch(
-  "sidebarCalculatorSearch",
-  "sidebarAutocompleteList"
-);
-setupCalculatorSearch(
-  "mobileCalculatorSearch",
-  "mobileAutocompleteList"
-);
-setupCalculatorSearch(
-  "mobileHeaderCalculatorSearch",
-  "mobileHeaderAutocompleteList"
-);
-const mobileSearchToggle = document.getElementById("mobileSearchToggle");
-const mobileSearchBox = document.getElementById("mobileSearchBox");
-if(mobileSearchToggle && mobileSearchBox){
-  mobileSearchToggle.addEventListener("click", () => {
-    mobileSearchBox.classList.toggle("open");
-  });
-}
+document.addEventListener("DOMContentLoaded", () => {
+  setupCalculatorSearch(
+    "sidebarCalculatorSearch",
+    "sidebarAutocompleteList"
+  );
+  setupCalculatorSearch(
+    "mobileCalculatorSearch",
+    "mobileAutocompleteList"
+  );
+  setupCalculatorSearch(
+    "mobileHeaderCalculatorSearch",
+    "mobileHeaderAutocompleteList"
+  );
+  const mobileSearchToggle = document.getElementById("mobileSearchToggle");
+  const mobileSearchBox = document.getElementById("mobileSearchBox");
+  if(mobileSearchToggle && mobileSearchBox){
+    mobileSearchToggle.addEventListener("click", () => {
+      mobileSearchBox.classList.toggle("open");
+    });
+  }
+});
