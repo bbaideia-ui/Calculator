@@ -18,6 +18,7 @@ if(localStorage.getItem("financeToolsTheme") === "dark"){
     <div class="logo">Finance<span>Tools</span></div>
     <div class="header-right">
       <button class="menu-toggle" id="menuToggle">☰ Menu</button>
+      <button class="mobile-search-toggle" id="mobileSearchToggle">🔍 Search</button>
       <nav id="mainNav">
         <a href="all-calc/all-calculators.html">All Calculators</a>
         <a href="about.html">About</a>
@@ -29,6 +30,16 @@ if(localStorage.getItem("financeToolsTheme") === "dark"){
     </div>
   </div>
 </header>
+
+<div class="mobile-search-box" id="mobileSearchBox">
+  <input
+    type="text"
+    id="mobileHeaderCalculatorSearch"
+    placeholder="Search calculators..."
+  >
+  <div class="autocomplete-list" id="mobileHeaderAutocompleteList"></div>
+</div>
+  
 <section class="hero">
   <div class="hero-content">
     <h1>Terms of Use</h1>
@@ -155,6 +166,7 @@ FinanceTools is for educational and informational purposes only. It does not pro
     &nbsp; © 2026 FinanceTools
   </div>
 </footer>
+  <script src="js/calculator-search.js"></script>
 <script src="js/terms.js"></script>
 <script src="cookie/cookie.js"></script>
 <script src="theme/theme.js"></script>
