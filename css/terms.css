@@ -437,3 +437,13 @@ body{
 
 
 
+@media(max-width:860px){
+
+  aside .sidebar-card{
+    margin-bottom:10px !important;
+  }
+
+}
+
+
+
