@@ -409,3 +409,31 @@ body{
   color:var(--blue) !important;
   box-shadow:0 0 0 2px rgba(47,129,247,.18);
 }
+
+
+
+
+
+
+
+
+@media(max-width:860px){
+
+  aside{
+    margin-top:12px !important;
+  }
+
+  aside .sidebar-card{
+    margin-bottom:12px !important;
+  }
+
+  aside .ad-box{
+    margin-top:0 !important;
+    margin-bottom:12px !important;
+  }
+
+}
+
+
+
+
