@@ -451,9 +451,7 @@ body{
 @media(max-width:860px){
 
   .site-footer{
-    margin-top:-10!important;
+    margin-top:0 !important;
   }
 
 }
-
-
