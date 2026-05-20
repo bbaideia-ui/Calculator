@@ -732,3 +732,134 @@ th{
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+.autocomplete-list{
+  margin-top:10px;
+  border:1px solid var(--soft-border);
+  border-radius:12px;
+  overflow:hidden;
+  background:var(--card);
+}
+
+.autocomplete-item{
+  display:block;
+  padding:12px 14px;
+  border-bottom:1px solid var(--soft-border);
+  text-decoration:none;
+  color:var(--text);
+  transition:background-color .2s ease;
+}
+
+.autocomplete-item:last-child{border-bottom:none}
+.autocomplete-item:hover{background:rgba(47,129,247,.08)}
+
+.autocomplete-item strong{
+  display:block;
+  font-size:14px;
+  margin-bottom:2px;
+}
+
+.autocomplete-item span{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+}
+
+.mobile-search-toggle,
+.mobile-search-box{
+  display:none !important;
+}
+
+@media(max-width:600px){
+  .mobile-search-toggle{
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+    padding:8px 10px;
+    border-radius:10px;
+    border:1px solid var(--soft-border);
+    background:var(--card);
+    color:var(--text);
+    cursor:pointer;
+    font-weight:700;
+    font-size:13px;
+    height:48px;
+  }
+
+  .mobile-search-box.open{
+    display:block !important;
+  }
+
+  .mobile-search-box{
+    position:fixed;
+    top:69px;
+    left:0;
+    right:0;
+    z-index:9998;
+    background:var(--header);
+    padding:12px 16px;
+    border-bottom:1px solid var(--soft-border);
+  }
+
+  .mobile-search-box input{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid var(--soft-border);
+    border-radius:10px;
+    font-size:15px;
+    background:var(--input-bg);
+    color:var(--text);
+  }
+
+  .header-wrap{
+    padding:14px 16px;
+  }
+
+  .header-right{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-left:14px;
+  }
+
+  .menu-toggle,
+  .mobile-search-toggle,
+  .theme-toggle{
+    height:56px;
+    min-height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+}
+
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:9999;
+}
+
+body{
+  padding-top:69px;
+}
+
+.mobile-search-toggle:focus,
+.mobile-search-toggle:focus-visible,
+.mobile-search-toggle.open{
+  border-color:var(--blue) !important;
+  color:var(--blue) !important;
+  box-shadow:0 0 0 2px rgba(47,129,247,.18);
+}
