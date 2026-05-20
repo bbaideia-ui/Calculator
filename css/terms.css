@@ -447,3 +447,14 @@ body{
 
 
 
+
+@media(max-width:860px){
+
+  aside .ad-box:last-child{
+    margin-bottom:0 !important;
+  }
+
+}
+
+
+
