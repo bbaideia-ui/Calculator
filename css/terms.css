@@ -454,7 +454,7 @@ body{
 
   aside .ad-box{
     margin-top:0 !important;
-    margin-bottom:16px !important;
+    margin-bottom:12px !important;
   }
 
   aside .ad-box:last-child{
@@ -466,7 +466,7 @@ body{
   }
 
   .site-footer{
-    margin-top:0 !important;
+    margin-top:10 !important;
   }
 
 }
