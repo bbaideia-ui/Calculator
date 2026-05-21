@@ -468,5 +468,8 @@ body{
   .site-footer{
     margin-top:1.5!important;
   }
+  .footer-info{
+  padding-top:4px !important;
+}
 
 }
