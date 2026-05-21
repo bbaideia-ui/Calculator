@@ -674,3 +674,49 @@ body{
   color:var(--blue) !important;
   box-shadow:0 0 0 2px rgba(47,129,247,.18);
 }
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:860px){
+
+  nav{
+    display:none;
+    position:absolute;
+    top:72px;
+    left:16px;
+    right:16px;
+    background:var(--card);
+    border:1px solid var(--soft-border);
+    border-radius:14px;
+    padding:10px;
+    z-index:10000;
+    box-shadow:var(--soft-shadow);
+  }
+
+  nav.open{
+    display:block !important;
+  }
+
+  nav a{
+    display:block;
+    margin:0;
+    padding:12px;
+    border-bottom:1px solid var(--soft-border);
+    font-size:15px;
+  }
+
+  nav a:last-child{
+    border-bottom:none;
+  }
+
+}
+
+
