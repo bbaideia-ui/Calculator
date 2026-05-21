@@ -120,6 +120,23 @@ if(localStorage.getItem("financeToolsTheme") === "dark"){
     &nbsp; © 2026 FinanceTools
   </div>
 </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  const menuToggle = document.getElementById("menuToggle");
+  const mainNav = document.getElementById("mainNav");
+
+  if(menuToggle && mainNav){
+    menuToggle.addEventListener("click", function(event){
+      event.preventDefault();
+      event.stopPropagation();
+
+      mainNav.classList.toggle("open");
+    });
+  }
+});
+</script>
+  
 <script src="js/calculator-search.js"></script> 
 <script src="cookie/cookie.js"></script>
 <script src="theme/theme.js"></script>
