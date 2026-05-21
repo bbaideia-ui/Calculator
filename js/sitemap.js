@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainNav = document.getElementById("mainNav");
 
   if(menuToggle && mainNav){
-    menuToggle.addEventListener("click", (event) => {
+    menuToggle.addEventListener("click", event => {
       event.preventDefault();
       event.stopPropagation();
 
