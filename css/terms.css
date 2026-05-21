@@ -453,7 +453,7 @@ body{
   }
 
   aside .ad-box{
-    margin-top:10 !important;
+    margin-top:0 !important;
     margin-bottom:12px !important;
   }
 
@@ -466,7 +466,7 @@ body{
   }
 
   .site-footer{
-    margin-top:0 !important;
+    margin-top:100 !important;
   }
 
 }
