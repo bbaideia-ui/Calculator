@@ -684,4 +684,49 @@ body{
 
 
 
+@media(max-width:860px){
+
+  aside{
+    margin-top:12px !important;
+    margin-bottom:0 !important;
+    padding-bottom:0 !important;
+  }
+
+  aside .sidebar-card{
+    margin-bottom:12px !important;
+  }
+
+  aside .ad-box{
+    margin-top:0 !important;
+    margin-bottom:12px !important;
+  }
+
+  aside .ad-box:last-child{
+    margin-bottom:0 !important;
+  }
+
+  .page{
+    margin-bottom:0 !important;
+  }
+
+  .site-footer{
+    margin-top:1.5px !important;
+  }
+
+  .footer-info{
+    padding-top:13px !important;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
