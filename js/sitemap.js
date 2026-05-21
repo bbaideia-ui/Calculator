@@ -1,28 +1,23 @@
 
-const menuToggle = document.getElementById("menuToggle");
-const mainNav = document.getElementById("mainNav");
+(function(){
+  const menuToggle = document.getElementById("menuToggle");
+  const mainNav = document.getElementById("mainNav");
 
-if(menuToggle && mainNav){
+  if(!menuToggle || !mainNav) return;
 
-  menuToggle.addEventListener("click", event => {
+  menuToggle.addEventListener("click", function(event){
+    event.preventDefault();
     event.stopPropagation();
 
-    const isOpen = mainNav.classList.contains("open");
-
-    mainNav.classList.toggle("open", !isOpen);
-    menuToggle.classList.toggle("open", !isOpen);
+    mainNav.classList.toggle("open");
   });
 
-  document.addEventListener("click", event => {
-
+  document.addEventListener("click", function(event){
     if(
       !menuToggle.contains(event.target) &&
       !mainNav.contains(event.target)
     ){
       mainNav.classList.remove("open");
-      menuToggle.classList.remove("open");
     }
-
   });
-
-}
+})();
