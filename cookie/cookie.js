@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ">
       <p style="margin:0;color:var(--muted);font-size:14px;">
         We use cookies and similar technologies to improve your experience.
-        Read our <a href="../privacy.html" style="color:var(--blue);font-weight:700;text-decoration:underline;">Privacy Policy</a>.
+        Read our <a href="/privacy.html" style="color:var(--blue);font-weight:700;text-decoration:underline;">Privacy Policy</a>.
       </p>
       <button id="cookieAccept" style="
         background:var(--green);
