@@ -1,206 +1,160 @@
 
-const menuToggle = document.getElementById("menuToggle");
-const mainNav = document.getElementById("mainNav");
+(() => {
+  const searchInput = document.getElementById("calculatorSearch");
+  const cards = document.querySelectorAll(".calculator-card");
+  const categories = document.querySelectorAll(".category");
+  const noResults = document.getElementById("noResults");
+  const autocompleteList = document.getElementById("autocompleteList");
 
-const searchInput = document.getElementById("calculatorSearch");
-const cards = document.querySelectorAll(".calculator-card");
-const categories = document.querySelectorAll(".category");
+  if(!searchInput || !autocompleteList) return;
 
-const noResults = document.getElementById("noResults");
-const autocompleteList = document.getElementById("autocompleteList");
+  let activeSuggestionIndex = -1;
 
-let activeSuggestionIndex = -1;
+  const allPageCalculators = Array.from(cards).map(card => ({
+    name: card.querySelector("strong").textContent.trim(),
+    description: card.querySelector("span").textContent.trim(),
+    href: card.getAttribute("href"),
+    element: card
+  }));
 
-menuToggle.addEventListener("click", () => {
-  mainNav.classList.toggle("open");
-});
+  function filterCards(query){
+    let visibleCount = 0;
 
-const calculators = Array.from(cards).map(card => ({
-  name: card.querySelector("strong").textContent.trim(),
-  description: card.querySelector("span").textContent.trim(),
-  href: card.getAttribute("href"),
-  element: card
-}));
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      const match = text.includes(query);
 
-function filterCards(query){
+      card.style.display = match ? "block" : "none";
 
-  let visibleCount = 0;
+      if(match) visibleCount++;
+    });
 
-  cards.forEach(card => {
+    categories.forEach(category => {
+      let hasVisible = false;
 
-    const text = card.textContent.toLowerCase();
-    const match = text.includes(query);
+      category.querySelectorAll(".calculator-card").forEach(card => {
+        if(card.style.display !== "none"){
+          hasVisible = true;
+        }
+      });
 
-    card.style.display = match ? "block" : "none";
+      category.style.display = hasVisible ? "block" : "none";
+    });
 
-    if(match){
-      visibleCount++;
+    if(noResults){
+      noResults.style.display = visibleCount === 0 ? "block" : "none";
+    }
+  }
+
+  function showSuggestions(query){
+    autocompleteList.innerHTML = "";
+    activeSuggestionIndex = -1;
+
+    if(!query){
+      autocompleteList.style.display = "none";
+      return;
     }
 
-  });
+    const matches = allPageCalculators
+      .filter(item =>
+        item.name.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query)
+      )
+      .slice(0, 8);
 
-  categories.forEach(category => {
+    if(matches.length === 0){
+      autocompleteList.style.display = "none";
+      return;
+    }
 
-    let hasVisible = false;
+    matches.forEach(match => {
+      const item = document.createElement("div");
 
-    category.querySelectorAll(".calculator-card").forEach(card => {
+      item.className = "autocomplete-item";
+      item.innerHTML = `
+        <strong>${match.name}</strong>
+        <span>${match.description}</span>
+      `;
 
-      if(card.style.display !== "none"){
-        hasVisible = true;
-      }
+      item.addEventListener("click", () => {
+        chooseSuggestion(match);
+      });
 
+      autocompleteList.appendChild(item);
     });
 
-    category.style.display = hasVisible ? "block" : "none";
-
-  });
-
-  noResults.style.display = visibleCount === 0 ? "block" : "none";
-}
-
-function showSuggestions(query){
-
-  autocompleteList.innerHTML = "";
-  activeSuggestionIndex = -1;
-
-  if(!query){
-    autocompleteList.style.display = "none";
-    return;
+    autocompleteList.style.display = "block";
   }
 
-  const matches = calculators
-    .filter(item =>
-      item.name.toLowerCase().includes(query) ||
-      item.description.toLowerCase().includes(query)
-    )
-    .slice(0, 8);
-
-  if(matches.length === 0){
+  function chooseSuggestion(match){
+    searchInput.value = match.name;
     autocompleteList.style.display = "none";
-    return;
-  }
 
-  matches.forEach(match => {
+    filterCards(match.name.toLowerCase());
 
-    const item = document.createElement("div");
-
-    item.className = "autocomplete-item";
-
-    item.innerHTML = `
-      <strong>${match.name}</strong>
-      <span>${match.description}</span>
-    `;
-
-    item.addEventListener("click", () => {
-      chooseSuggestion(match);
+    match.element.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
     });
 
-    autocompleteList.appendChild(item);
+    match.element.style.borderColor = "var(--blue)";
 
+    setTimeout(() => {
+      match.element.style.borderColor = "";
+    }, 900);
+  }
+
+  function updateActiveSuggestion(items){
+    items.forEach(item => {
+      item.classList.remove("active");
+    });
+
+    if(activeSuggestionIndex >= 0 && items[activeSuggestionIndex]){
+      items[activeSuggestionIndex].classList.add("active");
+    }
+  }
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase().trim();
+
+    filterCards(query);
+    showSuggestions(query);
   });
 
-  autocompleteList.style.display = "block";
-}
+  searchInput.addEventListener("keydown", event => {
+    const items = autocompleteList.querySelectorAll(".autocomplete-item");
 
-function chooseSuggestion(match){
+    if(autocompleteList.style.display !== "block" || items.length === 0){
+      return;
+    }
 
-  searchInput.value = match.name;
-
-  autocompleteList.style.display = "none";
-
-  filterCards(match.name.toLowerCase());
-
-  match.element.scrollIntoView({
-    behavior:"smooth",
-    block:"center"
-  });
-
-  match.element.style.borderColor = "var(--blue)";
-
-  setTimeout(() => {
-    match.element.style.borderColor = "";
-  }, 900);
-}
-
-function updateActiveSuggestion(items){
-
-  items.forEach(item => {
-    item.classList.remove("active");
-  });
-
-  if(activeSuggestionIndex >= 0 && items[activeSuggestionIndex]){
-    items[activeSuggestionIndex].classList.add("active");
-  }
-}
-
-searchInput.addEventListener("input", () => {
-
-  const query = searchInput.value.toLowerCase().trim();
-
-  filterCards(query);
-
-  showSuggestions(query);
-
-});
-
-searchInput.addEventListener("keydown", (event) => {
-
-  const items = autocompleteList.querySelectorAll(".autocomplete-item");
-
-  if(
-    autocompleteList.style.display !== "block" ||
-    items.length === 0
-  ){
-    return;
-  }
-
-  if(event.key === "ArrowDown"){
-
-    event.preventDefault();
-
-    activeSuggestionIndex =
-      (activeSuggestionIndex + 1) % items.length;
-
-    updateActiveSuggestion(items);
-  }
-
-  if(event.key === "ArrowUp"){
-
-    event.preventDefault();
-
-    activeSuggestionIndex =
-      (activeSuggestionIndex - 1 + items.length) % items.length;
-
-    updateActiveSuggestion(items);
-  }
-
-  if(event.key === "Enter"){
-
-    if(activeSuggestionIndex >= 0){
-
+    if(event.key === "ArrowDown"){
       event.preventDefault();
-
-      items[activeSuggestionIndex].click();
+      activeSuggestionIndex = (activeSuggestionIndex + 1) % items.length;
+      updateActiveSuggestion(items);
     }
-  }
 
-  if(event.key === "Escape"){
-    autocompleteList.style.display = "none";
-  }
+    if(event.key === "ArrowUp"){
+      event.preventDefault();
+      activeSuggestionIndex = (activeSuggestionIndex - 1 + items.length) % items.length;
+      updateActiveSuggestion(items);
+    }
 
-});
+    if(event.key === "Enter"){
+      if(activeSuggestionIndex >= 0){
+        event.preventDefault();
+        items[activeSuggestionIndex].click();
+      }
+    }
 
-document.addEventListener("click", (event) => {
+    if(event.key === "Escape"){
+      autocompleteList.style.display = "none";
+    }
+  });
 
-  if(!event.target.closest(".search-box")){
-    autocompleteList.style.display = "none";
-  }
-
-});
-
-
-
-
-
-
-
+  document.addEventListener("click", event => {
+    if(!event.target.closest(".search-box")){
+      autocompleteList.style.display = "none";
+    }
+  });
+})();
