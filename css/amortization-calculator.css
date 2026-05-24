@@ -555,37 +555,7 @@ th{background:var(--card);font-weight:800}
 
 
   
-.autocomplete-list{
-  margin-top:10px;
-  border:1px solid var(--soft-border);
-  border-radius:12px;
-  overflow:hidden;
-  background:var(--card);
-}
 
-.autocomplete-item{
-  display:block;
-  padding:12px 14px;
-  border-bottom:1px solid var(--soft-border);
-  text-decoration:none;
-  color:var(--text);
-  transition:background-color .2s ease;
-}
-
-.autocomplete-item:last-child{border-bottom:none}
-.autocomplete-item:hover{background:rgba(47,129,247,.08)}
-
-.autocomplete-item strong{
-  display:block;
-  font-size:14px;
-  margin-bottom:2px;
-}
-
-.autocomplete-item span{
-  display:block;
-  font-size:12px;
-  color:var(--muted);
-}
 
 .mobile-search-toggle,
 .mobile-search-box{
