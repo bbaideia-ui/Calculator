@@ -603,27 +603,69 @@ th{background:var(--card);font-weight:800}
     color:var(--text);
   }
 
-  .header-wrap{
-    padding:14px 16px;
+
+.header-wrap{
+
+    padding:14px 16px !important;
+
+    display:flex !important;
+
+    justify-content:space-between !important;
+
+    align-items:center !important;
+
   }
 
   .header-right{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    margin-left:14px;
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:flex-end !important;
+
+    gap:8px !important;
+
+    margin-left:14px !important;
+
+    flex-shrink:0 !important;
+
   }
 
   .menu-toggle,
+
   .mobile-search-toggle,
+
   .theme-toggle{
-    height:56px;
-    min-height:56px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+
+    height:56px !important;
+
+    min-height:56px !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    white-space:nowrap !important;
+
   }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 header{
   position:fixed;
