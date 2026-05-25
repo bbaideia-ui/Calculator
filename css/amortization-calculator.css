@@ -679,30 +679,32 @@ body{
 @media(max-width:600px){
 
   .header-wrap{
-    padding:14px 16px;
+    padding:14px 16px !important;
+  }
+
+  .logo{
+    font-size:22px !important;
+    flex-shrink:0 !important;
   }
 
   .header-right{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    margin-left:14px;
+    display:flex !important;
+    align-items:center !important;
+    gap:8px !important;
+    margin-left:14px !important;
+    flex-shrink:0 !important;
   }
 
   .menu-toggle,
   .mobile-search-toggle,
   .theme-toggle{
-    height:56px;
-    min-height:56px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    width:82px !important;
+    height:56px !important;
+    min-height:56px !important;
+    padding:8px 10px !important;
+    text-align:center !important;
+    white-space:normal !important;
+    line-height:1.15 !important;
   }
 
 }
-
-
-
-
-
-
