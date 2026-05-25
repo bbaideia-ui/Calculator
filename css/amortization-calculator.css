@@ -654,19 +654,6 @@ th{background:var(--card);font-weight:800}
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-  
-
 header{
   position:fixed;
   top:0;
@@ -685,5 +672,43 @@ body{
   border-color:var(--blue) !important;
   color:var(--blue) !important;
   box-shadow:0 0 0 2px rgba(47,129,247,.18);
+}
+
+
+
+
+
+
+
+
+@media(max-width:600px){
+
+  .header-wrap{
+    padding:14px 16px !important;
+    display:flex !important;
+    justify-content:space-between !important;
+    align-items:center !important;
+  }
+
+  .header-right{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-end !important;
+    gap:8px !important;
+    margin-left:14px !important;
+    flex-shrink:0 !important;
+  }
+
+  .menu-toggle,
+  .mobile-search-toggle,
+  .theme-toggle{
+    height:56px !important;
+    min-height:56px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    white-space:nowrap !important;
+  }
+
 }
 
