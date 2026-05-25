@@ -688,32 +688,24 @@ body{
 @media(max-width:600px){
 
   .header-wrap{
-    padding:14px 16px !important;
+    padding:14px 16px;
   }
 
   .header-right{
-    display:flex !important;
-    align-items:center !important;
-    gap:8px !important;
-    margin-left:14px !important;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-left:14px;
   }
 
   .menu-toggle,
   .mobile-search-toggle,
   .theme-toggle{
-    width:72px !important;
-    height:56px !important;
-    min-height:56px !important;
-    padding:6px 8px !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:2px !important;
-    font-size:13px !important;
-    line-height:1.1 !important;
-    white-space:normal !important;
-    text-align:center !important;
+    height:56px;
+    min-height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
 
 }
