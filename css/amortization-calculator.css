@@ -676,15 +676,13 @@ body{
 
 
 
+
+
+
 @media(max-width:600px){
 
   .header-wrap{
     padding:14px 16px !important;
-  }
-
-  .logo{
-    font-size:22px !important;
-    flex-shrink:0 !important;
   }
 
   .header-right{
@@ -692,19 +690,24 @@ body{
     align-items:center !important;
     gap:8px !important;
     margin-left:14px !important;
-    flex-shrink:0 !important;
   }
 
   .menu-toggle,
   .mobile-search-toggle,
   .theme-toggle{
-    width:82px !important;
+    width:72px !important;
     height:56px !important;
     min-height:56px !important;
-    padding:8px 10px !important;
-    text-align:center !important;
+    padding:6px 8px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:2px !important;
+    font-size:13px !important;
+    line-height:1.1 !important;
     white-space:normal !important;
-    line-height:1.15 !important;
+    text-align:center !important;
   }
 
 }
