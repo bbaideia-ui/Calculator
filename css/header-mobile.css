@@ -1,66 +1,6 @@
-/* HEADER MOBILE PADRÃO */
-
-header{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:9999;
-  background:var(--header);
-  border-bottom:1px solid var(--soft-border);
-}
-
-body{
-  padding-top:78px;
-}
-
-.mobile-search-toggle,
-.mobile-search-box{
-  display:none !important;
-}
-
-@media(max-width:860px){
-
-  .menu-toggle{
-    display:block;
-  }
-
-  nav{
-    display:none;
-    position:absolute;
-    top:72px;
-    left:16px;
-    right:16px;
-    background:var(--card);
-    border:1px solid var(--soft-border);
-    border-radius:14px;
-    padding:10px;
-    z-index:100;
-    box-shadow:var(--soft-shadow);
-  }
-
-  nav.open{
-    display:block;
-  }
-
-  nav a{
-    display:block;
-    margin:0;
-    padding:12px;
-    border-bottom:1px solid var(--soft-border);
-    font-size:15px;
-  }
-
-  nav a:last-child{
-    border-bottom:none;
-  }
-
-}
-
 @media(max-width:600px){
 
   .header-wrap{
-
     width:100%;
     max-width:100%;
 
@@ -73,9 +13,7 @@ body{
   }
 
   /* LOGO */
-
   .logo{
-
     font-size:19px !important;
 
     min-width:auto !important;
@@ -90,7 +28,6 @@ body{
   }
 
   /* ÁREA DOS BOTÕES */
-
   .header-right{
 
     display:flex !important;
@@ -103,16 +40,15 @@ body{
   }
 
   /* BOTÕES */
-
   .menu-toggle,
   .mobile-search-toggle,
   .theme-toggle{
 
     width:74px !important;
 
-    height:48px !important;
+    height:56px !important;
 
-    padding:2px 4px !important;
+    padding:4px 4px !important;
 
     display:flex !important;
 
@@ -137,27 +73,21 @@ body{
     white-space:normal !important;
   }
 
-  /* SEARCH BUTTON */
+  /* ÍCONES EM CIMA */
+  .menu-toggle{
+    font-size:12px !important;
+  }
 
   .mobile-search-toggle{
-
     display:flex !important;
+  }
 
-    border:1px solid var(--soft-border);
-
-    background:var(--card);
-
-    color:var(--text);
-
-    cursor:pointer;
-
-    font-weight:700;
+  .theme-toggle{
+    font-size:12px !important;
   }
 
   /* SEARCH BOX */
-
   .mobile-search-box{
-
     position:fixed;
 
     top:78px;
@@ -179,7 +109,6 @@ body{
   }
 
   .mobile-search-box input{
-
     width:100%;
 
     padding:11px 12px;
@@ -195,15 +124,4 @@ body{
     color:var(--text);
   }
 
-}
-
-.mobile-search-toggle:focus,
-.mobile-search-toggle:focus-visible,
-.mobile-search-toggle.open{
-
-  border-color:var(--blue) !important;
-
-  color:var(--blue) !important;
-
-  box-shadow:0 0 0 2px rgba(47,129,247,.18);
 }
