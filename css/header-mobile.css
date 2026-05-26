@@ -1,5 +1,7 @@
 
-/* HEADER FIXO */
+/* =========================
+   MOBILE HEADER FIX
+========================= */
 
 header{
   position:fixed;
@@ -7,115 +9,105 @@ header{
   left:0;
   right:0;
   z-index:9999;
-  background:var(--header);
-  border-bottom:1px solid var(--soft-border);
 }
 
+/* REMOVE espaço fantasma */
 body{
-  padding-top:69px;
+  padding-top:0;
 }
 
-/* MOBILE SEARCH */
-
+/* Barra de busca mobile */
 .mobile-search-toggle,
 .mobile-search-box{
   display:none !important;
 }
 
-/* MENU MOBILE */
-
-@media(max-width:860px){
-
-  .menu-toggle{
-    display:block;
-  }
-
-  nav{
-    display:none;
-    position:absolute;
-    top:72px;
-    left:16px;
-    right:16px;
-    background:var(--card);
-    border:1px solid var(--soft-border);
-    border-radius:14px;
-    padding:10px;
-    z-index:100;
-    box-shadow:var(--soft-shadow);
-  }
-
-  nav.open{
-    display:block;
-  }
-
-  nav a{
-    display:block;
-    margin:0;
-    padding:12px;
-    border-bottom:1px solid var(--soft-border);
-    font-size:15px;
-  }
-
-  nav a:last-child{
-    border-bottom:none;
-  }
-
-}
-
-/* MOBILE HEADER */
-
 @media(max-width:600px){
 
+  /* Header principal */
   .header-wrap{
     padding:14px 16px !important;
+
     display:flex !important;
-    justify-content:space-between !important;
     align-items:center !important;
+
+    gap:10px !important;
   }
 
+  /* Logo */
   .logo{
-    width:120px !important;
-    min-width:120px !important;
     flex-shrink:0 !important;
   }
 
+  /* Área dos botões */
   .header-right{
     display:flex !important;
     align-items:center !important;
-    justify-content:flex-end !important;
+
     gap:8px !important;
-    flex:1 !important;
-    margin-left:14px !important;
+
+    margin-left:auto !important;
+
+    flex-shrink:0 !important;
   }
 
+  /* Botões */
   .menu-toggle,
   .mobile-search-toggle,
   .theme-toggle{
+
     width:72px !important;
+
     height:56px !important;
     min-height:56px !important;
+
     padding:6px 8px !important;
+
     display:flex !important;
+
     align-items:center !important;
     justify-content:center !important;
+
     text-align:center !important;
-    white-space:normal !important;
+
     line-height:1.15 !important;
+
     font-size:13px !important;
+
+    white-space:normal !important;
   }
 
+  /* Search button */
   .mobile-search-toggle{
     display:flex !important;
+
+    border-radius:10px;
+    border:1px solid var(--soft-border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    cursor:pointer;
+
+    font-weight:700;
   }
 
+  /* Search box */
   .mobile-search-box{
     position:fixed;
+
     top:92px;
+
     left:0;
     right:0;
+
     z-index:9998;
+
     background:var(--header);
+
     padding:12px 16px;
+
     border-bottom:1px solid var(--soft-border);
   }
 
@@ -125,22 +117,30 @@ body{
 
   .mobile-search-box input{
     width:100%;
+
     padding:11px 12px;
+
     border:1px solid var(--soft-border);
+
     border-radius:10px;
+
     font-size:15px;
+
     background:var(--input-bg);
+
     color:var(--text);
   }
 
 }
 
-/* ACTIVE SEARCH BUTTON */
-
+/* Botão search ativo */
 .mobile-search-toggle:focus,
 .mobile-search-toggle:focus-visible,
 .mobile-search-toggle.open{
+
   border-color:var(--blue) !important;
+
   color:var(--blue) !important;
+
   box-shadow:0 0 0 2px rgba(47,129,247,.18);
 }
