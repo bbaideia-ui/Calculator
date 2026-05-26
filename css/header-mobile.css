@@ -1,127 +1,134 @@
-@media(max-width:600px){
+Sim, agora vamos padronizar de verdade. Substitua TODO o header-mobile.css por este:
 
+/* HEADER MOBILE PADRÃO */
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:9999;
+  background:var(--header);
+  border-bottom:1px solid var(--soft-border);
+}
+body{
+  padding-top:78px;
+}
+.mobile-search-toggle,
+.mobile-search-box{
+  display:none !important;
+}
+@media(max-width:860px){
+  .menu-toggle{
+    display:block;
+  }
+  nav{
+    display:none;
+    position:absolute;
+    top:72px;
+    left:16px;
+    right:16px;
+    background:var(--card);
+    border:1px solid var(--soft-border);
+    border-radius:14px;
+    padding:10px;
+    z-index:100;
+    box-shadow:var(--soft-shadow);
+  }
+  nav.open{
+    display:block;
+  }
+  nav a{
+    display:block;
+    margin:0;
+    padding:12px;
+    border-bottom:1px solid var(--soft-border);
+    font-size:15px;
+  }
+  nav a:last-child{
+    border-bottom:none;
+  }
+}
+@media(max-width:600px){
   .header-wrap{
     width:100%;
     max-width:100%;
-
-    padding:12px 10px !important;
-
+    padding:12px 12px !important;
     display:flex !important;
     align-items:center !important;
-
-    gap:10px !important;
-  }
-
-  /* LOGO */
-  .logo{
-    font-size:19px !important;
-
-    min-width:auto !important;
-    width:auto !important;
-    max-width:none !important;
-
-    line-height:1 !important;
-
-    flex-shrink:0 !important;
-
-    white-space:nowrap !important;
-  }
-
-  /* ÁREA DOS BOTÕES */
-  .header-right{
-
-    display:flex !important;
-
-    align-items:center !important;
-
+    justify-content:space-between !important;
     gap:8px !important;
-
-    margin-left:auto !important;
   }
-
-  /* BOTÕES */
+  .logo{
+    width:128px !important;
+    min-width:128px !important;
+    max-width:128px !important;
+    font-size:20px !important;
+    line-height:1 !important;
+    flex-shrink:0 !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+  }
+  .header-right{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-end !important;
+    gap:6px !important;
+    margin-left:0 !important;
+    flex-shrink:0 !important;
+  }
   .menu-toggle,
   .mobile-search-toggle,
   .theme-toggle{
-
-    width:74px !important;
-
+    width:64px !important;
+    min-width:64px !important;
+    max-width:64px !important;
     height:56px !important;
-
-    padding:4px 4px !important;
-
-    display:flex !important;
-
-    flex-direction:column !important;
-
-    align-items:center !important;
-
-    justify-content:center !important;
-
-    gap:3px !important;
-
+    min-height:56px !important;
+    padding:6px 4px !important;
+    display:block !important;
     text-align:center !important;
-
-    line-height:1.05 !important;
-
-    font-size:12px !important;
-
-    font-weight:700 !important;
-
-    border-radius:12px !important;
-
     white-space:normal !important;
+    line-height:1.15 !important;
+    font-size:13px !important;
+    border-radius:10px !important;
   }
-
-  /* ÍCONES EM CIMA */
-  .menu-toggle{
-    font-size:12px !important;
-  }
-
   .mobile-search-toggle{
-    display:flex !important;
+    display:block !important;
+    border:1px solid var(--soft-border);
+    background:var(--card);
+    color:var(--text);
+    cursor:pointer;
+    font-weight:700;
   }
-
-  .theme-toggle{
-    font-size:12px !important;
-  }
-
-  /* SEARCH BOX */
   .mobile-search-box{
     position:fixed;
-
     top:78px;
-
     left:0;
     right:0;
-
     z-index:9998;
-
     background:var(--header);
-
     padding:12px 16px;
-
     border-bottom:1px solid var(--soft-border);
   }
-
   .mobile-search-box.open{
     display:block !important;
   }
-
   .mobile-search-box input{
     width:100%;
-
     padding:11px 12px;
-
     border:1px solid var(--soft-border);
-
     border-radius:10px;
-
     font-size:15px;
-
     background:var(--input-bg);
-
     color:var(--text);
   }
-
 }
+.mobile-search-toggle:focus,
+.mobile-search-toggle:focus-visible,
+.mobile-search-toggle.open{
+  border-color:var(--blue) !important;
+  color:var(--blue) !important;
+  box-shadow:0 0 0 2px rgba(47,129,247,.18);
+}
+
+Esse reduz logo e botões, mantém simetria e impede o botão Light de sair para fora.
